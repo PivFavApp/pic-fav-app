@@ -30,7 +30,7 @@ public class LoginPresenter implements LoginContract.PresenterI {
 
     @Override
     public void onStop() {
-
+        mView = null;
     }
 
     @Override

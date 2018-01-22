@@ -22,7 +22,13 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
 
     @Override
     protected void onViewReady() {
+        presenter.onStart();
         presenter.logIn();
+    }
+
+    @Override
+    protected void onViewDestroy() {
+        presenter.onStop();
     }
 
     @Override

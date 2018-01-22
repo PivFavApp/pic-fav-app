@@ -23,7 +23,15 @@ public abstract class BaseActivity extends AppCompatActivity {
         initializeViewsInjection();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+    }
+
     protected abstract void onViewReady();
+
+    protected abstract void onViewDestroy();
 
     @LayoutRes
     protected abstract int onRequestLayout();
