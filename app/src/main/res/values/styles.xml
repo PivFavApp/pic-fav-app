@@ -8,4 +8,47 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+
+    <!-- Style -->
+    <style name="TextAppearance.Normal" parent="@android:style/TextAppearance">
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="TextAppearance.Bold" parent="@android:style/TextAppearance">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+
+    <!-- Colors -->
+    <style name="TextAppearance.Normal.White" parent="TextAppearance.Normal">
+        <item name="android:textColor">@color/colorWhite</item>
+    </style>
+
+    <style name="TextAppearance.Normal.Black" parent="TextAppearance.Normal">
+        <item name="android:textColor">@color/colorBlack</item>
+    </style>
+
+
+
+    <!-- Size -->
+    <style name="TextAppearance.Normal.White.12" parent="TextAppearance.Normal.White">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="TextAppearance.Normal.White.20" parent="TextAppearance.Normal.White">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+
+    <style name="TextAppearance.Normal.Black.14" parent="TextAppearance.Normal.Black">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+
 </resources>

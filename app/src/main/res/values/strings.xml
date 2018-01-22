@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">picFav</string>
+
+
+    <!--Login activity-->
+    <string name="login_activity_login_hint">login</string>
+    <string name="login_activity_password_hint">password</string>
+    <string name="login_activity_login_btn_msg">Login</string>
+    <string name="login_activity_terms_and_condition">I agreed with terms and conditions.</string>
 </resources>
