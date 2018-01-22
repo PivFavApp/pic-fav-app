@@ -4,7 +4,9 @@ import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.v7.app.AppCompatActivity;
 
-import newagency.picfav.R;
+import butterknife.ButterKnife;
+import newagency.picfav.PicFavApplication;
+import newagency.picfav.dagger.ApplicationComponent;
 
 /**
  * Created by oroshka on 1/22/18.
@@ -15,7 +17,10 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        beforeLayout();
+        setContentView(onRequestLayout());
+        onInitializeInjection();
+        initializeViewsInjection();
     }
 
     protected abstract void onViewReady();
@@ -26,4 +31,13 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected abstract void onInitializeInjection();
 
     protected void beforeLayout() {}
+
+    protected void initializeViewsInjection() {
+        ButterKnife.bind(this);
+        onViewReady();
+    }
+
+    protected ApplicationComponent getApplicationComponent() {
+        return PicFavApplication.mApplicationComponent;
+    }
 }
