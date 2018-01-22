@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import newagency.picfav.dagger.scope.ApplicationContext;
-import newagency.picfav.util.ApiConst;
+import newagency.picfav.netwotk.ApiConst;
 
 /**
  * Created by oroshka on 1/22/18.
