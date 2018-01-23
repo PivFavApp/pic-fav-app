@@ -9,10 +9,6 @@ import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-/**
- * Created by oroshka on 1/22/18.
- */
-
 public class ApiClient {
     private static ApiService sApiService;
 

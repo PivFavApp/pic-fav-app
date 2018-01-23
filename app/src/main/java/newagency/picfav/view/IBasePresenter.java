@@ -1,4 +1,4 @@
-package newagency.picfav.base;
+package newagency.picfav.view;
 
 /**
  * Created by oroshka on 1/22/18.

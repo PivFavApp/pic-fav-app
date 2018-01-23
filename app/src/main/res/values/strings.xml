@@ -7,4 +7,9 @@
     <string name="login_activity_password_hint">password</string>
     <string name="login_activity_login_btn_msg">Login</string>
     <string name="login_activity_terms_and_condition">I agreed with terms and conditions.</string>
+
+    <!--Welcome activity-->
+    <string name="login_title">LOG IN</string>
+    <string name="sign_up_title">SIGN UP</string>
+    <string name="welcome_title">Do you have good taste?</string>
 </resources>
