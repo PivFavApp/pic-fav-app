@@ -1,4 +1,4 @@
-package newagency.picfav.base;
+package newagency.picfav.view;
 
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;

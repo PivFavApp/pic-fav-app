@@ -1,4 +1,4 @@
-package newagency.picfav.login;
+package newagency.picfav.view.login.view;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,9 +6,10 @@ import android.content.Intent;
 import javax.inject.Inject;
 
 import newagency.picfav.R;
-import newagency.picfav.base.BaseActivity;
+import newagency.picfav.view.BaseActivity;
 import newagency.picfav.dagger.DaggerViewComponent;
 import newagency.picfav.dagger.ViewModule;
+import newagency.picfav.view.login.LoginContract;
 
 public class LoginActivity extends BaseActivity implements LoginContract.View {
 

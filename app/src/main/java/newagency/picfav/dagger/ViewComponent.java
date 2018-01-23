@@ -2,7 +2,9 @@ package newagency.picfav.dagger;
 
 import dagger.Component;
 import newagency.picfav.dagger.scope.ActivityScope;
-import newagency.picfav.login.LoginActivity;
+import newagency.picfav.view.login.view.LoginActivity;
+import newagency.picfav.view.sign.up.view.SignUpActivity;
+import newagency.picfav.view.welcome.view.WelcomeActivity;
 
 @ActivityScope
 @Component(
@@ -14,6 +16,10 @@ import newagency.picfav.login.LoginActivity;
 public interface ViewComponent {
 
     void inject(LoginActivity activity);
+
+    void inject(WelcomeActivity activity);
+
+    void inject(SignUpActivity activity);
 
 }
 

@@ -11,9 +11,7 @@ import newagency.picfav.localDb.SharedPrefManager;
 import newagency.picfav.netwotk.ApiClient;
 import newagency.picfav.netwotk.ApiService;
 
-/**
- * Created by oroshka on 1/22/18.
- */
+
 
 @Module
 public class DataModule {

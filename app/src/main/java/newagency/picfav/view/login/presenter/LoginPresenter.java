@@ -1,4 +1,4 @@
-package newagency.picfav.login;
+package newagency.picfav.view.login.presenter;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -6,11 +6,9 @@ import android.util.Log;
 
 import javax.inject.Inject;
 
-import static android.content.ContentValues.TAG;
+import newagency.picfav.view.login.LoginContract;
 
-/**
- * Created by oroshka on 1/22/18.
- */
+import static android.content.ContentValues.TAG;
 
 public class LoginPresenter implements LoginContract.PresenterI {
 
