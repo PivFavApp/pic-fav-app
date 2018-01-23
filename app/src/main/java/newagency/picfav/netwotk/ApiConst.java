@@ -6,7 +6,7 @@ package newagency.picfav.netwotk;
 
 public class ApiConst {
 
-    public final static String BASE_URL = "http://url";
+    public final static String BASE_URL = "http://picfavwebapp.azurewebsites.net";
 
     public final static String SHARED_PREFS_KEY = "SHARED_PREFERENCES_KEY";
     public final static String AUTH_TOKEN_SHARED_PREFS_KEY = "AUTH_TOKEN_SHARED_PREFERENCES_KEY";

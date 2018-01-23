@@ -36,6 +36,7 @@
             android:layout_height="@dimen/welcome_activity_btns_height"
             android:background="@color/indigo"
             android:text="@string/sign_up_title"
+            android:textAppearance="@style/TextAppearance.Normal.Black.14"
             android:textColor="@color/colorWhite"
             android:textSize="@dimen/text_size_normal"
             android:textStyle="bold" />
