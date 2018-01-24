@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#4A148C</color>
 
     <color name="colorWhite">#ffffff</color>
 
@@ -11,4 +11,6 @@
     <color name="jazzberry_jam">#880E4F</color>
     <color name="san_felix">#1B5E20</color>
     <color name="indigo">#4A148C</color>
+    <color name="grey">#BDBDBD</color>
+
 </resources>

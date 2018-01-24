@@ -7,9 +7,6 @@ import newagency.picfav.dagger.ApplicationModule;
 import newagency.picfav.dagger.DaggerApplicationComponent;
 import newagency.picfav.dagger.DataModule;
 
-/**
- * Created by oroshka on 1/22/18.
- */
 
 public class PicFavApplication extends Application {
 
