@@ -12,42 +12,82 @@
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
     </style>
 
 
     <!-- Style -->
-    <style name="TextAppearance.Normal" parent="@android:style/TextAppearance">
+    <style name="Roboto.Normal" parent="@android:style/TextAppearance">
         <item name="android:textStyle">normal</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
     </style>
 
-    <style name="TextAppearance.Bold" parent="@android:style/TextAppearance">
+    <style name="Roboto.Bold" parent="@android:style/TextAppearance">
         <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/roboto_bold</item>
     </style>
 
 
     <!-- Colors -->
-    <style name="TextAppearance.Normal.White" parent="TextAppearance.Normal">
+    <style name="Roboto.Normal.White" parent="Roboto.Normal">
         <item name="android:textColor">@color/colorWhite</item>
     </style>
 
-    <style name="TextAppearance.Normal.Black" parent="TextAppearance.Normal">
+    <style name="Roboto.Normal.Black" parent="Roboto.Normal">
         <item name="android:textColor">@color/colorBlack</item>
     </style>
+
+    <style name="Roboto.Bold.White" parent="Roboto.Bold">
+        <item name="android:textColor">@color/colorWhite</item>
+    </style>
+
+    <style name="Roboto.Bold.Black" parent="Roboto.Bold">
+        <item name="android:textColor">@color/colorBlack</item>
+    </style>
+
+    <style name="Roboto.Normal.Accent" parent="Roboto.Normal">
+        <item name="android:textColor">@color/colorAccent</item>
+    </style>
+
 
 
 
     <!-- Size -->
-    <style name="TextAppearance.Normal.White.12" parent="TextAppearance.Normal.White">
+    <style name="Roboto.Normal.White.12" parent="Roboto.Normal.White">
         <item name="android:textSize">12sp</item>
     </style>
 
-    <style name="TextAppearance.Normal.White.20" parent="TextAppearance.Normal.White">
+    <style name="Roboto.Normal.White.16" parent="Roboto.Normal.White">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="Roboto.Normal.White.20" parent="Roboto.Normal.White">
         <item name="android:textSize">20sp</item>
     </style>
 
 
-    <style name="TextAppearance.Normal.Black.14" parent="TextAppearance.Normal.Black">
+    <style name="Roboto.Normal.Black.14" parent="Roboto.Normal.Black">
         <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="Roboto.Bold.White.16" parent="Roboto.Bold.White">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="Roboto.Bold.White.30" parent="Roboto.Bold.White">
+        <item name="android:textSize">30sp</item>
+    </style>
+
+    <style name="Roboto.Normal.Accent.12" parent="Roboto.Normal.Accent">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="Roboto.Bold.Black.18" parent="Roboto.Bold.Black">
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="Roboto.Bold.Black.22" parent="Roboto.Bold.Black">
+        <item name="android:textSize">22sp</item>
     </style>
 
 

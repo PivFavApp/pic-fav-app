@@ -1,46 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:fitsSystemWindows="true"
     android:layout_height="match_parent"
-    android:background="@color/jazzberry_jam">
+    android:background="@color/colorPrimaryDark">
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:id="@+id/welcome_tv"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:gravity="center"
         android:text="@string/welcome_title"
-        android:textColor="@color/colorWhite"
-        android:textSize="@dimen/text_size_pre_extreme"
-        android:textStyle="bold" />
+        android:textAppearance="@style/Roboto.Bold.White.30"
+        app:layout_constraintBottom_toTopOf="@+id/btn_log_in"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:orientation="vertical">
+    <View
+        android:id="@+id/shadow_btn"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/welcome_activity_shadow_height"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btn_log_in"
+        android:background="@drawable/shadow_top" />
 
-        <Button
-            android:id="@+id/btn_log_in"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/welcome_activity_btns_height"
-            android:background="@color/san_felix"
-            android:text="@string/login_title"
-            android:textColor="@color/colorWhite"
-            android:textSize="@dimen/text_size_normal"
-            android:textStyle="bold" />
+    <Button
+        android:id="@+id/btn_log_in"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/welcome_activity_btn_height"
+        android:background="@color/colorAccent"
+        android:text="@string/login_title"
+        android:foreground="?attr/selectableItemBackground"
+        android:textAppearance="@style/Roboto.Bold.White.16"
+        app:layout_constraintBottom_toTopOf="@+id/btn_sing_up"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-        <Button
-            android:id="@+id/btn_sing_up"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/welcome_activity_btns_height"
-            android:background="@color/indigo"
-            android:text="@string/sign_up_title"
-            android:textAppearance="@style/TextAppearance.Normal.Black.14"
-            android:textColor="@color/colorWhite"
-            android:textSize="@dimen/text_size_normal"
-            android:textStyle="bold" />
+    <Button
+        android:id="@+id/btn_sing_up"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/welcome_activity_btn_height"
+        android:background="@color/colorIndigo"
+        android:text="@string/sign_up_title"
+        android:foreground="?attr/selectableItemBackground"
+        android:textAppearance="@style/Roboto.Bold.White.16"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-    </LinearLayout>
 
-</FrameLayout>
+</android.support.constraint.ConstraintLayout>

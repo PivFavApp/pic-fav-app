@@ -2,7 +2,7 @@ package newagency.picfav.view.sign.up.view;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.support.design.widget.TextInputEditText;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.view.MotionEvent;
@@ -33,19 +33,19 @@ public class SignUpActivity extends BaseActivity implements SignUpContract.View 
     SignUpContract.PresenterI presenterI;
 
     @BindView(R.id.date_of_birth)
-    TextInputEditText etDateOfBirth;
+    TextInputLayout etDateOfBirth;
 
     @BindView(R.id.et_first_name)
-    TextInputEditText etFirstName;
+    TextInputLayout etFirstName;
 
     @BindView(R.id.et_last_name)
-    TextInputEditText etLastName;
+    TextInputLayout etLastName;
 
     @BindView(R.id.et_username)
-    TextInputEditText etUsername;
+    TextInputLayout etUsername;
 
     @BindView(R.id.et_password)
-    TextInputEditText etPassword;
+    TextInputLayout etPassword;
 
     @BindView(R.id.btn_signup)
     AppCompatButton btnSignUp;
@@ -79,7 +79,7 @@ public class SignUpActivity extends BaseActivity implements SignUpContract.View 
 
     @SuppressLint("ClickableViewAccessibility")
     private void initDateOfBirth() {
-        etDateOfBirth.setOnTouchListener(new View.OnTouchListener() {
+        etDateOfBirth.getEditText().setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
@@ -89,7 +89,7 @@ public class SignUpActivity extends BaseActivity implements SignUpContract.View 
                         @Override
                         public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
                             String date = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
-                            etDateOfBirth.setText(DateTimeUtil.toNewFormat(date));
+                            etDateOfBirth.getEditText().setText(DateTimeUtil.toNewFormat(date));
                         }
                     });
                     datePickerDialog.show(getFragmentManager(), "Datepickerdialog");
@@ -109,40 +109,49 @@ public class SignUpActivity extends BaseActivity implements SignUpContract.View 
     }
 
     private boolean checkFields() {
-        String isSignUpValid = SignUpValidator.isFirstNameValid(etFirstName.getText().toString());
+        clearAllError();
+        String isSignUpValid = SignUpValidator.isFirstNameValid(etFirstName.getEditText().getText().toString());
         if (isSignUpValid != null) {
-            etFirstName.setText("");
+            etFirstName.getEditText().setText("");
             etFirstName.setError(isSignUpValid);
             return false;
         }
 
-        String isLastNameValid = SignUpValidator.isLastNameValid(etLastName.getText().toString());
+        String isLastNameValid = SignUpValidator.isLastNameValid(etLastName.getEditText().getText().toString());
         if (isLastNameValid != null) {
-            etLastName.setText("");
+            etLastName.getEditText().setText("");
             etLastName.setError(isLastNameValid);
             return false;
         }
 
-        String isUsernameValid = SignUpValidator.isUsernameValid(etUsername.getText().toString());
+        String isUsernameValid = SignUpValidator.isUsernameValid(etUsername.getEditText().getText().toString());
         if (isUsernameValid != null) {
-            etUsername.setText("");
+            etUsername.getEditText().setText("");
             etUsername.setError(isUsernameValid);
             return false;
         }
 
-        String isPasswordValid = SignUpValidator.isPasswordValid(etPassword.getText().toString());
+        String isPasswordValid = SignUpValidator.isPasswordValid(etPassword.getEditText().getText().toString());
         if (isPasswordValid != null) {
-            etPassword.setText("");
+            etPassword.getEditText().setText("");
             etPassword.setError(isPasswordValid);
             return false;
         }
 
-        String isDateOfBirthValid = SignUpValidator.isDateOfBirthValid(etDateOfBirth.getText().toString());
+        String isDateOfBirthValid = SignUpValidator.isDateOfBirthValid(etDateOfBirth.getEditText().getText().toString());
         if (isDateOfBirthValid != null) {
-            etDateOfBirth.setText("");
+            etDateOfBirth.getEditText().setText("");
             etDateOfBirth.setError(isDateOfBirthValid);
             return false;
         }
         return true;
+    }
+
+    private void clearAllError() {
+        etFirstName.setError(null);
+        etLastName.setError(null);
+        etUsername.setError(null);
+        etPassword.setError(null);
+        etDateOfBirth.setError(null);
     }
 }

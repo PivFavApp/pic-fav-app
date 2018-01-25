@@ -3,10 +3,11 @@
 
 
     <!--Login activity-->
-    <string name="login_activity_login_hint">login</string>
-    <string name="login_activity_password_hint">password</string>
-    <string name="login_activity_login_btn_msg">Login</string>
+    <string name="login_activity_user_name_hint">Username</string>
+    <string name="login_activity_password_hint">Password</string>
+    <string name="login_activity_login_btn_msg">Log In</string>
     <string name="login_activity_terms_and_condition">I agreed with terms and conditions.</string>
+    <string name="login_activity_forgot_password_msg">Forgot your password?</string>
 
     <!--Welcome activity-->
     <string name="login_title">LOG IN</string>
@@ -14,9 +15,11 @@
     <string name="welcome_title">Do you have good taste?</string>
 
     <!--Sign Up activity-->
+    <string name="sing_up_activity_title">Sign Up</string>
     <string name="username">Username</string>
-    <string name="first_name">First name</string>
-    <string name="last_name">Last name</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
     <string name="password">Password</string>
     <string name="date_of_birth">Date of Birth</string>
+    <string name="login_activity_login_title_msg">Log In</string>
 </resources>

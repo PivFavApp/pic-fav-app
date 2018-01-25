@@ -5,10 +5,11 @@ import android.content.Intent;
 
 import javax.inject.Inject;
 
+import butterknife.OnClick;
 import newagency.picfav.R;
-import newagency.picfav.view.BaseActivity;
 import newagency.picfav.dagger.DaggerViewComponent;
 import newagency.picfav.dagger.ViewModule;
+import newagency.picfav.view.BaseActivity;
 import newagency.picfav.view.login.LoginContract;
 
 public class LoginActivity extends BaseActivity implements LoginContract.View {
@@ -44,6 +45,16 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
                 .viewModule(new ViewModule(this))
                 .build()
                 .inject(this);
+    }
+
+    @OnClick(R.id.iv_back)
+    void onBackClick() {
+        onBackPressed();
+    }
+
+    @OnClick(R.id.login_btn)
+    void signIn() {
+
     }
 
 //    LoginContract.View methods

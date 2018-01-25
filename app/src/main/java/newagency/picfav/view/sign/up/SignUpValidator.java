@@ -6,7 +6,7 @@ public class SignUpValidator {
     //if null valid
     public static String isFirstNameValid(@NonNull String firstName) {
         if (firstName.isEmpty()) {
-            return "Please enter your First name";
+            return "Please enter your First Name";
         } else {
             return null;
         }
@@ -14,7 +14,7 @@ public class SignUpValidator {
 
     public static String isLastNameValid(@NonNull String lastName) {
         if (lastName.isEmpty()) {
-            return "Please enter your Last name";
+            return "Please enter your Last Name";
         } else {
             return null;
         }

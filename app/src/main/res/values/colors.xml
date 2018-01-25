@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#4A148C</color>
+    <color name="colorPrimary">#E91E63</color>
+    <color name="colorPrimaryDark">#C2185B</color>
+    <color name="colorAccent">#448AFF</color>
+    <color name="colorLightPrimary">#F8BBD0</color>
 
     <color name="colorWhite">#ffffff</color>
 
     <color name="colorBlack">#000000</color>
-
-    <color name="jazzberry_jam">#880E4F</color>
-    <color name="san_felix">#1B5E20</color>
-    <color name="indigo">#4A148C</color>
-    <color name="grey">#BDBDBD</color>
+    <color name="colorIndigo">#4A148C</color>
 
 </resources>

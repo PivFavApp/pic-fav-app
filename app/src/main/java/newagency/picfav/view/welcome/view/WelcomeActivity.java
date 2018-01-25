@@ -6,12 +6,12 @@ import butterknife.OnClick;
 import newagency.picfav.R;
 import newagency.picfav.dagger.DaggerViewComponent;
 import newagency.picfav.dagger.ViewModule;
-import newagency.picfav.view.BaseFullScreenActivity;
+import newagency.picfav.view.BaseActivity;
 import newagency.picfav.view.login.view.LoginActivity;
 import newagency.picfav.view.sign.up.view.SignUpActivity;
 import newagency.picfav.view.welcome.WelcomeContract;
 
-public class WelcomeActivity extends BaseFullScreenActivity implements WelcomeContract.View {
+public class WelcomeActivity extends BaseActivity implements WelcomeContract.View {
 
     @Inject
     WelcomeContract.PresenterI presenter;
