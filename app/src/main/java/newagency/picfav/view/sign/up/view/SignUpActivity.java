@@ -50,6 +50,25 @@ public class SignUpActivity extends BaseActivity implements SignUpContract.View 
     @BindView(R.id.btn_signup)
     AppCompatButton btnSignUp;
 
+    private View.OnTouchListener mOnTouchListener = new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                etDateOfBirth.setError(null);
+                DatePickerDialog datePickerDialog = DatePickerDialog.newInstance(new DatePickerDialog.OnDateSetListener() {
+                    @SuppressLint("SetTextI18n")
+                    @Override
+                    public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+                        String date = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
+                        etDateOfBirth.getEditText().setText(DateTimeUtil.toNewFormat(date));
+                    }
+                });
+                datePickerDialog.show(getFragmentManager(), "Datepickerdialog");
+            }
+            return false;
+        }
+    };
+
     @Override
     protected void onViewReady() {
         initDateOfBirth();
@@ -58,6 +77,7 @@ public class SignUpActivity extends BaseActivity implements SignUpContract.View 
     @Override
     protected void onViewDestroy() {
         presenterI.onStop();
+        etDateOfBirth.getEditText().setOnTouchListener(null);
     }
 
     @Override
@@ -79,24 +99,7 @@ public class SignUpActivity extends BaseActivity implements SignUpContract.View 
 
     @SuppressLint("ClickableViewAccessibility")
     private void initDateOfBirth() {
-        etDateOfBirth.getEditText().setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                    etDateOfBirth.setError(null);
-                    DatePickerDialog datePickerDialog = DatePickerDialog.newInstance(new DatePickerDialog.OnDateSetListener() {
-                        @SuppressLint("SetTextI18n")
-                        @Override
-                        public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
-                            String date = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
-                            etDateOfBirth.getEditText().setText(DateTimeUtil.toNewFormat(date));
-                        }
-                    });
-                    datePickerDialog.show(getFragmentManager(), "Datepickerdialog");
-                }
-                return false;
-            }
-        });
+        etDateOfBirth.getEditText().setOnTouchListener(mOnTouchListener);
     }
 
     @Override

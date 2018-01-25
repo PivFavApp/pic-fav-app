@@ -24,12 +24,13 @@
 
         <activity
             android:name=".view.login.view.LoginActivity"
+            android:windowSoftInputMode="adjustResize"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
             android:name=".view.sign.up.view.SignUpActivity"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateAlwaysHidden"/>
+            android:windowSoftInputMode="adjustResize"/>
 
     </application>
 
