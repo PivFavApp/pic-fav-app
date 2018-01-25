@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import newagency.picfav.netwotk.ApiService;
 import newagency.picfav.netwotk.request.LoginRequestBody;
+import newagency.picfav.netwotk.response.LoginResponse;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -25,12 +26,13 @@ public class LoginRepositoryImpl implements ILoginRepository {
     }
 
     @Override
-    public void login(final LoginRequestBody requestBody, @NonNull final LoginRepositoryImpl.LoginCallback callback) {
-        mApiService.login(requestBody).enqueue(new Callback<Object>() {
+    public void login(final LoginRequestBody requestBody, @NonNull final LoginRepositoryImpl.LoginCallback callback) throws NullPointerException{
+        mApiService.login(requestBody.username, requestBody.password, requestBody.grantType).enqueue(new Callback<LoginResponse>() {
             @Override
-            public void onResponse(Call<Object> call, Response<Object> response) {
-                if (response.isSuccessful()) {
-                    callback.onSuccess("");
+            public void onResponse(@NonNull Call<LoginResponse> call, @NonNull Response<LoginResponse> response) {
+                LoginResponse loginResponse = response.body();
+                if (response.isSuccessful() && loginResponse != null) {
+                        callback.onSuccess(loginResponse.accessToken);
 
                 } else {
                     callback.onError("");
@@ -38,7 +40,7 @@ public class LoginRepositoryImpl implements ILoginRepository {
             }
 
             @Override
-            public void onFailure(Call<Object> call, Throwable t) {
+            public void onFailure(Call<LoginResponse> call, Throwable t) {
                 callback.onError("");
             }
         });
