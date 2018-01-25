@@ -93,7 +93,8 @@ public class SignUpActivity extends BaseActivity implements SignUpContract.View 
     @OnClick(R.id.btn_signup)
     void signIn() {
         if (checkFields()) {
-            //TODO
+            presenterI.signUp(getFieldValue(etFirstName), getFieldValue(etLastName),
+                    getFieldValue(etUsername), getFieldValue(etPassword), getFieldValue(etDateOfBirth));
         }
     }
 
@@ -111,37 +112,57 @@ public class SignUpActivity extends BaseActivity implements SignUpContract.View 
                 .inject(this);
     }
 
+    //  SignUpContract.View methods
+    @Override
+    public void showProgress() {
+        if (!mProgressDialog.isShowing()) {
+            mProgressDialog.show();
+        }
+    }
+
+    @Override
+    public void hideProgress() {
+        if (mProgressDialog.isShowing()) {
+            mProgressDialog.dismiss();
+        }
+    }
+
+    private String getFieldValue(TextInputLayout field) {
+        if (field.getEditText() == null) return "";
+        return field.getEditText().getText().toString();
+    }
+
     private boolean checkFields() {
         clearAllError();
-        String isSignUpValid = SignUpValidator.isFirstNameValid(etFirstName.getEditText().getText().toString());
+        String isSignUpValid = SignUpValidator.isFirstNameValid(getFieldValue(etFirstName));
         if (isSignUpValid != null) {
             etFirstName.getEditText().setText("");
             etFirstName.setError(isSignUpValid);
             return false;
         }
 
-        String isLastNameValid = SignUpValidator.isLastNameValid(etLastName.getEditText().getText().toString());
+        String isLastNameValid = SignUpValidator.isLastNameValid(getFieldValue(etLastName));
         if (isLastNameValid != null) {
             etLastName.getEditText().setText("");
             etLastName.setError(isLastNameValid);
             return false;
         }
 
-        String isUsernameValid = SignUpValidator.isUsernameValid(etUsername.getEditText().getText().toString());
+        String isUsernameValid = SignUpValidator.isUsernameValid(getFieldValue(etUsername));
         if (isUsernameValid != null) {
             etUsername.getEditText().setText("");
             etUsername.setError(isUsernameValid);
             return false;
         }
 
-        String isPasswordValid = SignUpValidator.isPasswordValid(etPassword.getEditText().getText().toString());
+        String isPasswordValid = SignUpValidator.isPasswordValid(getFieldValue(etPassword));
         if (isPasswordValid != null) {
             etPassword.getEditText().setText("");
             etPassword.setError(isPasswordValid);
             return false;
         }
 
-        String isDateOfBirthValid = SignUpValidator.isDateOfBirthValid(etDateOfBirth.getEditText().getText().toString());
+        String isDateOfBirthValid = SignUpValidator.isDateOfBirthValid(getFieldValue(etDateOfBirth));
         if (isDateOfBirthValid != null) {
             etDateOfBirth.getEditText().setText("");
             etDateOfBirth.setError(isDateOfBirthValid);

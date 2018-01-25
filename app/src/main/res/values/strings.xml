@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">picFav</string>
-
+    <string name="general_waiting_please_msg">Please waiting…</string>
 
     <!--Login activity-->
     <string name="login_activity_user_name_hint">Username</string>
@@ -22,4 +22,5 @@
     <string name="password">Password</string>
     <string name="date_of_birth">Date of Birth</string>
     <string name="login_activity_login_title_msg">Log In</string>
+
 </resources>

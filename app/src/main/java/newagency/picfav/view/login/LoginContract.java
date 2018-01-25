@@ -12,7 +12,7 @@ public interface LoginContract {
 
     interface PresenterI extends IBasePresenter {
 
-        void logIn();
+        void logIn(String userName, String password);
 
     }
 }

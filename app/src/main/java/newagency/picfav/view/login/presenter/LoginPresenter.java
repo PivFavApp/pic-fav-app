@@ -2,28 +2,43 @@ package newagency.picfav.view.login.presenter;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 
 import javax.inject.Inject;
 
-import newagency.picfav.netwotk.ApiService;
+import newagency.picfav.netwotk.request.LoginRequestBody;
+import newagency.picfav.view.login.ILoginRepository;
 import newagency.picfav.view.login.LoginContract;
-
-import static android.content.ContentValues.TAG;
+import newagency.picfav.view.login.LoginRepositoryImpl;
 
 public class LoginPresenter implements LoginContract.PresenterI {
 
     @Nullable
     private LoginContract.View mView;
 
-    @Nullable
-    private ApiService mApiService;
+    @NonNull
+    LoginRepositoryImpl mLoginRepository;
+
+    private LoginRepositoryImpl.LoginCallback mLoginCallback = new ILoginRepository.LoginCallback() {
+        @Override
+        public void onSuccess(String token) {
+            if (mView != null) {
+                mView.hideProgress();
+            }
+        }
+
+        @Override
+        public void onError(String error) {
+            if (mView != null) {
+                mView.hideProgress();
+            }
+        }
+    };
 
     @Inject
     public LoginPresenter(@NonNull LoginContract.View view,
-                          @NonNull ApiService apiService) {
+                          @NonNull LoginRepositoryImpl loginRepository) {
         this.mView = view;
-        this.mApiService = apiService;
+        this.mLoginRepository = loginRepository;
     }
 
     //    LoginContract.PresenterI methods
@@ -38,9 +53,9 @@ public class LoginPresenter implements LoginContract.PresenterI {
     }
 
     @Override
-    public void logIn() {
-        Log.e(TAG, "logIn: ");
-// TODO validation fields and call API
-//        mApiService.login()
+    public void logIn(String userName, String password) {
+        if (mView == null) return;
+        mView.showProgress();
+        mLoginRepository.login(new LoginRequestBody(userName, password), mLoginCallback);
     }
 }
