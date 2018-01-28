@@ -25,13 +25,13 @@ public class MainScreenActivity extends BaseActivity implements MainScreenContra
 
     @Override
     protected void onViewReady() {
-
+        if (!mPresenter.isLogin())
+            navigateToLogIn();
     }
 
     @Override
     protected void onViewDestroy() {
-        if (!mPresenter.isLogin())
-            navigateToLogIn();
+
     }
 
     @Override
