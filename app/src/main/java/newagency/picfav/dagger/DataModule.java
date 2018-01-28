@@ -16,9 +16,9 @@ import newagency.picfav.view.login.LoginRepositoryImpl;
 import newagency.picfav.view.sign.up.ISignUpRepository;
 import newagency.picfav.view.sign.up.SignUpRepositoryImpl;
 
-
 @Module
 public class DataModule {
+
     @Provides
     @Singleton
     SharedPrefManager provideSharedPrefManager(@ApplicationContext Context context) {
@@ -33,13 +33,15 @@ public class DataModule {
 
     @Provides
     @Singleton
-    ILoginRepository provideLoginRepository(@NonNull ApiService apiService) {
-        return new LoginRepositoryImpl(apiService);
+    ILoginRepository provideLoginRepository(@NonNull @ApplicationContext Context context,
+                                            @NonNull ApiService apiService) {
+        return new LoginRepositoryImpl(context, apiService);
     }
 
     @Provides
     @Singleton
-    ISignUpRepository proviceLoginRepository(@NonNull ApiService apiService) {
-        return new SignUpRepositoryImpl(apiService);
+    ISignUpRepository provideSignUpRepository(@NonNull @ApplicationContext Context context,
+                                             @NonNull ApiService apiService) {
+        return new SignUpRepositoryImpl(context, apiService);
     }
 }

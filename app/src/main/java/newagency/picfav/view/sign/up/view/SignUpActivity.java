@@ -2,6 +2,8 @@ package newagency.picfav.view.sign.up.view;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
@@ -17,8 +19,10 @@ import butterknife.OnClick;
 import newagency.picfav.R;
 import newagency.picfav.dagger.DaggerViewComponent;
 import newagency.picfav.dagger.ViewModule;
+import newagency.picfav.util.AppUtils;
 import newagency.picfav.util.DateTimeUtil;
 import newagency.picfav.view.BaseActivity;
+import newagency.picfav.view.login.view.LoginActivity;
 import newagency.picfav.view.sign.up.SignUpContract;
 import newagency.picfav.view.sign.up.SignUpValidator;
 
@@ -31,6 +35,9 @@ public class SignUpActivity extends BaseActivity implements SignUpContract.View 
 
     @Inject
     SignUpContract.PresenterI presenterI;
+
+    @BindView(R.id.root)
+    ConstraintLayout mRoot;
 
     @BindView(R.id.date_of_birth)
     TextInputLayout etDateOfBirth;
@@ -87,11 +94,13 @@ public class SignUpActivity extends BaseActivity implements SignUpContract.View 
 
     @OnClick(R.id.iv_back)
     void onBackClick() {
+        AppUtils.hideSoftInputFromWindow(getCurrentFocus());
         onBackPressed();
     }
 
     @OnClick(R.id.btn_signup)
     void signIn() {
+        AppUtils.hideSoftInputFromWindow(getCurrentFocus());
         if (checkFields()) {
             presenterI.signUp(getFieldValue(etFirstName), getFieldValue(etLastName),
                     getFieldValue(etUsername), getFieldValue(etPassword), getFieldValue(etDateOfBirth));
@@ -125,6 +134,17 @@ public class SignUpActivity extends BaseActivity implements SignUpContract.View 
         if (mProgressDialog.isShowing()) {
             mProgressDialog.dismiss();
         }
+    }
+
+    @Override
+    public void showMessage(String error) {
+        Snackbar.make(mRoot, error, Snackbar.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void redirectToLogin() {
+        finish();
+        LoginActivity.start(this);
     }
 
     private String getFieldValue(TextInputLayout field) {

@@ -2,12 +2,18 @@
     <string name="app_name">picFav</string>
     <string name="general_waiting_please_msg">Please waiting…</string>
 
+    <!--General error-->
+    <string name="error_connection_msg">No internet connection</string>
+    <string name="error_something_wrong_msg">Something went wrong, try later.</string>
+
     <!--Login activity-->
     <string name="login_activity_user_name_hint">Username</string>
     <string name="login_activity_password_hint">Password</string>
     <string name="login_activity_login_btn_msg">Log In</string>
     <string name="login_activity_terms_and_condition">I agreed with terms and conditions.</string>
     <string name="login_activity_forgot_password_msg">Forgot your password?</string>
+    <string name="login_error_user_name_empty">Please enter your Username.</string>
+    <string name="login_error_password_empty">Please enter your Password.</string>
 
     <!--Welcome activity-->
     <string name="login_title">LOG IN</string>

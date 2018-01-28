@@ -8,6 +8,15 @@ public interface LoginContract {
         void showProgress();
 
         void hideProgress();
+
+        void showMessage(String error);
+
+        void showUserNameError(String error);
+
+        void showPasswordError(String error);
+
+        void clearAllError();
+
     }
 
     interface PresenterI extends IBasePresenter {

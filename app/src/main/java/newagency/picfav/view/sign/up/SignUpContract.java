@@ -9,6 +9,11 @@ public interface SignUpContract {
         void showProgress();
 
         void hideProgress();
+
+        void showMessage(String error);
+
+        void redirectToLogin();
+
     }
 
     interface PresenterI extends IBasePresenter {

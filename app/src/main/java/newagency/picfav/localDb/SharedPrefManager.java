@@ -3,6 +3,8 @@ package newagency.picfav.localDb;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import javax.inject.Inject;
+
 import newagency.picfav.dagger.scope.ApplicationContext;
 import newagency.picfav.netwotk.ApiConst;
 
@@ -13,6 +15,7 @@ import newagency.picfav.netwotk.ApiConst;
 public class SharedPrefManager {
     private final SharedPreferences mSharedPreferences;
 
+    @Inject
     public SharedPrefManager(@ApplicationContext Context context) {
         mSharedPreferences = context.getSharedPreferences(ApiConst.SHARED_PREFS_KEY, Context.MODE_PRIVATE);
     }

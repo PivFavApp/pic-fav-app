@@ -16,7 +16,7 @@ public interface ISignUpRepository {
     interface SignUpCallback {
         void onSuccess();
 
-        void onError();
+        void onError(String error);
     }
 
 }

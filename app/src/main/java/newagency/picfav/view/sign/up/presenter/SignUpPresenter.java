@@ -21,13 +21,15 @@ public class SignUpPresenter implements SignUpContract.PresenterI {
         @Override
         public void onSuccess() {
             if (mView != null) {
+                mView.redirectToLogin();
                 mView.hideProgress();
             }
         }
 
         @Override
-        public void onError() {
+        public void onError(String error) {
             if (mView != null) {
+                mView.showMessage(error);
                 mView.hideProgress();
             }
         }
