@@ -1,4 +1,4 @@
-package newagency.picfav.view.sign.up;
+package newagency.picfav.view.sign.up.presenter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

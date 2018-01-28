@@ -16,6 +16,7 @@ import newagency.picfav.dagger.ViewModule;
 import newagency.picfav.util.AppUtils;
 import newagency.picfav.view.BaseActivity;
 import newagency.picfav.view.login.LoginContract;
+import newagency.picfav.view.main.view.MainScreenActivity;
 
 public class LoginActivity extends BaseActivity implements LoginContract.View {
 
@@ -114,5 +115,11 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
     public void clearAllError() {
         mLoginInputLayout.setError(null);
         mPasswordInputLayout.setError(null);
+    }
+
+    @Override
+    public void navigateToMainScreen() {
+        finish();
+        MainScreenActivity.start(this);
     }
 }

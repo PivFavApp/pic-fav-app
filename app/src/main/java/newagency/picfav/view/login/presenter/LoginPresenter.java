@@ -11,9 +11,7 @@ import newagency.picfav.dagger.scope.ApplicationContext;
 import newagency.picfav.localDb.SharedPrefManager;
 import newagency.picfav.netwotk.request.LoginRequestBody;
 import newagency.picfav.util.AppConstants;
-import newagency.picfav.view.login.ILoginRepository;
 import newagency.picfav.view.login.LoginContract;
-import newagency.picfav.view.login.LoginRepositoryImpl;
 
 public class LoginPresenter implements LoginContract.PresenterI {
 
@@ -35,6 +33,7 @@ public class LoginPresenter implements LoginContract.PresenterI {
             mSharedPrefManager.setAuthToken(token);
             mSharedPrefManager.setLoggedIn(true);
             if (mView != null) {
+                mView.navigateToMainScreen();
                 mView.hideProgress();
             }
         }

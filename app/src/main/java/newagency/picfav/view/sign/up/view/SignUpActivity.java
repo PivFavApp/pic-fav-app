@@ -24,7 +24,7 @@ import newagency.picfav.util.DateTimeUtil;
 import newagency.picfav.view.BaseActivity;
 import newagency.picfav.view.login.view.LoginActivity;
 import newagency.picfav.view.sign.up.SignUpContract;
-import newagency.picfav.view.sign.up.SignUpValidator;
+import newagency.picfav.view.sign.up.presenter.SignUpValidator;
 
 public class SignUpActivity extends BaseActivity implements SignUpContract.View {
 

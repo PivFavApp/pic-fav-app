@@ -11,10 +11,10 @@ import newagency.picfav.dagger.scope.ApplicationContext;
 import newagency.picfav.localDb.SharedPrefManager;
 import newagency.picfav.netwotk.ApiClient;
 import newagency.picfav.netwotk.ApiService;
-import newagency.picfav.view.login.ILoginRepository;
-import newagency.picfav.view.login.LoginRepositoryImpl;
-import newagency.picfav.view.sign.up.ISignUpRepository;
-import newagency.picfav.view.sign.up.SignUpRepositoryImpl;
+import newagency.picfav.view.login.presenter.ILoginRepository;
+import newagency.picfav.view.login.presenter.LoginRepositoryImpl;
+import newagency.picfav.view.sign.up.presenter.ISignUpRepository;
+import newagency.picfav.view.sign.up.presenter.SignUpRepositoryImpl;
 
 @Module
 public class DataModule {

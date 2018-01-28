@@ -9,8 +9,8 @@ import dagger.Component;
 import newagency.picfav.PicFavApplication;
 import newagency.picfav.dagger.scope.ApplicationContext;
 import newagency.picfav.netwotk.ApiService;
-import newagency.picfav.view.login.ILoginRepository;
-import newagency.picfav.view.sign.up.ISignUpRepository;
+import newagency.picfav.view.login.presenter.ILoginRepository;
+import newagency.picfav.view.sign.up.presenter.ISignUpRepository;
 
 /**
  * Created by oroshka on 1/22/18.

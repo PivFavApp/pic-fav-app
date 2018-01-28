@@ -5,6 +5,7 @@ import dagger.Module;
 import dagger.Provides;
 import newagency.picfav.view.AbsView;
 import newagency.picfav.view.login.LoginContract;
+import newagency.picfav.view.main.MainScreenContract;
 import newagency.picfav.view.sign.up.SignUpContract;
 import newagency.picfav.view.welcome.WelcomeContract;
 
@@ -32,6 +33,11 @@ public class ViewModule {
     @Provides
     SignUpContract.View providesSignUpView() {
         return (SignUpContract.View) view;
+    }
+
+    @Provides
+    MainScreenContract.View provideMainScreenView() {
+        return (MainScreenContract.View) view;
     }
 
 }

@@ -17,6 +17,8 @@ public interface LoginContract {
 
         void clearAllError();
 
+        void navigateToMainScreen();
+
     }
 
     interface PresenterI extends IBasePresenter {

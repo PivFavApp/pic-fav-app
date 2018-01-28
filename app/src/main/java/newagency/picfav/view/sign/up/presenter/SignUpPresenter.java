@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import javax.inject.Inject;
 
 import newagency.picfav.netwotk.request.SignUpRequestBody;
-import newagency.picfav.view.sign.up.ISignUpRepository;
 import newagency.picfav.view.sign.up.SignUpContract;
 
 public class SignUpPresenter implements SignUpContract.PresenterI {
