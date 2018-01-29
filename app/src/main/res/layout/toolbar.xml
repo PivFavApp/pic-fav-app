@@ -1,0 +1,63 @@
+<android.support.design.widget.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:theme="@style/AppTheme.AppBarOverlay"
+    tools:showIn="@layout/activity_main_screen">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/big_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/colorPrimary"
+        app:popupTheme="@style/AppTheme.PopupOverlay">
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/constraint_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/toolbar_title_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name"
+                android:textAppearance="@style/Roboto.Bold.White.18"
+                app:layout_constraintBottom_toTopOf="@+id/toolbar_sub_title_tv"
+                app:layout_constraintStart_toStartOf="parent"
+                android:maxLines="1"
+                android:layout_marginEnd="@dimen/toolbar_title_margin_end"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/set_name_tv"
+                app:layout_constraintVertical_chainStyle="packed" />
+
+            <TextView
+                android:id="@+id/toolbar_sub_title_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Theme of pic"
+                android:maxLines="2"
+                android:layout_marginEnd="@dimen/toolbar_title_margin_end"
+                android:textAppearance="@style/Roboto.Normal.White.14"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/set_name_tv"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar_title_tv" />
+
+            <TextView
+                android:id="@+id/set_name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/general_margin"
+                android:text="1st set"
+                android:textAppearance="@style/Roboto.Normal.White.16"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.v7.widget.Toolbar>
+
+</android.support.design.widget.AppBarLayout>

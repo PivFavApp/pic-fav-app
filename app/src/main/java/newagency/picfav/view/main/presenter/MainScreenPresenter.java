@@ -48,7 +48,7 @@ public class MainScreenPresenter implements MainScreenContract.PresenterI {
         mSharedPrefManager.setAuthToken(null);
         mSharedPrefManager.setLoggedIn(false);
         if (mView != null) {
-            mView.navigateToLogIn();
+            mView.navigateToWelcome();
         }
     }
 }

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">picFav</string>
+    <string name="app_name">PicFav</string>
     <string name="general_waiting_please_msg">Please waiting…</string>
 
     <!--General error-->
@@ -28,5 +28,9 @@
     <string name="password">Password</string>
     <string name="date_of_birth">Date of Birth</string>
     <string name="login_activity_login_title_msg">Log In</string>
+
+
+    <!--Main activity-->
+    <string name="main_next_btn_msg">Next</string>
 
 </resources>

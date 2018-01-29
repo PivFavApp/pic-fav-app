@@ -15,6 +15,10 @@
         <item name="android:windowTranslucentStatus">true</item>
     </style>
 
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
 
     <!-- Style -->
     <style name="Roboto.Normal" parent="@android:style/TextAppearance">
@@ -49,12 +53,19 @@
         <item name="android:textColor">@color/colorAccent</item>
     </style>
 
+    <style name="Roboto.Normal.Grey" parent="Roboto.Normal">
+        <item name="android:textColor">@color/colorGrey</item>
+    </style>
 
 
 
     <!-- Size -->
     <style name="Roboto.Normal.White.12" parent="Roboto.Normal.White">
         <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="Roboto.Normal.White.14" parent="Roboto.Normal.White">
+        <item name="android:textSize">14sp</item>
     </style>
 
     <style name="Roboto.Normal.White.16" parent="Roboto.Normal.White">
@@ -65,13 +76,20 @@
         <item name="android:textSize">20sp</item>
     </style>
 
+    <style name="Roboto.Normal.Grey.16" parent="Roboto.Normal.Grey">
+        <item name="android:textSize">16sp</item>
+    </style>
 
-    <style name="Roboto.Normal.Black.14" parent="Roboto.Normal.Black">
-        <item name="android:textSize">14sp</item>
+    <style name="Roboto.Bold.White.12" parent="Roboto.Bold.White">
+        <item name="android:textSize">12sp</item>
     </style>
 
     <style name="Roboto.Bold.White.16" parent="Roboto.Bold.White">
         <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="Roboto.Bold.White.18" parent="Roboto.Bold.White">
+        <item name="android:textSize">18sp</item>
     </style>
 
     <style name="Roboto.Bold.White.30" parent="Roboto.Bold.White">
@@ -80,6 +98,10 @@
 
     <style name="Roboto.Normal.Accent.12" parent="Roboto.Normal.Accent">
         <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="Roboto.Normal.Black.14" parent="Roboto.Normal.Black">
+        <item name="android:textSize">14sp</item>
     </style>
 
     <style name="Roboto.Bold.Black.18" parent="Roboto.Bold.Black">

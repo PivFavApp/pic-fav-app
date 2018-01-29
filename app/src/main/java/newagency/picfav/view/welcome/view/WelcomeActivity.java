@@ -1,5 +1,8 @@
 package newagency.picfav.view.welcome.view;
 
+import android.content.Context;
+import android.content.Intent;
+
 import javax.inject.Inject;
 
 import butterknife.OnClick;
@@ -15,6 +18,10 @@ public class WelcomeActivity extends BaseActivity implements WelcomeContract.Vie
 
     @Inject
     WelcomeContract.PresenterI presenter;
+
+    public static void start(Context context) {
+        context.startActivity(new Intent(context, WelcomeActivity.class));
+    }
 
     @Override
     protected void onViewReady() {

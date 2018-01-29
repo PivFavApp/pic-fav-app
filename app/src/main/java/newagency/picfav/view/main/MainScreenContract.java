@@ -11,7 +11,7 @@ public interface MainScreenContract {
 
     interface View extends AbsView {
 
-        void navigateToLogIn();
+        void navigateToWelcome();
 
     }
 
