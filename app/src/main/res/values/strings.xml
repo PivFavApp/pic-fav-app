@@ -32,5 +32,6 @@
 
     <!--Main activity-->
     <string name="main_next_btn_msg">Next</string>
+    <string name="main_choose_title">Choose 3–5</string>
 
 </resources>
