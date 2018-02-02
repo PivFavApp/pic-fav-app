@@ -22,11 +22,15 @@ import newagency.picfav.view.main.presenter.model.GameStateInfo;
 
 public class GameManager implements IGameManager {
 
+    private final static int COUNT_FIRST_STEP = 4;
+
+    private final static int COUNT_SECOND_STEP = 2;
+
     private final static int STEP_IN_FIRST_ROUND = 3;
 
     private final static int FIRST_ROUND_PRELIMINARY = 4;
 
-    private final static int STEP_IN_SECIND_ROUND = 6;
+    private final static int STEP_IN_SECOND_ROUND = 6;
 
     private final static int SECOND_ROUND_PRELIMINARY = 7;
 
@@ -41,7 +45,9 @@ public class GameManager implements IGameManager {
 
     private GameResponse mGameResponse;
 
-    private Map<Integer, List<ImageModel>> groupImageUser;
+    private Map<Integer, List<ImageModel>> groupImageUserFirstRound;
+
+    private Map<Integer, List<ImageModel>> groupImageUserSecondRound;
 
     private int mCurrentStep;
 
@@ -70,8 +76,8 @@ public class GameManager implements IGameManager {
     public void moveToNextStep() {
         if (mGameManagerCallback == null) return;
         mCurrentStep++;
-        if (mCurrentStep < STEP_IN_FIRST_ROUND) {
-            GameStateInfo gameStateInfo = generateGameCurrentState(groupImageUser.get(mCurrentStep), -1);
+        if (mCurrentStep <= STEP_IN_FIRST_ROUND) {
+            GameStateInfo gameStateInfo = generateGameCurrentState(groupImageUserFirstRound.get(mCurrentStep), -1);
             mGameManagerCallback.selectedStep(gameStateInfo);
 
         } else if (mCurrentStep == FIRST_ROUND_PRELIMINARY) {
@@ -84,8 +90,16 @@ public class GameManager implements IGameManager {
                 mGameManagerCallback.selectedStep(gameStateInfo);
 
             } else {
-                mCurrentStep++;  // continue next step
+                moveToNextStep();  // continue next step
             }
+        } else if (mCurrentStep <= STEP_IN_SECOND_ROUND) {
+//            groupSecondRoundGame();
+//            TODO second round
+
+        } else if (mCurrentStep == SECOND_ROUND_PRELIMINARY) {
+
+        } else if (mCurrentStep > SECOND_ROUND_PRELIMINARY) {
+//            finish
         }
     }
 
@@ -106,36 +120,36 @@ public class GameManager implements IGameManager {
     }
 
     private void groupFirstRoundGame(GameResponse gameResponse) {
-        groupImageUser = new HashMap<>();
+        groupImageUserFirstRound = new HashMap<>();
         int sizeImagesGame = gameResponse.mImageModels.size();
         int countInGroup = 0;
-        int itemInGroup = sizeImagesGame / STEP_IN_FIRST_ROUND;
+        int itemInGroup = sizeImagesGame / COUNT_FIRST_STEP;
         int groupIndex = 0;
         List<ImageModel> groupImage = new ArrayList<>();
         for (int i = 0; i < sizeImagesGame; i++) {
             ImageModel imageModel = gameResponse.mImageModels.get(i);
             if (countInGroup == itemInGroup) {
                 countInGroup = 0;
-                groupImageUser.put(groupIndex, groupImage);
+                groupImageUserFirstRound.put(groupIndex, groupImage);
                 groupImage = new ArrayList<>();
                 groupIndex++;
             }
             groupImage.add(imageModel);
             countInGroup++;
             if (i == sizeImagesGame - 1) {
-                groupImageUser.put(groupIndex, groupImage);
+                groupImageUserFirstRound.put(groupIndex, groupImage);
             }
         }
 
         if (mGameManagerCallback != null) {
-            mGameManagerCallback.selectedStep(generateGameCurrentState(groupImageUser.get(mCurrentStep), -1));
+            mGameManagerCallback.selectedStep(generateGameCurrentState(groupImageUserFirstRound.get(mCurrentStep), -1));
         }
     }
 
     private int calculateSelectedInAllGroup() {
         int countSelected = 0;
-        for (Integer key : groupImageUser.keySet()) {
-            for (ImageModel imageModel : groupImageUser.get(key)) {
+        for (Integer key : groupImageUserFirstRound.keySet()) {
+            for (ImageModel imageModel : groupImageUserFirstRound.get(key)) {
                 if (imageModel.isSelected)
                     countSelected++;
             }
@@ -145,8 +159,8 @@ public class GameManager implements IGameManager {
 
     private List<ImageModel> getUnSelectedPics() {
         List<ImageModel> imageModels = new ArrayList<>();
-        for (Integer key : groupImageUser.keySet()) {
-            for (ImageModel imageModel : groupImageUser.get(key)) {
+        for (Integer key : groupImageUserFirstRound.keySet()) {
+            for (ImageModel imageModel : groupImageUserFirstRound.get(key)) {
                 if (!imageModel.isSelected)
                     imageModels.add(imageModel);
             }
