@@ -15,7 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import newagency.picfav.R;
-import newagency.picfav.view.main.presenter.model.ImageItemModel;
+import newagency.picfav.netwotk.response.ImageModel;
+import newagency.picfav.util.GameUtil;
 
 /**
  * Created by oroshka on 1/30/18.
@@ -26,13 +27,31 @@ public class ImageRecyclerAdapter extends RecyclerView.Adapter<ImageRecyclerAdap
     public interface ImageRecyclerAdapterCallback {
 
         void onChangeCountSelected(int count);
+
+        void selectedMaxCount(int maxCount);
+
+        void changeRemainState(int needCount);
+
+        void hideRemainCount();
+
+        void showRemainCount();
+
     }
 
-    private List<ImageItemModel> mImageItemList;
+    private static int MAX_SELECTED_COUNT = 5;
+
+    private static int MIN_SELECTED_COUNT = 3;
+
+    private static int mCountNeedPreliminary = -1;
+
+    private List<ImageModel> mImageItemList;
 
     private Context mContext;
 
     private ImageRecyclerAdapterCallback mCallback;
+
+    private int mSelectedCount = 0;
+
 
     public ImageRecyclerAdapter(Context context, ImageRecyclerAdapterCallback callback) {
         mContext = context;
@@ -55,21 +74,44 @@ public class ImageRecyclerAdapter extends RecyclerView.Adapter<ImageRecyclerAdap
         return mImageItemList != null ? mImageItemList.size() : 0;
     }
 
-    public void addAll(List<ImageItemModel> imageItemList) {
+    public int getSelectedCount() {
+        return mSelectedCount;
+    }
+
+    public List<ImageModel> getData() {
+        return mImageItemList;
+    }
+
+    public void addAll(List<ImageModel> imageItemList, int countNeedPreliminary) {
+        mCountNeedPreliminary = countNeedPreliminary;
         if (this.mImageItemList == null) {
             this.mImageItemList = new ArrayList<>();
         }
         this.mImageItemList.clear();
         this.mImageItemList.addAll(imageItemList);
-        notifyDataSetChanged();
+        notifyChange();
     }
 
-    public void add(ImageItemModel imageItemModel) {
+    public void add(ImageModel imageItemModel) {
         if (mImageItemList == null) {
             mImageItemList = new ArrayList<>();
         }
         mImageItemList.add(imageItemModel);
         notifyItemInserted(mImageItemList.size() - 1);
+    }
+
+    public void notifyChange() {
+        mSelectedCount = GameUtil.calculateSelected(mImageItemList);
+        mCallback.onChangeCountSelected(mSelectedCount);
+        if (mCountNeedPreliminary != -1) {
+            int diff = mCountNeedPreliminary - mSelectedCount;
+            if (diff == 0)
+                mCallback.hideRemainCount();
+            else
+                mCallback.showRemainCount();
+            mCallback.changeRemainState(diff);
+        }
+        notifyDataSetChanged();
     }
 
     public class ImageHolder extends RecyclerView.ViewHolder {
@@ -82,29 +124,63 @@ public class ImageRecyclerAdapter extends RecyclerView.Adapter<ImageRecyclerAdap
             mImageView = itemView.findViewById(R.id.game_iv);
             mWrapperCv = itemView.findViewById(R.id.wrapper_image_cv);
 
-            mWrapperCv.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    int positionClicked = getAdapterPosition();
-                    if (positionClicked != -1) {
-                        ImageItemModel imageItemModel = mImageItemList.get(positionClicked);
-                        imageItemModel.setSelected(!imageItemModel.isSelected());
-                        notifyDataSetChanged();
+            mWrapperCv.setOnLongClickListener(v -> {
+                int positionClicked = getAdapterPosition();
+
+                if (positionClicked != -1) {
+                    ImageModel imageItemModel = mImageItemList.get(positionClicked);
+                    changeSelectionItem(imageItemModel);
+                }
+                return false;
+            });
+
+            mWrapperCv.setOnClickListener(v -> {
+                int positionClicked = getAdapterPosition();
+                if (positionClicked != -1) {
+                    ImageModel imageModel = mImageItemList.get(positionClicked);
+                    if (imageModel.isSelected) {
+                        imageModel.isSelected = false;
+                        notifyChange();
                     }
-                    return false;
                 }
             });
         }
 
-        public void bind(ImageItemModel imageItem) {
-            int colorBackground = imageItem.isSelected()
+        public void bind(ImageModel imageItem) {
+            int colorBackground = imageItem.isSelected
                     ? ContextCompat.getColor(mContext, R.color.colorAccent)
                     : ContextCompat.getColor(mContext, R.color.colorWhite);
             mWrapperCv.setCardBackgroundColor(colorBackground);
 
             Glide.with(mContext)
-                    .load(imageItem.getUrl())
+                    .load(imageItem.url)
                     .into(mImageView);
+        }
+    }
+
+    private void changeSelectionItem(ImageModel imageItemModel) {
+        if (!imageItemModel.isSelected && mSelectedCount >= getMaxSelectedCount()) {
+            mCallback.selectedMaxCount(getMaxSelectedCount());
+
+        } else {
+            imageItemModel.isSelected = !imageItemModel.isSelected;
+            notifyChange();
+        }
+    }
+
+    private static int getMaxSelectedCount() {
+        if(mCountNeedPreliminary == -1) {
+            return MAX_SELECTED_COUNT;
+        } else {
+            return mCountNeedPreliminary;
+        }
+    }
+
+    public static int getMinSelectedCount() {
+        if(mCountNeedPreliminary == -1) {
+            return MIN_SELECTED_COUNT;
+        } else {
+            return mCountNeedPreliminary;
         }
     }
 }

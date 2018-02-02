@@ -33,5 +33,10 @@
     <!--Main activity-->
     <string name="main_next_btn_msg">Next</string>
     <string name="main_choose_title">Choose 3–5</string>
+    <string name="main_selected_max_image_msg">Please press Next. You have already selected %d images.</string>
+    <string name="main_selected_min_image_msg">Please, You should select more than %d images.</string>
+    <string name="main_set_name_preliminary">Preliminary</string>
+    <string name="main_set_name">%d st set</string>
+    <string name="main_remain_count_msg">%d Remain</string>
 
 </resources>

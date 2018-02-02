@@ -21,8 +21,8 @@
 
     <Button
         android:id="@+id/btn_log_out"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
         android:text="Log Out"
         android:textAllCaps="false"
         app:layout_constraintEnd_toEndOf="parent"
@@ -59,6 +59,19 @@
         app:layout_constraintBottom_toTopOf="@+id/next_tv"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+
+    <TextView
+        android:id="@+id/remain_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="@string/main_remain_count_msg"
+        android:textAppearance="@style/Roboto.Normal.Black.16"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/next_tv"
+        app:layout_constraintStart_toEndOf="@+id/next_tv"
+        app:layout_constraintTop_toTopOf="@+id/next_tv" />
+
 
     <TextView
         android:id="@+id/next_tv"

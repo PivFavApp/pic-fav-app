@@ -1,5 +1,8 @@
 package newagency.picfav.view.main;
 
+import java.util.List;
+
+import newagency.picfav.netwotk.response.ImageModel;
 import newagency.picfav.view.AbsView;
 import newagency.picfav.view.IBasePresenter;
 
@@ -13,6 +16,16 @@ public interface MainScreenContract {
 
         void navigateToWelcome();
 
+        void showMessage(String message);
+
+        void updateToolbar(String name, String setRoundName);
+
+        void updateAdapterPhoto(List<ImageModel> imageModels, int countNeedPreliminary);
+
+        void showPreliminaryCount();
+
+        void showNeededCountSimple();
+
     }
 
     interface PresenterI extends IBasePresenter {
@@ -21,5 +34,8 @@ public interface MainScreenContract {
 
         void logout();
 
+        void goToNextStep(List<ImageModel> packImage);
+
+        void loadGame(String idGame);
     }
 }

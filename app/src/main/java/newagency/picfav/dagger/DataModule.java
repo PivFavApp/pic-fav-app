@@ -13,6 +13,10 @@ import newagency.picfav.netwotk.ApiClient;
 import newagency.picfav.netwotk.ApiService;
 import newagency.picfav.view.login.presenter.ILoginRepository;
 import newagency.picfav.view.login.presenter.LoginRepositoryImpl;
+import newagency.picfav.view.main.presenter.GameManager;
+import newagency.picfav.view.main.presenter.IGameManager;
+import newagency.picfav.view.main.presenter.IMainScreenRepository;
+import newagency.picfav.view.main.presenter.MainScreenRepositoryImpl;
 import newagency.picfav.view.sign.up.presenter.ISignUpRepository;
 import newagency.picfav.view.sign.up.presenter.SignUpRepositoryImpl;
 
@@ -44,4 +48,18 @@ public class DataModule {
                                              @NonNull ApiService apiService) {
         return new SignUpRepositoryImpl(context, apiService);
     }
+
+    @Provides
+    @Singleton
+    IMainScreenRepository provideMainScreenRepository(@NonNull @ApplicationContext Context context,
+                                                      @NonNull ApiService apiService) {
+        return new MainScreenRepositoryImpl(context, apiService);
+    }
+
+    @Provides
+    @Singleton
+    IGameManager provideGameManager(@NonNull @ApplicationContext Context context) {
+        return new GameManager(context);
+    }
+
 }
