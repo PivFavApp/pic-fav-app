@@ -22,9 +22,9 @@ import newagency.picfav.view.main.presenter.model.GameStateInfo;
 
 public class GameManager implements IGameManager {
 
-    private final static int COUNT_FIRST_STEP = 4;
+    private final static int COUNT_FIRST_ROUND = 4;
 
-    private final static int COUNT_SECOND_STEP = 2;
+    private final static int COUNT_SECOND_ROUND = 2;
 
     private final static int STEP_IN_FIRST_ROUND = 3;
 
@@ -84,7 +84,7 @@ public class GameManager implements IGameManager {
             int selectedCount = calculateSelectedInAllGroup();
 
             if (selectedCount < NEED_SELECT_FIRST_ROUND) {
-                List<ImageModel> packImage = getUnSelectedPics();
+                List<ImageModel> packImage = getPicsBySelection(groupImageUserFirstRound, false);
                 int countRemains = NEED_SELECT_FIRST_ROUND - selectedCount;
                 GameStateInfo gameStateInfo = generateGameCurrentState(packImage, countRemains);
                 mGameManagerCallback.selectedStep(gameStateInfo);
@@ -93,13 +93,14 @@ public class GameManager implements IGameManager {
                 moveToNextStep();  // continue next step
             }
         } else if (mCurrentStep <= STEP_IN_SECOND_ROUND) {
-//            groupSecondRoundGame();
-//            TODO second round
+            mRound++;
+            groupSecondRoundGame(getPicsBySelection(groupImageUserFirstRound, false));
 
         } else if (mCurrentStep == SECOND_ROUND_PRELIMINARY) {
+//            TODO look FIRST_ROUND_PRELIMINARY realization
 
         } else if (mCurrentStep > SECOND_ROUND_PRELIMINARY) {
-//            finish
+//            finish send to UI update
         }
     }
 
@@ -123,8 +124,8 @@ public class GameManager implements IGameManager {
         groupImageUserFirstRound = new HashMap<>();
         int sizeImagesGame = gameResponse.mImageModels.size();
         int countInGroup = 0;
-        int itemInGroup = sizeImagesGame / COUNT_FIRST_STEP;
-        int groupIndex = 0;
+        int itemInGroup = sizeImagesGame / COUNT_FIRST_ROUND;
+        int groupIndex = mCurrentStep;
         List<ImageModel> groupImage = new ArrayList<>();
         for (int i = 0; i < sizeImagesGame; i++) {
             ImageModel imageModel = gameResponse.mImageModels.get(i);
@@ -146,6 +147,34 @@ public class GameManager implements IGameManager {
         }
     }
 
+    private void groupSecondRoundGame(List<ImageModel> originList) {
+        groupImageUserSecondRound = new HashMap<>();
+        int sizeImagesGame = originList.size();
+        int countInGroup = 0;
+        int itemInGroup = sizeImagesGame / COUNT_SECOND_ROUND;
+        int groupIndex = mCurrentStep;
+        List<ImageModel> groupImage = new ArrayList<>();
+        for (int i = 0; i < sizeImagesGame; i++) {
+            ImageModel imageModel = originList.get(i);
+            if (countInGroup == itemInGroup) {
+                countInGroup = 0;
+                groupImageUserSecondRound.put(groupIndex, groupImage);
+                groupImage = new ArrayList<>();
+                groupIndex++;
+            }
+            groupImage.add(imageModel);
+            countInGroup++;
+            if (i == sizeImagesGame - 1) {
+                groupImageUserSecondRound.put(groupIndex, groupImage);
+            }
+        }
+
+        if (mGameManagerCallback != null) {
+            mGameManagerCallback.selectedStep(generateGameCurrentState(groupImageUserSecondRound.get(mCurrentStep), -1));
+        }
+    }
+
+
     private int calculateSelectedInAllGroup() {
         int countSelected = 0;
         for (Integer key : groupImageUserFirstRound.keySet()) {
@@ -157,11 +186,11 @@ public class GameManager implements IGameManager {
         return countSelected;
     }
 
-    private List<ImageModel> getUnSelectedPics() {
+    private List<ImageModel> getPicsBySelection(Map<Integer, List<ImageModel>> originGroup, boolean isSelected) {
         List<ImageModel> imageModels = new ArrayList<>();
-        for (Integer key : groupImageUserFirstRound.keySet()) {
-            for (ImageModel imageModel : groupImageUserFirstRound.get(key)) {
-                if (!imageModel.isSelected)
+        for (Integer key : originGroup.keySet()) {
+            for (ImageModel imageModel : originGroup.get(key)) {
+                if (imageModel.isSelected == isSelected)
                     imageModels.add(imageModel);
             }
         }

@@ -110,6 +110,7 @@ public class MainScreenPresenter implements MainScreenContract.PresenterI, IGame
     //    IGameManager.GameManagerCallback methods
     @Override
     public void selectedStep(GameStateInfo gameStateInfo) {
+        //            TODO need realize change IO for second round
         if (mView != null) {
             String setName = detectSetName(gameStateInfo);
             mView.updateToolbar(gameStateInfo.name, setName);
