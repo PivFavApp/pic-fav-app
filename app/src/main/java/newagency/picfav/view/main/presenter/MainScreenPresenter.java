@@ -105,21 +105,6 @@ public class MainScreenPresenter implements MainScreenContract.PresenterI, IGame
         }
     }
 
-    //    MainScreenContract.PresenterI  methods
-    @Override
-    public boolean isLogin() {
-        return mSharedPrefManager.isLoggedIn();
-    }
-
-    @Override
-    public void logout() {
-        mSharedPrefManager.setAuthToken(null);
-        mSharedPrefManager.setLoggedIn(false);
-        if (mView != null) {
-            mView.navigateToWelcome();
-        }
-    }
-
     @Override
     public void goToNextStep(List<ImageModel> packImage) {
         if (mView == null || packImage == null) return;
