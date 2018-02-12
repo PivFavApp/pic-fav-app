@@ -12,80 +12,66 @@
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
         android:background="@color/colorPrimary"
-        app:contentInsetEnd="0dp"
-        app:contentInsetLeft="0dp"
-        app:contentInsetRight="0dp"
-        app:contentInsetStart="0dp"
+        app:contentInsetStart="4dp"
         app:popupTheme="@style/AppTheme.PopupOverlay">
 
-        <RelativeLayout
-            android:id="@+id/toolbar"
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/constraint_toolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <LinearLayout
+            <ImageView
+                android:id="@+id/iv_back"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:padding="8dp"
+                android:src="@drawable/ic_arrow_back_white_24dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageView
-                    android:id="@+id/iv_back"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginRight="@dimen/spacing_small"
-                    android:src="@drawable/ic_back" />
+            <TextView
+                android:id="@+id/toolbar_title_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/toolbar_title_margin_end"
+                android:maxLines="1"
+                android:layout_marginStart="8dp"
+                android:text="@string/app_name"
+                android:textAppearance="@style/Roboto.Bold.White.18"
+                app:layout_constraintBottom_toTopOf="@+id/toolbar_sub_title_tv"
+                app:layout_constraintEnd_toStartOf="@+id/set_name_tv"
+                app:layout_constraintStart_toEndOf="@+id/iv_back"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed" />
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/toolbar_title_tv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/toolbar_title_margin_end"
-                        android:maxLines="1"
-                        android:text="@string/app_name"
-                        android:textAppearance="@style/Roboto.Bold.White.18"
-                        app:layout_constraintBottom_toTopOf="@+id/toolbar_sub_title_tv"
-                        app:layout_constraintEnd_toStartOf="@+id/set_name_tv"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_chainStyle="packed" />
-
-                    <TextView
-                        android:id="@+id/toolbar_sub_title_tv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/toolbar_title_margin_end"
-                        android:maxLines="2"
-                        android:textAppearance="@style/Roboto.Normal.White.14"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/set_name_tv"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/toolbar_title_tv"
-                        tools:text="Theme of pic" />
-
-                </LinearLayout>
-
-            </LinearLayout>
-
+            <TextView
+                android:id="@+id/toolbar_sub_title_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/toolbar_title_margin_end"
+                android:maxLines="2"
+                android:layout_marginStart="8dp"
+                android:textAppearance="@style/Roboto.Normal.White.14"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/set_name_tv"
+                app:layout_constraintStart_toEndOf="@+id/iv_back"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar_title_tv"
+                tools:text="Theme of pic" />
 
             <TextView
                 android:id="@+id/set_name_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
                 android:layout_marginEnd="@dimen/general_margin"
                 android:textAppearance="@style/Roboto.Normal.White.16"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:text="1st set" />
 
-        </RelativeLayout>
+        </android.support.constraint.ConstraintLayout>
 
     </android.support.v7.widget.Toolbar>
 
