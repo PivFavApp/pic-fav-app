@@ -21,7 +21,9 @@
             android:name=".view.login.view.LoginActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="adjustResize" >
+
+        </activity>
 
         <activity
             android:name=".view.sign.up.view.SignUpActivity"
@@ -33,16 +35,16 @@
             android:name=".view.gamelist.view.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme">
-        </activity>
-
-        <activity
-            android:name=".view.main.view.MainScreenActivity"
-            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".view.main.view.MainScreenActivity"
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
     </application>

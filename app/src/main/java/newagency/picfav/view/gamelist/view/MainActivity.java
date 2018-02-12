@@ -46,12 +46,14 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
     @Override
     protected void onViewReady() {
-        initRecView();
         if (!presenter.isLogin()) {
             navigateToWelcome();
+            return;
+
         } else {
             presenter.onStart();
         }
+        initRecView();
     }
 
     @Override

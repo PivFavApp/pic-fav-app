@@ -93,17 +93,11 @@ public class MainScreenActivity extends BaseActivity implements MainScreenContra
 
     private String gameId = "";
 
-    public static void start(Context context) {
-        Intent starter = new Intent(context, MainScreenActivity.class);
-        starter.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        context.startActivity(starter);
-    }
-
     @Override
     protected void onViewReady() {
         getArgs();
-        //  mPresenter.loadGame(gameId);
-        mPresenter.loadGame("494499d7-4826-46db-8315-a5bc90a67bbd");
+        mPresenter.loadGame(gameId);
+//        mPresenter.loadGame("494499d7-4826-46db-8315-a5bc90a67bbd");
         initAdapter();
     }
 
@@ -203,7 +197,6 @@ public class MainScreenActivity extends BaseActivity implements MainScreenContra
         mCarouselView.setTransformer(transformer);
         mCarouselView.setAdapter(mImageRecyclerAdapter);
         mCarouselView.setInfinite(false);
-        mImageRecyclerAdapter.addAll(generateImage(), -1);
     }
 
     private ArrayList<ImageModel> generateImage() {
