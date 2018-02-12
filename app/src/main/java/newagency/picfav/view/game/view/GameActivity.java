@@ -1,7 +1,8 @@
-package newagency.picfav.view.main.view;
+package newagency.picfav.view.game.view;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,14 +22,22 @@ import newagency.picfav.dagger.DaggerViewComponent;
 import newagency.picfav.dagger.ViewModule;
 import newagency.picfav.netwotk.response.ImageModel;
 import newagency.picfav.view.BaseActivity;
-import newagency.picfav.view.main.MainScreenContract;
-import newagency.picfav.view.main.presenter.ImageRecyclerAdapter;
+import newagency.picfav.view.game.GameContract;
+import newagency.picfav.view.game.presenter.ImageRecyclerAdapter;
 import newagency.picfav.view.welcome.view.WelcomeActivity;
 
-public class MainScreenActivity extends BaseActivity implements MainScreenContract.View {
+public class GameActivity extends BaseActivity implements GameContract.View {
+
+    private static String GAME_ID_KEY = "game_id";
+
+    public static void start(@NonNull Context context, @NonNull String gameId) {
+        Intent starter = new Intent(context, GameActivity.class);
+        starter.putExtra(GAME_ID_KEY, gameId);
+        context.startActivity(starter);
+    }
 
     @Inject
-    MainScreenContract.PresenterI mPresenter;
+    GameContract.PresenterI mPresenter;
 
     @BindView(R.id.carousel)
     CarouselView mCarouselView;
@@ -77,17 +86,13 @@ public class MainScreenActivity extends BaseActivity implements MainScreenContra
         }
     };
 
-    public static void start(Context context) {
-        Intent starter = new Intent(context, MainScreenActivity.class);
-        starter.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        context.startActivity(starter);
-    }
+    private String gameId = "";
 
     @Override
     protected void onViewReady() {
-        if (!mPresenter.isLogin())
-            navigateToWelcome();
-        mPresenter.loadGame("8ce2ca1c-81d1-4396-a0e0-b09af2137438");
+        getArgs();
+        //  mPresenter.loadGame(gameId);
+        mPresenter.loadGame("494499d7-4826-46db-8315-a5bc90a67bbd");
         initAdapter();
     }
 
@@ -98,7 +103,7 @@ public class MainScreenActivity extends BaseActivity implements MainScreenContra
 
     @Override
     protected int onRequestLayout() {
-        return R.layout.activity_main_screen;
+        return R.layout.activity_game_screen;
     }
 
     @Override
@@ -110,6 +115,11 @@ public class MainScreenActivity extends BaseActivity implements MainScreenContra
                 .inject(this);
     }
 
+    @OnClick(R.id.iv_back)
+    void onBack() {
+        onBackPressed();
+    }
+
     @OnClick(R.id.next_tv)
     void onNextClick() {
         mPresenter.goToNextStep(mImageRecyclerAdapter.getData());
@@ -118,17 +128,6 @@ public class MainScreenActivity extends BaseActivity implements MainScreenContra
     @OnClick(R.id.small_grid_iv)
     void onGridClick() {
 
-    }
-
-    @OnClick(R.id.btn_log_out)
-    void onLogOutClick() {
-        mPresenter.logout();
-    }
-
-    @Override
-    public void navigateToWelcome() {
-        finish();
-        WelcomeActivity.start(this);
     }
 
     @Override
@@ -186,5 +185,9 @@ public class MainScreenActivity extends BaseActivity implements MainScreenContra
             arrayList.add(imageItemModel);
         }
         return arrayList;
+    }
+
+    private void getArgs() {
+        gameId = getIntent().getStringExtra(GAME_ID_KEY);
     }
 }

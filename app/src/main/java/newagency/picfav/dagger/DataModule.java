@@ -11,12 +11,14 @@ import newagency.picfav.dagger.scope.ApplicationContext;
 import newagency.picfav.localDb.SharedPrefManager;
 import newagency.picfav.netwotk.ApiClient;
 import newagency.picfav.netwotk.ApiService;
+import newagency.picfav.view.game.presenter.IGameRepository;
 import newagency.picfav.view.login.presenter.ILoginRepository;
 import newagency.picfav.view.login.presenter.LoginRepositoryImpl;
-import newagency.picfav.view.main.presenter.GameManager;
-import newagency.picfav.view.main.presenter.IGameManager;
-import newagency.picfav.view.main.presenter.IMainScreenRepository;
-import newagency.picfav.view.main.presenter.MainScreenRepositoryImpl;
+import newagency.picfav.view.game.presenter.GameManager;
+import newagency.picfav.view.game.presenter.IGameManager;
+import newagency.picfav.view.game.presenter.GameRepositoryImpl;
+import newagency.picfav.view.main.data.GetAllGamesRepository;
+import newagency.picfav.view.main.data.GetAllGamesRepositoryImpl;
 import newagency.picfav.view.sign.up.presenter.ISignUpRepository;
 import newagency.picfav.view.sign.up.presenter.SignUpRepositoryImpl;
 
@@ -31,8 +33,8 @@ public class DataModule {
 
     @Provides
     @Singleton
-    ApiService providesDataApiService() {
-        return ApiClient.getDataApiService();
+    ApiService providesDataApiService(SharedPrefManager sharedPrefManager) {
+        return ApiClient.getDataApiService(sharedPrefManager);
     }
 
     @Provides
@@ -45,15 +47,22 @@ public class DataModule {
     @Provides
     @Singleton
     ISignUpRepository provideSignUpRepository(@NonNull @ApplicationContext Context context,
-                                             @NonNull ApiService apiService) {
+                                              @NonNull ApiService apiService) {
         return new SignUpRepositoryImpl(context, apiService);
     }
 
     @Provides
     @Singleton
-    IMainScreenRepository provideMainScreenRepository(@NonNull @ApplicationContext Context context,
-                                                      @NonNull ApiService apiService) {
-        return new MainScreenRepositoryImpl(context, apiService);
+    IGameRepository provideGameRepository(@NonNull @ApplicationContext Context context,
+                                          @NonNull ApiService apiService) {
+        return new GameRepositoryImpl(context, apiService);
+    }
+
+    @Provides
+    @Singleton
+    GetAllGamesRepository provideAllGamesRepository(@NonNull @ApplicationContext Context context,
+                                                    @NonNull ApiService apiService) {
+        return new GetAllGamesRepositoryImpl(context, apiService);
     }
 
     @Provides

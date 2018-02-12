@@ -8,10 +8,6 @@ import javax.inject.Inject;
 import newagency.picfav.dagger.scope.ApplicationContext;
 import newagency.picfav.netwotk.ApiConst;
 
-/**
- * Created by oroshka on 1/22/18.
- */
-
 public class SharedPrefManager {
     private final SharedPreferences mSharedPreferences;
 

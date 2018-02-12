@@ -1,7 +1,9 @@
-package newagency.picfav.view.main.presenter;
+package newagency.picfav.view.main.data;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+
+import java.util.List;
 
 import newagency.picfav.dagger.scope.ApplicationContext;
 import newagency.picfav.netwotk.ApiService;
@@ -12,11 +14,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-/**
- * Created by oroshka on 2/1/18.
- */
-
-public class MainScreenRepositoryImpl implements IMainScreenRepository {
+public class GetAllGamesRepositoryImpl implements GetAllGamesRepository {
 
     @NonNull
     private ApiService mApiService;
@@ -25,17 +23,17 @@ public class MainScreenRepositoryImpl implements IMainScreenRepository {
     @ApplicationContext
     private Context mContext;
 
-    public MainScreenRepositoryImpl(@NonNull @ApplicationContext Context context,
-                                    @NonNull ApiService apiService) {
+    public GetAllGamesRepositoryImpl(@NonNull @ApplicationContext Context context,
+                                     @NonNull ApiService apiService) {
         this.mApiService = apiService;
         this.mContext = context;
     }
 
     @Override
-    public void getGame(String idGame, @NonNull GameCallback callback) {
-        mApiService.getGame(idGame).enqueue(new Callback<GameResponse>() {
+    public void getAllGames(@NonNull GetAllGamesCallback callback) {
+        mApiService.getAllGames().enqueue(new Callback<List<GameResponse>>() {
             @Override
-            public void onResponse(Call<GameResponse> call, Response<GameResponse> response) {
+            public void onResponse(Call<List<GameResponse>> call, Response<List<GameResponse>> response) {
                 if (response.isSuccessful()) {
                     callback.onSuccess(response.body());
 
@@ -46,7 +44,7 @@ public class MainScreenRepositoryImpl implements IMainScreenRepository {
             }
 
             @Override
-            public void onFailure(Call<GameResponse> call, Throwable t) {
+            public void onFailure(Call<List<GameResponse>> call, Throwable t) {
                 String message = ErrorUtils.parseError(mContext, t);
                 callback.onError(message);
             }

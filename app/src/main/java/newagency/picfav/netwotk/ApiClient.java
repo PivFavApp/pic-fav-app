@@ -1,11 +1,18 @@
 package newagency.picfav.netwotk;
 
+import android.support.annotation.NonNull;
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+import newagency.picfav.localDb.SharedPrefManager;
+import newagency.picfav.netwotk.token.AccessTokenManager;
+import newagency.picfav.netwotk.token.HeadersInterceptor;
+import newagency.picfav.netwotk.token.TokenAuthenticator;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -17,8 +24,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ApiClient {
     private static ApiService sApiService;
 
-    public static ApiService getDataApiService() {
+    public static ApiService getDataApiService(@NonNull SharedPrefManager sharedPrefManager) {
         if (sApiService == null) {
+            AccessTokenManager tokenManager = new AccessTokenManager(sharedPrefManager);
+
             HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
             logging.setLevel(HttpLoggingInterceptor.Level.BODY);
 
@@ -35,6 +44,8 @@ public class ApiClient {
                         }
                     })
                     .addInterceptor(logging)
+                    .addInterceptor(new HeadersInterceptor(tokenManager))
+                    .authenticator(new TokenAuthenticator(tokenManager))
                     .build();
 
             Gson gson = new GsonBuilder()

@@ -4,10 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="newagency.picfav.view.main.view.MainScreenActivity">
+    tools:context="newagency.picfav.view.game.view.GameActivity">
 
     <include layout="@layout/toolbar" />
 
-    <include layout="@layout/content_main" />
+    <include layout="@layout/content_game" />
 
 </android.support.design.widget.CoordinatorLayout>

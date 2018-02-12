@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">PicFav</string>
     <string name="general_waiting_please_msg">Please waiting…</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 
     <!--General error-->
     <string name="error_connection_msg">No internet connection</string>
@@ -30,7 +32,7 @@
     <string name="login_activity_login_title_msg">Log In</string>
 
 
-    <!--Main activity-->
+    <!--Game activity-->
     <string name="main_next_btn_msg">Next</string>
     <string name="main_choose_title">Choose 3–5</string>
     <string name="main_selected_max_image_msg">Please press Next. You have already selected %d images.</string>
@@ -38,5 +40,11 @@
     <string name="main_set_name_preliminary">Preliminary</string>
     <string name="main_set_name">%d st set</string>
     <string name="main_remain_count_msg">%d Remain</string>
+
+    <!--Main activity-->
+    <string name="select_game">Select game</string>
+    <string name="log_out_title">Do you really want to log out?</string>
+    <string name="start">Start</string>
+
 
 </resources>

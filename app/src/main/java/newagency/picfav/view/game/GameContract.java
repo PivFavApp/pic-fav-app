@@ -1,4 +1,4 @@
-package newagency.picfav.view.main;
+package newagency.picfav.view.game;
 
 import java.util.List;
 
@@ -10,11 +10,9 @@ import newagency.picfav.view.IBasePresenter;
  * Created by oroshka on 1/28/18.
  */
 
-public interface MainScreenContract {
+public interface GameContract {
 
     interface View extends AbsView {
-
-        void navigateToWelcome();
 
         void showMessage(String message);
 
@@ -29,10 +27,6 @@ public interface MainScreenContract {
     }
 
     interface PresenterI extends IBasePresenter {
-
-        boolean isLogin();
-
-        void logout();
 
         void goToNextStep(List<ImageModel> packImage);
 

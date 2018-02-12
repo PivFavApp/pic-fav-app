@@ -1,14 +1,11 @@
-package newagency.picfav.view.main.presenter;
+package newagency.picfav.view.game.presenter;
 
 import java.util.List;
 
 import newagency.picfav.netwotk.response.GameResponse;
 import newagency.picfav.netwotk.response.ImageModel;
-import newagency.picfav.view.main.presenter.model.GameStateInfo;
+import newagency.picfav.view.game.presenter.model.GameStateInfo;
 
-/**
- * Created by oroshka on 2/1/18.
- */
 
 public interface IGameManager {
 

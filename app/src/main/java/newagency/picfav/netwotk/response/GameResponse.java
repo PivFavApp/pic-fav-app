@@ -4,10 +4,6 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-/**
- * Created by oroshka on 2/1/18.
- */
-
 public class GameResponse {
 
     @SerializedName("PublicId")
@@ -21,4 +17,8 @@ public class GameResponse {
 
     @SerializedName("Images")
     public List<ImageModel> mImageModels;
+
+    public String getId() {
+        return id;
+    }
 }
