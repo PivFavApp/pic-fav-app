@@ -20,7 +20,6 @@ public class PicFavApplication extends Application {
                 .applicationModule(new ApplicationModule(this))
                 .dataModule(new DataModule())
                 .build();
-
         mApplicationComponent.inject(this);
     }
 }
