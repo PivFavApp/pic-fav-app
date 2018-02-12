@@ -16,8 +16,7 @@ import newagency.picfav.dagger.ViewModule;
 import newagency.picfav.util.AppUtils;
 import newagency.picfav.view.BaseActivity;
 import newagency.picfav.view.login.LoginContract;
-import newagency.picfav.view.game.view.GameActivity;
-import newagency.picfav.view.main.view.MainActivity;
+import newagency.picfav.view.gamelist.view.MainActivity;
 
 public class LoginActivity extends BaseActivity implements LoginContract.View {
 

@@ -1,4 +1,4 @@
-package newagency.picfav.view.game.view;
+package newagency.picfav.view.main.view;
 
 import android.content.Context;
 import android.content.Intent;
@@ -22,22 +22,21 @@ import newagency.picfav.dagger.DaggerViewComponent;
 import newagency.picfav.dagger.ViewModule;
 import newagency.picfav.netwotk.response.ImageModel;
 import newagency.picfav.view.BaseActivity;
-import newagency.picfav.view.game.GameContract;
-import newagency.picfav.view.game.presenter.ImageRecyclerAdapter;
-import newagency.picfav.view.welcome.view.WelcomeActivity;
+import newagency.picfav.view.main.MainScreenContract;
+import newagency.picfav.view.main.presenter.ImageRecyclerAdapter;
 
-public class GameActivity extends BaseActivity implements GameContract.View {
+public class MainScreenActivity extends BaseActivity implements MainScreenContract.View {
 
     private static String GAME_ID_KEY = "game_id";
 
     public static void start(@NonNull Context context, @NonNull String gameId) {
-        Intent starter = new Intent(context, GameActivity.class);
+        Intent starter = new Intent(context, MainScreenActivity.class);
         starter.putExtra(GAME_ID_KEY, gameId);
         context.startActivity(starter);
     }
 
     @Inject
-    GameContract.PresenterI mPresenter;
+    MainScreenContract.PresenterI mPresenter;
 
     @BindView(R.id.carousel)
     CarouselView mCarouselView;
@@ -103,7 +102,7 @@ public class GameActivity extends BaseActivity implements GameContract.View {
 
     @Override
     protected int onRequestLayout() {
-        return R.layout.activity_game_screen;
+        return R.layout.activity_main_screen;
     }
 
     @Override

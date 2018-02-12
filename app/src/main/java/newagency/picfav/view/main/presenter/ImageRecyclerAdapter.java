@@ -1,4 +1,4 @@
-package newagency.picfav.view.game.presenter;
+package newagency.picfav.view.main.presenter;
 
 import android.content.Context;
 import android.support.v4.content.ContextCompat;

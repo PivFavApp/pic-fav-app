@@ -1,4 +1,4 @@
-package newagency.picfav.view.game;
+package newagency.picfav.view.main;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import newagency.picfav.view.IBasePresenter;
  * Created by oroshka on 1/28/18.
  */
 
-public interface GameContract {
+public interface MainScreenContract {
 
     interface View extends AbsView {
 

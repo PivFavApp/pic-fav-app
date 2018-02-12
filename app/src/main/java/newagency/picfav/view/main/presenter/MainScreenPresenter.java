@@ -1,9 +1,8 @@
-package newagency.picfav.view.game.presenter;
+package newagency.picfav.view.main.presenter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 
 import java.util.List;
 
@@ -15,13 +14,13 @@ import newagency.picfav.localDb.SharedPrefManager;
 import newagency.picfav.netwotk.response.GameResponse;
 import newagency.picfav.netwotk.response.ImageModel;
 import newagency.picfav.util.GameUtil;
-import newagency.picfav.view.game.GameContract;
-import newagency.picfav.view.game.presenter.model.GameStateInfo;
+import newagency.picfav.view.main.MainScreenContract;
+import newagency.picfav.view.main.presenter.model.GameStateInfo;
 
-public class GamePresenter implements GameContract.PresenterI, IGameManager.GameManagerCallback {
+public class MainScreenPresenter implements MainScreenContract.PresenterI, IGameManager.GameManagerCallback {
 
     @Nullable
-    private GameContract.View mView;
+    private MainScreenContract.View mView;
 
     @NonNull
     private SharedPrefManager mSharedPrefManager;
@@ -33,9 +32,9 @@ public class GamePresenter implements GameContract.PresenterI, IGameManager.Game
     private Context mContext;
 
     @NonNull
-    private IGameRepository mIGameRepository;
+    private IMainScreenRepository mIMainScreenRepository;
 
-    private IGameRepository.GameCallback mGameCallback = new IGameRepository.GameCallback() {
+    private IMainScreenRepository.GameCallback mGameCallback = new IMainScreenRepository.GameCallback() {
         @Override
         public void onSuccess(GameResponse gameResponse) {
             mIGameManager.initGame(gameResponse);
@@ -48,20 +47,20 @@ public class GamePresenter implements GameContract.PresenterI, IGameManager.Game
     };
 
     @Inject
-    public GamePresenter(@NonNull @ApplicationContext Context context,
-                         @Nullable GameContract.View view,
-                         @NonNull SharedPrefManager sharedPrefManager,
-                         @NonNull IGameRepository mainScreenRepository,
-                         @NonNull IGameManager gameManager) {
+    public MainScreenPresenter(@NonNull @ApplicationContext Context context,
+                               @Nullable MainScreenContract.View view,
+                               @NonNull SharedPrefManager sharedPrefManager,
+                               @NonNull IMainScreenRepository mainScreenRepository,
+                               @NonNull IGameManager gameManager) {
         this.mContext = context;
         this.mView = view;
         this.mSharedPrefManager = sharedPrefManager;
-        this.mIGameRepository = mainScreenRepository;
+        this.mIMainScreenRepository = mainScreenRepository;
         this.mIGameManager = gameManager;
         this.mIGameManager.setCallback(this);
     }
 
-    //    GameContract.PresenterI methods
+    //    MainScreenContract.PresenterI methods
     @Override
     public void onStart() {
 
@@ -74,7 +73,7 @@ public class GamePresenter implements GameContract.PresenterI, IGameManager.Game
 
     @Override
     public void loadGame(String idGame) {
-        mIGameRepository.getGame(idGame, mGameCallback);
+        mIMainScreenRepository.getGame(idGame, mGameCallback);
     }
 
     @Override

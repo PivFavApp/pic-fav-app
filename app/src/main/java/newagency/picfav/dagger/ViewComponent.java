@@ -3,8 +3,8 @@ package newagency.picfav.dagger;
 import dagger.Component;
 import newagency.picfav.dagger.scope.ActivityScope;
 import newagency.picfav.view.login.view.LoginActivity;
-import newagency.picfav.view.game.view.GameActivity;
-import newagency.picfav.view.main.view.MainActivity;
+import newagency.picfav.view.main.view.MainScreenActivity;
+import newagency.picfav.view.gamelist.view.MainActivity;
 import newagency.picfav.view.sign.up.view.SignUpActivity;
 import newagency.picfav.view.welcome.view.WelcomeActivity;
 
@@ -23,7 +23,7 @@ public interface ViewComponent {
 
     void inject(SignUpActivity activity);
 
-    void inject(GameActivity activity);
+    void inject(MainScreenActivity activity);
 
     void inject(MainActivity activity);
 }

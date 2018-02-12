@@ -1,18 +1,16 @@
-package newagency.picfav.view.main.presenter;
+package newagency.picfav.view.gamelist.presenter;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
 import newagency.picfav.localDb.SharedPrefManager;
-import newagency.picfav.netwotk.response.AllGamesResponse;
 import newagency.picfav.netwotk.response.GameResponse;
-import newagency.picfav.view.main.MainContract;
-import newagency.picfav.view.main.data.GetAllGamesRepository;
+import newagency.picfav.view.gamelist.MainContract;
+import newagency.picfav.view.gamelist.data.GetAllGamesRepository;
 
 public class MainPresenter implements MainContract.Presenter {
 

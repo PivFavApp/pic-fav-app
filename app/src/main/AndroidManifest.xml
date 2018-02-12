@@ -30,7 +30,7 @@
             android:windowSoftInputMode="adjustResize" />
 
         <activity
-            android:name=".view.main.view.MainActivity"
+            android:name=".view.gamelist.view.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme">
             <intent-filter>
@@ -41,7 +41,7 @@
         </activity>
 
         <activity
-            android:name=".view.game.view.GameActivity"
+            android:name=".view.main.view.MainScreenActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
 
     </application>

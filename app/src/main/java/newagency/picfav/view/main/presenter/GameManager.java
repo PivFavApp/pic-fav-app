@@ -1,4 +1,4 @@
-package newagency.picfav.view.game.presenter;
+package newagency.picfav.view.main.presenter;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
@@ -14,7 +14,7 @@ import javax.inject.Inject;
 import newagency.picfav.dagger.scope.ApplicationContext;
 import newagency.picfav.netwotk.response.GameResponse;
 import newagency.picfav.netwotk.response.ImageModel;
-import newagency.picfav.view.game.presenter.model.GameStateInfo;
+import newagency.picfav.view.main.presenter.model.GameStateInfo;
 
 /**
  * Created by oroshka on 2/1/18.

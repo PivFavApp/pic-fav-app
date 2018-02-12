@@ -1,4 +1,4 @@
-package newagency.picfav.view.game.presenter.model;
+package newagency.picfav.view.main.presenter.model;
 
 import java.util.List;
 

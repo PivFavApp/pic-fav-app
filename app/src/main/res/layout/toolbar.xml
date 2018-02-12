@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:theme="@style/AppTheme.AppBarOverlay"
     app:elevation="0dp"
-    tools:showIn="@layout/activity_game_screen">
+    tools:showIn="@layout/activity_main_screen">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/big_toolbar"
