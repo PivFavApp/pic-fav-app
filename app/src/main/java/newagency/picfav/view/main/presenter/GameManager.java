@@ -14,6 +14,8 @@ import javax.inject.Inject;
 import newagency.picfav.dagger.scope.ApplicationContext;
 import newagency.picfav.netwotk.response.GameResponse;
 import newagency.picfav.netwotk.response.ImageModel;
+import newagency.picfav.util.GameUtil;
+import newagency.picfav.view.main.presenter.model.GameResult;
 import newagency.picfav.view.main.presenter.model.GameStateInfo;
 
 /**
@@ -35,6 +37,8 @@ public class GameManager implements IGameManager {
     private final static int SECOND_ROUND_PRELIMINARY = 7;
 
     private final static int NEED_SELECT_FIRST_ROUND = 20;
+
+    private final static int NEED_SELECT_SECOND_ROUND = 10;
 
     @Nullable
     @ApplicationContext
@@ -81,7 +85,7 @@ public class GameManager implements IGameManager {
             mGameManagerCallback.selectedStep(gameStateInfo);
 
         } else if (mCurrentStep == FIRST_ROUND_PRELIMINARY) {
-            int selectedCount = calculateSelectedInAllGroup();
+            int selectedCount = calculateSelectedInAllGroup(groupImageUserFirstRound);
 
             if (selectedCount < NEED_SELECT_FIRST_ROUND) {
                 List<ImageModel> packImage = getPicsBySelection(groupImageUserFirstRound, false);
@@ -97,10 +101,21 @@ public class GameManager implements IGameManager {
             groupSecondRoundGame(getPicsBySelection(groupImageUserFirstRound, false));
 
         } else if (mCurrentStep == SECOND_ROUND_PRELIMINARY) {
-//            TODO look FIRST_ROUND_PRELIMINARY realization
+            int selectedInSecondRound = calculateSelectedInAllGroup(groupImageUserSecondRound);
+
+            if (selectedInSecondRound < NEED_SELECT_SECOND_ROUND) {
+                List<ImageModel> packImageUnselected = getPicsBySelection(groupImageUserSecondRound,
+                        false);
+                int countRemains = NEED_SELECT_SECOND_ROUND - selectedInSecondRound;
+                GameStateInfo gameStateInfo = generateGameCurrentState(packImageUnselected, countRemains);
+                mGameManagerCallback.selectedStep(gameStateInfo);
+
+            } else {
+                moveToNextStep();
+            }
 
         } else if (mCurrentStep > SECOND_ROUND_PRELIMINARY) {
-//            finish send to UI update
+            finishGame();
         }
     }
 
@@ -175,13 +190,10 @@ public class GameManager implements IGameManager {
     }
 
 
-    private int calculateSelectedInAllGroup() {
+    private int calculateSelectedInAllGroup(Map<Integer, List<ImageModel>> groupImageUserFirstRound) {
         int countSelected = 0;
         for (Integer key : groupImageUserFirstRound.keySet()) {
-            for (ImageModel imageModel : groupImageUserFirstRound.get(key)) {
-                if (imageModel.isSelected)
-                    countSelected++;
-            }
+            countSelected += GameUtil.calculateSelected(groupImageUserFirstRound.get(key));
         }
         return countSelected;
     }
@@ -195,5 +207,21 @@ public class GameManager implements IGameManager {
             }
         }
         return imageModels;
+    }
+
+    private void finishGame() {
+        int validCountInFirstRound = GameUtil.calculateValid(getPicsBySelection(groupImageUserFirstRound, true));
+        int validCountInSecondRound = GameUtil.calculateValid(getPicsBySelection(groupImageUserSecondRound, true));
+        int firstPercent = (validCountInFirstRound / NEED_SELECT_FIRST_ROUND) * 100;
+        int secondInPercent = (validCountInSecondRound / NEED_SELECT_SECOND_ROUND) * 100;
+
+        float result = (firstPercent * 0.75f) + secondInPercent;
+
+        GameResult gameResult = new GameResult();
+        gameResult.score = result;
+
+        if (mGameManagerCallback != null) {
+            mGameManagerCallback.finishedGame(gameResult);
+        }
     }
 }

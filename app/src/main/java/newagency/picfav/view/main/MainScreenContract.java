@@ -3,6 +3,7 @@ package newagency.picfav.view.main;
 import java.util.List;
 
 import newagency.picfav.netwotk.response.ImageModel;
+import newagency.picfav.util.AppConstants;
 import newagency.picfav.view.AbsView;
 import newagency.picfav.view.IBasePresenter;
 
@@ -24,6 +25,7 @@ public interface MainScreenContract {
 
         void showNeededCountSimple();
 
+        void changedSizeGrid(AppConstants.GridState gridState);
     }
 
     interface PresenterI extends IBasePresenter {
@@ -31,5 +33,10 @@ public interface MainScreenContract {
         void goToNextStep(List<ImageModel> packImage);
 
         void loadGame(String idGame);
+
+        void changeGridState();
+
+        void restoreGridState();
+
     }
 }

@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 import newagency.picfav.dagger.scope.ApplicationContext;
 import newagency.picfav.netwotk.ApiConst;
+import newagency.picfav.util.AppConstants;
 
 public class SharedPrefManager {
     private final SharedPreferences mSharedPreferences;
@@ -30,5 +31,14 @@ public class SharedPrefManager {
 
     public void setLoggedIn(boolean loggedIn) {
         mSharedPreferences.edit().putBoolean(ApiConst.IS_LOGGED_IN_KEY, loggedIn).apply();
+    }
+
+    public void setGridState(AppConstants.GridState gridState) {
+        mSharedPreferences.edit().putInt(ApiConst.GRID_STATE, gridState.ordinal()).apply();
+    }
+
+    public AppConstants.GridState getGridState() {
+        int ordinal = mSharedPreferences.getInt(ApiConst.GRID_STATE, 0);
+        return AppConstants.GridState.values()[ordinal];
     }
 }

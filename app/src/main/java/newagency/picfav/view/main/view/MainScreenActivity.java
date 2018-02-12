@@ -2,8 +2,10 @@ package newagency.picfav.view.main.view;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.content.ContextCompat;
 import android.support.annotation.NonNull;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +23,7 @@ import newagency.picfav.R;
 import newagency.picfav.dagger.DaggerViewComponent;
 import newagency.picfav.dagger.ViewModule;
 import newagency.picfav.netwotk.response.ImageModel;
+import newagency.picfav.util.AppConstants;
 import newagency.picfav.view.BaseActivity;
 import newagency.picfav.view.main.MainScreenContract;
 import newagency.picfav.view.main.presenter.ImageRecyclerAdapter;
@@ -56,6 +59,9 @@ public class MainScreenActivity extends BaseActivity implements MainScreenContra
     @BindView(R.id.choose_label)
     TextView chooseTv;
 
+    @BindView(R.id.grid_iv)
+    ImageView gridIv;
+
     private ImageRecyclerAdapter mImageRecyclerAdapter;
 
     private ImageRecyclerAdapter.ImageRecyclerAdapterCallback mAdapterCallback = new ImageRecyclerAdapter.ImageRecyclerAdapterCallback() {
@@ -86,6 +92,12 @@ public class MainScreenActivity extends BaseActivity implements MainScreenContra
     };
 
     private String gameId = "";
+
+    public static void start(Context context) {
+        Intent starter = new Intent(context, MainScreenActivity.class);
+        starter.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        context.startActivity(starter);
+    }
 
     @Override
     protected void onViewReady() {
@@ -124,9 +136,9 @@ public class MainScreenActivity extends BaseActivity implements MainScreenContra
         mPresenter.goToNextStep(mImageRecyclerAdapter.getData());
     }
 
-    @OnClick(R.id.small_grid_iv)
+    @OnClick(R.id.grid_iv)
     void onGridClick() {
-
+        mPresenter.changeGridState();
     }
 
     @Override
@@ -152,6 +164,22 @@ public class MainScreenActivity extends BaseActivity implements MainScreenContra
     }
 
     @Override
+    public void changedSizeGrid(AppConstants.GridState gridState) {
+        if (mImageRecyclerAdapter != null) {
+            mImageRecyclerAdapter.changeGridSize(gridState);
+            switch (gridState) {
+                case SMALL:
+                    gridIv.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_big_grid));
+                    break;
+
+                case BIG:
+                    gridIv.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_small_grid));
+                    break;
+            }
+        }
+    }
+
+    @Override
     public void updateToolbar(String name, String setRoundName) {
         setNameTv.setText(setRoundName);
         subTitleTv.setText(name);
@@ -168,12 +196,14 @@ public class MainScreenActivity extends BaseActivity implements MainScreenContra
 
     private void initAdapter() {
         mImageRecyclerAdapter = new ImageRecyclerAdapter(this, mAdapterCallback);
+        mPresenter.restoreGridState();
         CoverFlowViewTransformer transformer = new CoverFlowViewTransformer();
         transformer.setYProjection(0f);
         transformer.setScaleYFactor(-0.15f);
         mCarouselView.setTransformer(transformer);
         mCarouselView.setAdapter(mImageRecyclerAdapter);
         mCarouselView.setInfinite(false);
+        mImageRecyclerAdapter.addAll(generateImage(), -1);
     }
 
     private ArrayList<ImageModel> generateImage() {
