@@ -11,4 +11,15 @@ public class AppConstants {
             this.value = value;
         }
     }
+
+    public enum GridState {
+        BIG(1f),
+        SMALL(0.5f);
+
+        public float coeff;
+
+        GridState(float coeff) {
+            this.coeff = coeff;
+        }
+    }
 }

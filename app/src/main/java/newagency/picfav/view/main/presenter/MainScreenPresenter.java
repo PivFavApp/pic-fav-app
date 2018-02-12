@@ -13,8 +13,10 @@ import newagency.picfav.dagger.scope.ApplicationContext;
 import newagency.picfav.localDb.SharedPrefManager;
 import newagency.picfav.netwotk.response.GameResponse;
 import newagency.picfav.netwotk.response.ImageModel;
+import newagency.picfav.util.AppConstants;
 import newagency.picfav.util.GameUtil;
 import newagency.picfav.view.main.MainScreenContract;
+import newagency.picfav.view.main.presenter.model.GameResult;
 import newagency.picfav.view.main.presenter.model.GameStateInfo;
 
 /**
@@ -67,7 +69,6 @@ public class MainScreenPresenter implements MainScreenContract.PresenterI, IGame
     //    MainScreenContract.PresenterI methods
     @Override
     public void onStart() {
-
     }
 
     @Override
@@ -78,6 +79,29 @@ public class MainScreenPresenter implements MainScreenContract.PresenterI, IGame
     @Override
     public void loadGame(String idGame) {
         mIMainScreenRepository.getGame(idGame, mGameCallback);
+    }
+
+    @Override
+    public void changeGridState() {
+        if(mView == null) return;
+        AppConstants.GridState gridState = mSharedPrefManager.getGridState();
+        switch (gridState) {
+            case BIG:
+                mSharedPrefManager.setGridState(AppConstants.GridState.SMALL);
+                break;
+
+            case SMALL:
+                mSharedPrefManager.setGridState(AppConstants.GridState.BIG);
+                break;
+        }
+        mView.changedSizeGrid(mSharedPrefManager.getGridState());
+    }
+
+    @Override
+    public void restoreGridState() {
+        if (mView != null) {
+            mView.changedSizeGrid(mSharedPrefManager.getGridState());
+        }
     }
 
     //    MainScreenContract.PresenterI  methods
@@ -97,7 +121,7 @@ public class MainScreenPresenter implements MainScreenContract.PresenterI, IGame
 
     @Override
     public void goToNextStep(List<ImageModel> packImage) {
-        if (mView == null) return;
+        if (mView == null || packImage == null) return;
         if (GameUtil.calculateSelected(packImage) < ImageRecyclerAdapter.getMinSelectedCount()) {
             mView.showMessage(mContext.getString(R.string.main_selected_min_image_msg, ImageRecyclerAdapter.getMinSelectedCount()));
 
@@ -121,6 +145,13 @@ public class MainScreenPresenter implements MainScreenContract.PresenterI, IGame
             } else {
                 mView.showNeededCountSimple();
             }
+        }
+    }
+
+    @Override
+    public void finishedGame(GameResult gameResult) {
+        if (mView != null) {
+            mView.showMessage("game over: " + gameResult.score);
         }
     }
 

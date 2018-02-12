@@ -19,4 +19,14 @@ public class GameUtil {
         }
         return mSelectedCount;
     }
+
+    public static int calculateValid(List<ImageModel> mImageItemList) {
+        int mCountValid = 0;
+        for (ImageModel imageItemModel : mImageItemList) {
+            if (imageItemModel.isValid) {
+                mCountValid++;
+            }
+        }
+        return mCountValid;
+    }
 }

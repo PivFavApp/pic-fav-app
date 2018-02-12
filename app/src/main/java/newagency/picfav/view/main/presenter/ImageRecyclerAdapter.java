@@ -16,6 +16,7 @@ import java.util.List;
 
 import newagency.picfav.R;
 import newagency.picfav.netwotk.response.ImageModel;
+import newagency.picfav.util.AppConstants;
 import newagency.picfav.util.GameUtil;
 
 /**
@@ -52,6 +53,7 @@ public class ImageRecyclerAdapter extends RecyclerView.Adapter<ImageRecyclerAdap
 
     private int mSelectedCount = 0;
 
+    private float sizeCoef = 1;
 
     public ImageRecyclerAdapter(Context context, ImageRecyclerAdapterCallback callback) {
         mContext = context;
@@ -147,6 +149,13 @@ public class ImageRecyclerAdapter extends RecyclerView.Adapter<ImageRecyclerAdap
         }
 
         public void bind(ImageModel imageItem) {
+            ViewGroup.LayoutParams params = mImageView.getLayoutParams();
+            float width = mContext.getResources().getDimension(R.dimen.item_image_width);
+            float height = mContext.getResources().getDimension(R.dimen.item_image_height);
+            params.width = (int) (width * sizeCoef);
+            params.height = (int) (height * sizeCoef);
+            mImageView.setLayoutParams(params);
+
             int colorBackground = imageItem.isSelected
                     ? ContextCompat.getColor(mContext, R.color.colorAccent)
                     : ContextCompat.getColor(mContext, R.color.colorWhite);
@@ -156,6 +165,11 @@ public class ImageRecyclerAdapter extends RecyclerView.Adapter<ImageRecyclerAdap
                     .load(imageItem.url)
                     .into(mImageView);
         }
+    }
+
+    public void changeGridSize(AppConstants.GridState gridState) {
+        sizeCoef = gridState.coeff;
+        notifyDataSetChanged();
     }
 
     private void changeSelectionItem(ImageModel imageItemModel) {
@@ -169,7 +183,7 @@ public class ImageRecyclerAdapter extends RecyclerView.Adapter<ImageRecyclerAdap
     }
 
     private static int getMaxSelectedCount() {
-        if(mCountNeedPreliminary == -1) {
+        if (mCountNeedPreliminary == -1) {
             return MAX_SELECTED_COUNT;
         } else {
             return mCountNeedPreliminary;
@@ -177,7 +191,7 @@ public class ImageRecyclerAdapter extends RecyclerView.Adapter<ImageRecyclerAdap
     }
 
     public static int getMinSelectedCount() {
-        if(mCountNeedPreliminary == -1) {
+        if (mCountNeedPreliminary == -1) {
             return MIN_SELECTED_COUNT;
         } else {
             return mCountNeedPreliminary;
