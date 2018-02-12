@@ -210,10 +210,10 @@ public class GameManager implements IGameManager {
     }
 
     private void finishGame() {
-        int validCountInFirstRound = GameUtil.calculateValid(getPicsBySelection(groupImageUserFirstRound, true));
-        int validCountInSecondRound = GameUtil.calculateValid(getPicsBySelection(groupImageUserSecondRound, true));
-        int firstPercent = (validCountInFirstRound / NEED_SELECT_FIRST_ROUND) * 100;
-        int secondInPercent = (validCountInSecondRound / NEED_SELECT_SECOND_ROUND) * 100;
+        float validCountInFirstRound = GameUtil.calculateValid(getPicsBySelection(groupImageUserFirstRound, true));
+        float validCountInSecondRound = GameUtil.calculateValid(getPicsBySelection(groupImageUserSecondRound, true));
+        float firstPercent = (validCountInFirstRound / NEED_SELECT_FIRST_ROUND) * 100;
+        float secondInPercent = (validCountInSecondRound / NEED_SELECT_SECOND_ROUND) * 100;
 
         float result = (firstPercent * 0.75f) + secondInPercent;
 

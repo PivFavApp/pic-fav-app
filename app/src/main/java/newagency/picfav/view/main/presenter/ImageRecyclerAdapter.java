@@ -68,7 +68,8 @@ public class ImageRecyclerAdapter extends RecyclerView.Adapter<ImageRecyclerAdap
 
     @Override
     public void onBindViewHolder(ImageHolder holder, int position) {
-        holder.bind(mImageItemList.get(position));
+        if (position < mImageItemList.size())
+            holder.bind(mImageItemList.get(position));
     }
 
     @Override
@@ -103,17 +104,19 @@ public class ImageRecyclerAdapter extends RecyclerView.Adapter<ImageRecyclerAdap
     }
 
     public void notifyChange() {
-        mSelectedCount = GameUtil.calculateSelected(mImageItemList);
-        mCallback.onChangeCountSelected(mSelectedCount);
-        if (mCountNeedPreliminary != -1) {
-            int diff = mCountNeedPreliminary - mSelectedCount;
-            if (diff == 0)
-                mCallback.hideRemainCount();
-            else
-                mCallback.showRemainCount();
-            mCallback.changeRemainState(diff);
+        if (mImageItemList != null) {
+            mSelectedCount = GameUtil.calculateSelected(mImageItemList);
+            mCallback.onChangeCountSelected(mSelectedCount);
+            if (mCountNeedPreliminary != -1) {
+                int diff = mCountNeedPreliminary - mSelectedCount;
+                if (diff == 0)
+                    mCallback.hideRemainCount();
+                else
+                    mCallback.showRemainCount();
+                mCallback.changeRemainState(diff);
+            }
+            notifyDataSetChanged();
         }
-        notifyDataSetChanged();
     }
 
     public class ImageHolder extends RecyclerView.ViewHolder {
@@ -149,12 +152,12 @@ public class ImageRecyclerAdapter extends RecyclerView.Adapter<ImageRecyclerAdap
         }
 
         public void bind(ImageModel imageItem) {
-            ViewGroup.LayoutParams params = mImageView.getLayoutParams();
+            /*ViewGroup.LayoutParams params = mImageView.getLayoutParams();
             float width = mContext.getResources().getDimension(R.dimen.item_image_width);
             float height = mContext.getResources().getDimension(R.dimen.item_image_height);
             params.width = (int) (width * sizeCoef);
             params.height = (int) (height * sizeCoef);
-            mImageView.setLayoutParams(params);
+            mImageView.setLayoutParams(params);*/
 
             int colorBackground = imageItem.isSelected
                     ? ContextCompat.getColor(mContext, R.color.colorAccent)

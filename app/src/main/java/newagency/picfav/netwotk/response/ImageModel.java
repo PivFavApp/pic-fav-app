@@ -14,7 +14,7 @@ public class ImageModel {
     @SerializedName("ImageUrl")
     public String url;
 
-    @SerializedName("isValid")
+    @SerializedName("IsValid")
     public boolean isValid;
 
     public boolean isSelected;
