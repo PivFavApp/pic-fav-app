@@ -165,11 +165,11 @@ public class MainScreenActivity extends BaseActivity implements MainScreenContra
             mImageRecyclerAdapter.changeGridSize(gridState);
             switch (gridState) {
                 case SMALL:
-                    gridIv.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_small_grid));
+                    gridIv.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_big_grid));
                     break;
 
                 case BIG:
-                    gridIv.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_big_grid));
+                    gridIv.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_small_grid));
                     break;
             }
         }
