@@ -48,6 +48,7 @@
 
     <!--Result activity-->
     <string name="result_activity_title">Result</string>
+    <string name="game_loading_text">%d%%</string>
 
 
 </resources>

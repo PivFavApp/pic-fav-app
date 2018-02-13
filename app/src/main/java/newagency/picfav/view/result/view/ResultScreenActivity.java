@@ -10,6 +10,7 @@ import newagency.picfav.R;
 import newagency.picfav.dagger.DaggerViewComponent;
 import newagency.picfav.dagger.ViewModule;
 import newagency.picfav.view.BaseActivity;
+import newagency.picfav.view.custom.GameLoadingView;
 import newagency.picfav.view.result.ResultScreenContract;
 
 public class ResultScreenActivity extends BaseActivity implements ResultScreenContract.View {
@@ -20,6 +21,9 @@ public class ResultScreenActivity extends BaseActivity implements ResultScreenCo
     @BindView(R.id.toolbar_title_tv)
     TextView mToolbarTitle;
 
+    @BindView(R.id.loading_game)
+    GameLoadingView mGameLoadingView;
+
     public static void start(Context context) {
         Intent starter = new Intent(context, ResultScreenActivity.class);
         context.startActivity(starter);
@@ -28,6 +32,8 @@ public class ResultScreenActivity extends BaseActivity implements ResultScreenCo
     @Override
     protected void onViewReady() {
         mToolbarTitle.setText(R.string.result_activity_title);
+        mGameLoadingView.setMaxMembers(100);
+        mGameLoadingView.setCountResponded(50);
     }
 
     @Override

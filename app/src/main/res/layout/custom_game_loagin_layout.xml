@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <ProgressBar
+        android:id="@+id/progress_counter"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:background="@drawable/circle_shape"
+        android:indeterminate="false"
+        android:max="100"
+        android:progress="75"
+        android:progressDrawable="@drawable/circular_progress_bar" />
+
+
+    <TextView
+        android:id="@+id/count_responded"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/progress_counter"
+        android:layout_alignEnd="@+id/progress_counter"
+        android:layout_alignStart="@+id/progress_counter"
+        android:layout_alignTop="@+id/progress_counter"
+        android:gravity="center"
+        android:paddingEnd="30dp"
+        android:paddingStart="30dp"
+        android:text="12"
+        android:textAppearance="@style/Roboto.Normal.Black.16" />
+
+</RelativeLayout>
