@@ -4,9 +4,10 @@ package newagency.picfav.dagger;
 import dagger.Module;
 import dagger.Provides;
 import newagency.picfav.view.AbsView;
-import newagency.picfav.view.main.MainScreenContract;
-import newagency.picfav.view.login.LoginContract;
 import newagency.picfav.view.gamelist.MainContract;
+import newagency.picfav.view.login.LoginContract;
+import newagency.picfav.view.main.MainScreenContract;
+import newagency.picfav.view.result.ResultScreenContract;
 import newagency.picfav.view.sign.up.SignUpContract;
 import newagency.picfav.view.welcome.WelcomeContract;
 
@@ -44,6 +45,10 @@ public class ViewModule {
     @Provides
     MainContract.View provideMainView() {
         return (MainContract.View) view;
+    }
+
+    @Provides
+    ResultScreenContract.View proviceResultView() {return (ResultScreenContract.View) view;
     }
 
 }

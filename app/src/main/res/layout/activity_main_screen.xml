@@ -6,7 +6,7 @@
     android:fitsSystemWindows="true"
     tools:context="newagency.picfav.view.main.view.MainScreenActivity">
 
-    <include layout="@layout/toolbar" />
+    <include layout="@layout/game_toolbar" />
 
     <include layout="@layout/content_main" />
 

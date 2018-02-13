@@ -26,6 +26,8 @@ public interface MainScreenContract {
         void showNeededCountSimple();
 
         void changedSizeGrid(AppConstants.GridState gridState);
+
+        void navigateToResult();
     }
 
     interface PresenterI extends IBasePresenter {

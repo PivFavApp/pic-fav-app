@@ -46,5 +46,8 @@
     <string name="log_out_title">Do you really want to log out?</string>
     <string name="start">Start</string>
 
+    <!--Result activity-->
+    <string name="result_activity_title">Result</string>
+
 
 </resources>

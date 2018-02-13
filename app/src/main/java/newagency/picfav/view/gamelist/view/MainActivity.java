@@ -21,9 +21,9 @@ import newagency.picfav.dagger.DaggerViewComponent;
 import newagency.picfav.dagger.ViewModule;
 import newagency.picfav.netwotk.response.GameResponse;
 import newagency.picfav.view.BaseActivity;
-import newagency.picfav.view.main.view.MainScreenActivity;
 import newagency.picfav.view.gamelist.MainContract;
 import newagency.picfav.view.gamelist.presenter.MainPresenter;
+import newagency.picfav.view.result.view.ResultScreenActivity;
 import newagency.picfav.view.welcome.view.WelcomeActivity;
 
 public class MainActivity extends BaseActivity implements MainContract.View {
@@ -114,7 +114,8 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         adapter = new AllGamesAdapter(new AllGamesAdapter.AllGameCallback() {
             @Override
             public void gameClick(@NonNull GameResponse game) {
-                MainScreenActivity.start(MainActivity.this, game.getId());
+                ResultScreenActivity.start(MainActivity.this);
+//                MainScreenActivity.start(MainActivity.this, game.getId());
             }
         });
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

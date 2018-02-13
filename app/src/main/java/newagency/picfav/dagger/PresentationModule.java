@@ -44,4 +44,9 @@ public class PresentationModule {
         return presenter;
     }
 
+    @Provides
+    MainContract.Presenter proviceResultPresenter(@Nullable MainPresenter presenter) {
+        return presenter;
+    }
+
 }

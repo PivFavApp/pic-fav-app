@@ -27,6 +27,7 @@ import newagency.picfav.util.AppConstants;
 import newagency.picfav.view.BaseActivity;
 import newagency.picfav.view.main.MainScreenContract;
 import newagency.picfav.view.main.presenter.ImageRecyclerAdapter;
+import newagency.picfav.view.result.view.ResultScreenActivity;
 
 public class MainScreenActivity extends BaseActivity implements MainScreenContract.View {
 
@@ -171,6 +172,12 @@ public class MainScreenActivity extends BaseActivity implements MainScreenContra
                     break;
             }
         }
+    }
+
+    @Override
+    public void navigateToResult() {
+        finish();
+        ResultScreenActivity.start(this);
     }
 
     @Override
