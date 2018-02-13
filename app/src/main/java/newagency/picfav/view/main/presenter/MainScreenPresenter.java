@@ -84,7 +84,7 @@ public class MainScreenPresenter implements MainScreenContract.PresenterI, IGame
 
     @Override
     public void changeGridState() {
-        if(mView == null) return;
+        if (mView == null) return;
         AppConstants.GridState gridState = mSharedPrefManager.getGridState();
         switch (gridState) {
             case BIG:

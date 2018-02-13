@@ -24,7 +24,7 @@ import newagency.picfav.view.main.presenter.model.GameStateInfo;
 
 public class GameManager implements IGameManager {
 
-    private final static int COUNT_FIRST_ROUND = 4;
+    public final static int COUNT_FIRST_ROUND = 4;
 
     private final static int COUNT_SECOND_ROUND = 2;
 
@@ -97,8 +97,14 @@ public class GameManager implements IGameManager {
                 moveToNextStep();  // continue next step
             }
         } else if (mCurrentStep <= STEP_IN_SECOND_ROUND) {
-            mRound++;
-            groupSecondRoundGame(getPicsBySelection(groupImageUserFirstRound, false));
+            if (mCurrentStep == FIRST_ROUND_PRELIMINARY + 1) {
+                mRound++;
+                groupSecondRoundGame(getPicsBySelection(groupImageUserFirstRound, false));
+
+            } else {
+                GameStateInfo gameStateInfo = generateGameCurrentState(groupImageUserSecondRound.get(mCurrentStep), -1);
+                mGameManagerCallback.selectedStep(gameStateInfo);
+            }
 
         } else if (mCurrentStep == SECOND_ROUND_PRELIMINARY) {
             int selectedInSecondRound = calculateSelectedInAllGroup(groupImageUserSecondRound);
@@ -132,6 +138,9 @@ public class GameManager implements IGameManager {
         gameStateInfo.countNeedPreliminary = remainCountPreliminary;
         gameStateInfo.isPreliminary = mCurrentStep == FIRST_ROUND_PRELIMINARY || mCurrentStep == SECOND_ROUND_PRELIMINARY;
         gameStateInfo.imageModels = imageModels;
+        if (gameStateInfo.round == 1) {
+            gameStateInfo.step -= 5; // remove count step in first round for second round
+        }
         return gameStateInfo;
     }
 
@@ -170,7 +179,7 @@ public class GameManager implements IGameManager {
         int groupIndex = mCurrentStep;
         List<ImageModel> groupImage = new ArrayList<>();
         for (int i = 0; i < sizeImagesGame; i++) {
-            ImageModel imageModel = originList.get(i);
+            ImageModel imageModel = new ImageModel(originList.get(i));
             if (countInGroup == itemInGroup) {
                 countInGroup = 0;
                 groupImageUserSecondRound.put(groupIndex, groupImage);

@@ -18,4 +18,14 @@ public class ImageModel {
     public boolean isValid;
 
     public boolean isSelected;
+
+    public ImageModel(ImageModel other) {
+        id = other.id;
+        url = other.url;
+        isValid = other.isValid;
+        isSelected = other.isSelected;
+    }
+
+    public ImageModel() {
+    }
 }
