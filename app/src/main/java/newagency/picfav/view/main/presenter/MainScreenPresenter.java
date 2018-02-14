@@ -109,7 +109,8 @@ public class MainScreenPresenter implements MainScreenContract.PresenterI, IGame
     public void goToNextStep(List<ImageModel> packImage) {
         if (mView == null || packImage == null) return;
         if (GameUtil.calculateSelected(packImage) < ImageRecyclerAdapter.getMinSelectedCount()) {
-            mView.showMessage(mContext.getString(R.string.main_selected_min_image_msg, ImageRecyclerAdapter.getMinSelectedCount()));
+            mView.showMessage(mContext.getString(R.string.main_selected_min_image_msg,
+                    ImageRecyclerAdapter.getMinSelectedCount()));
 
         } else {
             mIGameManager.saveSelected(packImage);
