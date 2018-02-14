@@ -57,6 +57,10 @@
         <item name="android:textColor">@color/colorGrey</item>
     </style>
 
+    <style name="Roboto.Normal.PrimaryDark" parent="Roboto.Normal">
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+    </style>
+
 
 
     <!-- Size -->
@@ -80,6 +84,10 @@
         <item name="android:textSize">16sp</item>
     </style>
 
+    <style name="Roboto.Normal.Grey.32" parent="Roboto.Normal.Grey">
+        <item name="android:textSize">32sp</item>
+    </style>
+
     <style name="Roboto.Bold.White.12" parent="Roboto.Bold.White">
         <item name="android:textSize">12sp</item>
     </style>
@@ -100,6 +108,10 @@
         <item name="android:textSize">12sp</item>
     </style>
 
+    <style name="Roboto.Normal.Accent.42" parent="Roboto.Normal.Accent">
+        <item name="android:textSize">42sp</item>
+    </style>
+
     <style name="Roboto.Normal.Black.14" parent="Roboto.Normal.Black">
         <item name="android:textSize">14sp</item>
     </style>
@@ -108,12 +120,20 @@
         <item name="android:textSize">16sp</item>
     </style>
 
+    <style name="Roboto.Normal.Black.42" parent="Roboto.Normal.Black">
+        <item name="android:textSize">42sp</item>
+    </style>
+
     <style name="Roboto.Bold.Black.18" parent="Roboto.Bold.Black">
         <item name="android:textSize">18sp</item>
     </style>
 
     <style name="Roboto.Bold.Black.22" parent="Roboto.Bold.Black">
         <item name="android:textSize">22sp</item>
+    </style>
+
+    <style name="Roboto.Normal.PrimaryDark.36" parent="Roboto.Normal.PrimaryDark">
+        <item name="android:textSize">36sp</item>
     </style>
 
 

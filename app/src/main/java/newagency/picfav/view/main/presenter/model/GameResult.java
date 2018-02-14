@@ -6,6 +6,6 @@ package newagency.picfav.view.main.presenter.model;
 
 public class GameResult {
 
-    public float score;
+    public int score;
 
 }

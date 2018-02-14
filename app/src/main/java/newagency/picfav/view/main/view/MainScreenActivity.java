@@ -27,6 +27,7 @@ import newagency.picfav.util.AppConstants;
 import newagency.picfav.view.BaseActivity;
 import newagency.picfav.view.main.MainScreenContract;
 import newagency.picfav.view.main.presenter.ImageRecyclerAdapter;
+import newagency.picfav.view.main.presenter.model.GameResult;
 import newagency.picfav.view.result.view.ResultScreenActivity;
 
 public class MainScreenActivity extends BaseActivity implements MainScreenContract.View {
@@ -175,9 +176,9 @@ public class MainScreenActivity extends BaseActivity implements MainScreenContra
     }
 
     @Override
-    public void navigateToResult() {
+    public void navigateToResult(GameResult gameResult) {
         finish();
-        ResultScreenActivity.start(this);
+        ResultScreenActivity.start(this, gameResult.score);
     }
 
     @Override

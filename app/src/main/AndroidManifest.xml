@@ -20,7 +20,7 @@
             android:name=".view.login.view.LoginActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustResize"></activity>
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".view.sign.up.view.SignUpActivity"
             android:screenOrientation="portrait"
@@ -38,8 +38,8 @@
         </activity>
         <activity
             android:name=".view.main.view.MainScreenActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".view.result.view.ResultScreenActivity"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".view.result.view.ResultScreenActivity" />
     </application>
 
 </manifest>

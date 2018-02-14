@@ -6,6 +6,7 @@ import newagency.picfav.netwotk.response.ImageModel;
 import newagency.picfav.util.AppConstants;
 import newagency.picfav.view.AbsView;
 import newagency.picfav.view.IBasePresenter;
+import newagency.picfav.view.main.presenter.model.GameResult;
 
 /**
  * Created by oroshka on 1/28/18.
@@ -27,7 +28,7 @@ public interface MainScreenContract {
 
         void changedSizeGrid(AppConstants.GridState gridState);
 
-        void navigateToResult();
+        void navigateToResult(GameResult gameResult);
     }
 
     interface PresenterI extends IBasePresenter {

@@ -137,8 +137,7 @@ public class MainScreenPresenter implements MainScreenContract.PresenterI, IGame
     @Override
     public void finishedGame(GameResult gameResult) {
         if (mView != null) {
-            mView.showMessage("game over: " + gameResult.score);
-            mView.navigateToResult();
+            mView.navigateToResult(gameResult);
         }
     }
 

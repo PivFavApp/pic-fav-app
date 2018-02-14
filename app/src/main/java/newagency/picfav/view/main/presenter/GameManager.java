@@ -99,7 +99,7 @@ public class GameManager implements IGameManager {
         } else if (mCurrentStep <= STEP_IN_SECOND_ROUND) {
             if (mCurrentStep == FIRST_ROUND_PRELIMINARY + 1) {
                 mRound++;
-                groupSecondRoundGame(getPicsBySelection(groupImageUserFirstRound, false));
+                groupSecondRoundGame(getPicsBySelection(groupImageUserFirstRound, true));
 
             } else {
                 GameStateInfo gameStateInfo = generateGameCurrentState(groupImageUserSecondRound.get(mCurrentStep), -1);
@@ -180,6 +180,7 @@ public class GameManager implements IGameManager {
         List<ImageModel> groupImage = new ArrayList<>();
         for (int i = 0; i < sizeImagesGame; i++) {
             ImageModel imageModel = new ImageModel(originList.get(i));
+            imageModel.isSelected = false;
             if (countInGroup == itemInGroup) {
                 countInGroup = 0;
                 groupImageUserSecondRound.put(groupIndex, groupImage);
@@ -225,9 +226,10 @@ public class GameManager implements IGameManager {
         float secondInPercent = (validCountInSecondRound / NEED_SELECT_SECOND_ROUND) * 100;
 
         float result = (firstPercent * 0.75f) + secondInPercent;
+        result = result > 100 ? 100 : result;
 
         GameResult gameResult = new GameResult();
-        gameResult.score = result;
+        gameResult.score = (int) result; // int because progress only int 
 
         if (mGameManagerCallback != null) {
             mGameManagerCallback.finishedGame(gameResult);

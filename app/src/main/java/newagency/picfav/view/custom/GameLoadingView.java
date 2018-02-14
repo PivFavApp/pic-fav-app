@@ -1,5 +1,6 @@
 package newagency.picfav.view.custom;
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.text.SpannableString;
 import android.text.style.RelativeSizeSpan;
@@ -27,7 +28,7 @@ public class GameLoadingView extends RelativeLayout {
 
     private int mCountResponded = 0;
 
-    private int mMaxMember;
+    private int mMaxMember = 100;
 
     public GameLoadingView(Context context) {
         super(context);
@@ -48,17 +49,18 @@ public class GameLoadingView extends RelativeLayout {
         View view = inflate(getContext(), R.layout.custom_game_loagin_layout, this);
         ButterKnife.bind(view);
         mCountResponded = 0;
+        mProgressBar.setMax(mMaxMember);
         updateCountResponded();
     }
 
     private void updateCountResponded() {
         String s = getContext().getString(R.string.game_loading_text, mCountResponded);
         SpannableString ss1 = new SpannableString(s);
-        ss1.setSpan(new RelativeSizeSpan(2f), 0, 2, 0);
+        ss1.setSpan(new RelativeSizeSpan(1.5f), 0, 2, 0);
         mCountTv.setText(ss1);
     }
 
-    public void setCountResponded(int count) {
+    public void setResult(int count) {
         mCountResponded = count;
         updateCountResponded();
         updateProgress();
@@ -66,11 +68,8 @@ public class GameLoadingView extends RelativeLayout {
     }
 
     private void updateProgress() {
-        mProgressBar.setProgress(mCountResponded);
-    }
-
-    public void setMaxMembers(int maxMembers) {
-        mMaxMember = maxMembers;
-        mProgressBar.setMax(mMaxMember);
+        ObjectAnimator progressAnimator = ObjectAnimator.ofInt(mProgressBar, "progress", 0, mCountResponded);
+        progressAnimator.setDuration(1500);
+        progressAnimator.start();
     }
 }
