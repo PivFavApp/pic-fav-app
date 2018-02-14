@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -146,6 +147,7 @@ public class GameManager implements IGameManager {
 
     private void groupFirstRoundGame(GameResponse gameResponse) {
         groupImageUserFirstRound = new HashMap<>();
+        Collections.shuffle(gameResponse.mImageModels);
         int sizeImagesGame = gameResponse.mImageModels.size();
         int countInGroup = 0;
         int itemInGroup = sizeImagesGame / COUNT_FIRST_ROUND;
@@ -153,6 +155,7 @@ public class GameManager implements IGameManager {
         List<ImageModel> groupImage = new ArrayList<>();
         for (int i = 0; i < sizeImagesGame; i++) {
             ImageModel imageModel = gameResponse.mImageModels.get(i);
+
             if (countInGroup == itemInGroup) {
                 countInGroup = 0;
                 groupImageUserFirstRound.put(groupIndex, groupImage);
@@ -173,6 +176,7 @@ public class GameManager implements IGameManager {
 
     private void groupSecondRoundGame(List<ImageModel> originList) {
         groupImageUserSecondRound = new HashMap<>();
+        Collections.shuffle(originList);
         int sizeImagesGame = originList.size();
         int countInGroup = 0;
         int itemInGroup = sizeImagesGame / COUNT_SECOND_ROUND;
@@ -229,7 +233,7 @@ public class GameManager implements IGameManager {
         result = result > 100 ? 100 : result;
 
         GameResult gameResult = new GameResult();
-        gameResult.score = (int) result; // int because progress only int 
+        gameResult.score = (int) result; // int because progress only int
 
         if (mGameManagerCallback != null) {
             mGameManagerCallback.finishedGame(gameResult);
