@@ -4,6 +4,13 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
 
+    <!--Permissions-->
+    <string name="no_permissions">No permissions</string>
+    <string name="enable_permission">Please, enable %1$s permission in app settings</string>
+    <string name="open_settings">Open Settings</string>
+    <string name="cancel">Cancel</string>
+    <string name="storage">Storage</string>
+
     <!--General error-->
     <string name="error_connection_msg">No internet connection</string>
     <string name="error_something_wrong_msg">Something went wrong, try later.</string>
