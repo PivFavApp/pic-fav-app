@@ -9,10 +9,11 @@ import dagger.Component;
 import newagency.picfav.PicFavApplication;
 import newagency.picfav.dagger.scope.ApplicationContext;
 import newagency.picfav.netwotk.ApiService;
+import newagency.picfav.view.gamelist.data.IGetAllGamesRepository;
 import newagency.picfav.view.login.presenter.ILoginRepository;
 import newagency.picfav.view.main.presenter.IGameManager;
 import newagency.picfav.view.main.presenter.IMainScreenRepository;
-import newagency.picfav.view.gamelist.data.GetAllGamesRepository;
+import newagency.picfav.view.result.data.IResultRepository;
 import newagency.picfav.view.sign.up.presenter.ISignUpRepository;
 
 /**
@@ -38,9 +39,11 @@ public interface ApplicationComponent {
 
     IMainScreenRepository getMainScreenRepository();
 
+    IResultRepository getResultRepository();
+
     IGameManager getGameManagerRepository();
 
-    GetAllGamesRepository getAllGamesRepository();
+    IGetAllGamesRepository getAllGamesRepository();
 
     void inject(PicFavApplication tripiApplication);
 }

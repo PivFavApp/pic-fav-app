@@ -14,7 +14,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class GetAllGamesRepositoryImpl implements GetAllGamesRepository {
+public class IGetAllGamesRepositoryImpl implements IGetAllGamesRepository {
 
     @NonNull
     private ApiService mApiService;
@@ -23,8 +23,8 @@ public class GetAllGamesRepositoryImpl implements GetAllGamesRepository {
     @ApplicationContext
     private Context mContext;
 
-    public GetAllGamesRepositoryImpl(@NonNull @ApplicationContext Context context,
-                                     @NonNull ApiService apiService) {
+    public IGetAllGamesRepositoryImpl(@NonNull @ApplicationContext Context context,
+                                      @NonNull ApiService apiService) {
         this.mApiService = apiService;
         this.mContext = context;
     }

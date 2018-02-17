@@ -3,7 +3,6 @@ package newagency.picfav.netwotk;
 import java.util.List;
 
 import newagency.picfav.netwotk.request.SignUpRequestBody;
-import newagency.picfav.netwotk.response.AllGamesResponse;
 import newagency.picfav.netwotk.response.GameResponse;
 import newagency.picfav.netwotk.response.LoginResponse;
 import retrofit2.Call;
@@ -34,4 +33,7 @@ public interface ApiService {
 
     @GET("/api/game")
     Call<List<GameResponse>> getAllGames();
+
+    @GET("/api/userstatistic")
+    Call<Object> postFinishGame();
 }

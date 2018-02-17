@@ -6,7 +6,7 @@ import java.util.List;
 
 import newagency.picfav.netwotk.response.GameResponse;
 
-public interface GetAllGamesRepository {
+public interface IGetAllGamesRepository {
 
     void getAllGames(@NonNull GetAllGamesCallback callback);
 

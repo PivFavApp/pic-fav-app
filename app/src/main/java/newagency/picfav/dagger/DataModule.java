@@ -17,8 +17,10 @@ import newagency.picfav.view.login.presenter.LoginRepositoryImpl;
 import newagency.picfav.view.main.presenter.GameManager;
 import newagency.picfav.view.main.presenter.IGameManager;
 import newagency.picfav.view.main.presenter.MainScreenRepositoryImpl;
-import newagency.picfav.view.gamelist.data.GetAllGamesRepository;
-import newagency.picfav.view.gamelist.data.GetAllGamesRepositoryImpl;
+import newagency.picfav.view.gamelist.data.IGetAllGamesRepository;
+import newagency.picfav.view.gamelist.data.IGetAllGamesRepositoryImpl;
+import newagency.picfav.view.result.data.IResultRepository;
+import newagency.picfav.view.result.data.IResultRepositoryImpl;
 import newagency.picfav.view.sign.up.presenter.ISignUpRepository;
 import newagency.picfav.view.sign.up.presenter.SignUpRepositoryImpl;
 
@@ -60,10 +62,18 @@ public class DataModule {
 
     @Provides
     @Singleton
-    GetAllGamesRepository provideAllGamesRepository(@NonNull @ApplicationContext Context context,
-                                                    @NonNull ApiService apiService) {
-        return new GetAllGamesRepositoryImpl(context, apiService);
+    IGetAllGamesRepository provideAllGamesRepository(@NonNull @ApplicationContext Context context,
+                                                     @NonNull ApiService apiService) {
+        return new IGetAllGamesRepositoryImpl(context, apiService);
     }
+
+    @Provides
+    @Singleton
+    IResultRepository provideResultRepository(@NonNull @ApplicationContext Context context,
+                                              @NonNull ApiService apiService) {
+        return new IResultRepositoryImpl(context, apiService);
+    }
+
 
     @Provides
     @Singleton

@@ -10,7 +10,7 @@ import javax.inject.Inject;
 import newagency.picfav.localDb.SharedPrefManager;
 import newagency.picfav.netwotk.response.GameResponse;
 import newagency.picfav.view.gamelist.MainContract;
-import newagency.picfav.view.gamelist.data.GetAllGamesRepository;
+import newagency.picfav.view.gamelist.data.IGetAllGamesRepository;
 
 public class AllGamePresenter implements MainContract.Presenter {
 
@@ -21,15 +21,15 @@ public class AllGamePresenter implements MainContract.Presenter {
     private SharedPrefManager sharedPrefManager;
 
     @NonNull
-    private GetAllGamesRepository getAllGamesRepository;
+    private IGetAllGamesRepository mIGetAllGamesRepository;
 
     @Inject
     AllGamePresenter(@NonNull MainContract.View view,
                      @NonNull SharedPrefManager sharedPrefManager,
-                     @NonNull GetAllGamesRepository getAllGamesRepository) {
+                     @NonNull IGetAllGamesRepository IGetAllGamesRepository) {
         this.view = view;
         this.sharedPrefManager = sharedPrefManager;
-        this.getAllGamesRepository = getAllGamesRepository;
+        this.mIGetAllGamesRepository = IGetAllGamesRepository;
     }
 
     @Override
@@ -60,7 +60,7 @@ public class AllGamePresenter implements MainContract.Presenter {
     public void getAllGames() {
         if (view == null) return;
         view.showProgressBar();
-        getAllGamesRepository.getAllGames(new GetAllGamesRepository.GetAllGamesCallback() {
+        mIGetAllGamesRepository.getAllGames(new IGetAllGamesRepository.GetAllGamesCallback() {
             @Override
             public void onSuccess(List<GameResponse> allGames) {
                 if (view != null) {
