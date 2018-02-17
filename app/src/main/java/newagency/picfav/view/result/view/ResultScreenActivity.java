@@ -29,6 +29,7 @@ import newagency.picfav.dagger.DaggerViewComponent;
 import newagency.picfav.dagger.ViewModule;
 import newagency.picfav.util.CapturePhotoUtils;
 import newagency.picfav.util.PermissionManager;
+import newagency.picfav.util.SocialConstans;
 import newagency.picfav.view.BaseActivity;
 import newagency.picfav.view.custom.GameLoadingView;
 import newagency.picfav.view.result.ResultScreenContract;
@@ -37,6 +38,11 @@ public class ResultScreenActivity extends BaseActivity implements ResultScreenCo
 
     private final static String RESULT_KEY = "result_key";
     private static final String PACKAGE = "package:";
+    private static final String INTENT_IMAGE_EXTRA = "image/*";
+
+    private static final String SHARED_TITLE = "PicFav App";
+    private static final String SHARED_TO_INSTA_DESCRIPTION = "PicFav App share image to insta";
+    private static final String SHARED_TO_FACEBOOK_DESCRIPTION = "PicFav App share image to facebook";
 
     private static final String PERMISSION_WRITE_STORAGE = Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
@@ -120,20 +126,20 @@ public class ResultScreenActivity extends BaseActivity implements ResultScreenCo
     }
 
     public void shareToInstagram(@NonNull Bitmap bitmap) {
-        Intent intent = this.getPackageManager().getLaunchIntentForPackage("com.instagram.android");
+        Intent intent = this.getPackageManager().getLaunchIntentForPackage(SocialConstans.INSTAGRAM_PACKAGE);
         if (intent != null) {
             Intent shareIntent = new Intent();
             shareIntent.setAction(Intent.ACTION_SEND);
-            shareIntent.setPackage("com.instagram.android");
+            shareIntent.setPackage(SocialConstans.INSTAGRAM_PACKAGE);
 
-            shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse(CapturePhotoUtils.insertImage(getContentResolver(), bitmap, "share_result_to_insta", "success")));
-            shareIntent.setType("image/*");
+            shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse(CapturePhotoUtils.insertImage(getContentResolver(), bitmap, SHARED_TITLE, SHARED_TO_INSTA_DESCRIPTION)));
+            shareIntent.setType(INTENT_IMAGE_EXTRA);
 
             startActivity(shareIntent);
         } else {
             intent = new Intent(Intent.ACTION_VIEW);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.setData(Uri.parse("market://details?id=" + "com.instagram.android"));
+            intent.setData(Uri.parse(SocialConstans.MARKET_URL + SocialConstans.INSTAGRAM_PACKAGE));
             startActivity(intent);
         }
     }
@@ -141,17 +147,16 @@ public class ResultScreenActivity extends BaseActivity implements ResultScreenCo
     private void shareFacebook(@NonNull Bitmap shareScreen) {
         List<Bitmap> bitmaps = new ArrayList<>();
         bitmaps.add(shareScreen);
-        String res = "My result in PicFav.";
 
         Intent tweetIntent = new Intent(bitmaps.size() > 1 ? Intent.ACTION_SEND_MULTIPLE : Intent.ACTION_SEND);
-        tweetIntent.putExtra(Intent.EXTRA_SUBJECT, "Pic Fav app");
+        tweetIntent.putExtra(Intent.EXTRA_SUBJECT, SHARED_TITLE);
 
         if (bitmaps.size() > 1) {
             ArrayList<Uri> imageUris = new ArrayList<Uri>();
             for (Bitmap bitmap : bitmaps) {
                 String imagePath = CapturePhotoUtils.insertImage(
                         getContentResolver(), bitmap,
-                        "share_facebook", "success");
+                        SHARED_TITLE, SHARED_TO_FACEBOOK_DESCRIPTION);
                 if (imagePath != null) {
                     try {
                         imageUris.add(Uri.parse(imagePath));
@@ -162,19 +167,18 @@ public class ResultScreenActivity extends BaseActivity implements ResultScreenCo
             }
             tweetIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, imageUris);
         } else {
-            tweetIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse(CapturePhotoUtils.insertImage(getContentResolver(), bitmaps.get(0), "share_facebook", "success")));
+            tweetIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse(CapturePhotoUtils.insertImage(getContentResolver(), bitmaps.get(0), SHARED_TITLE, SHARED_TO_FACEBOOK_DESCRIPTION)));
         }
-        tweetIntent.putExtra(Intent.EXTRA_TEXT, res);
-        Log.d("EXTRA_TEXT", res);
+        tweetIntent.putExtra(Intent.EXTRA_TEXT, SHARED_TITLE);
 
-        tweetIntent.setType("image/*");
+        tweetIntent.setType(INTENT_IMAGE_EXTRA);
 
         PackageManager packManager = getPackageManager();
         List<ResolveInfo> resolvedInfoList = packManager.queryIntentActivities(tweetIntent, PackageManager.MATCH_DEFAULT_ONLY);
 
         boolean resolved = false;
         for (ResolveInfo resolveInfo : resolvedInfoList) {
-            if (resolveInfo.activityInfo.packageName.startsWith("com.facebook.katana")) {
+            if (resolveInfo.activityInfo.packageName.startsWith(SocialConstans.FACEBOOK_PACKAGE)) {
                 tweetIntent.setClassName(
                         resolveInfo.activityInfo.packageName,
                         resolveInfo.activityInfo.name);
@@ -188,7 +192,7 @@ public class ResultScreenActivity extends BaseActivity implements ResultScreenCo
         } else {
             Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.setData(Uri.parse("market://details?id=" + "com.facebook.katana"));
+            intent.setData(Uri.parse(SocialConstans.MARKET_URL + SocialConstans.FACEBOOK_PACKAGE));
             startActivity(intent);
         }
     }
