@@ -114,7 +114,6 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         adapter = new AllGamesAdapter(new AllGamesAdapter.AllGameCallback() {
             @Override
             public void gameClick(@NonNull GameResponse game) {
-//                ResultScreenActivity.start(MainActivity.this);
                 MainScreenActivity.start(MainActivity.this, game.getId());
             }
         });
