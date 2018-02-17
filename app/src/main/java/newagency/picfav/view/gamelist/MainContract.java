@@ -14,9 +14,17 @@ public interface MainContract {
 
         void navigateToWelcome();
 
-        void allGames(boolean isForceRefresh, @NonNull List<GameResponse> games);
+        void showAllGame(boolean isForceRefresh, @NonNull List<GameResponse> games);
 
         void showMessage(String message);
+
+        void showProgressBar();
+
+        void hideProgressBar();
+
+        void showEmptyList();
+
+        void hideEmptyList();
     }
 
     interface Presenter extends IBasePresenter {

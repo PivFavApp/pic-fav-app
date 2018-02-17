@@ -22,7 +22,7 @@ public class AllGamesResponse implements Serializable {
     @Override
     public String toString() {
         return "AllGamesResponse{" +
-                "allGames=" + allGames +
+                "showAllGame=" + allGames +
                 '}';
     }
 }

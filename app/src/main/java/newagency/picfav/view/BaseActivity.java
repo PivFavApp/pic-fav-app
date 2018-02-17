@@ -23,7 +23,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         beforeLayout();
         setContentView(onRequestLayout());
-        initLoading();
+        initDialogLoading();
         onInitializeInjection();
         initializeViewsInjection();
     }
@@ -45,7 +45,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected void beforeLayout() {}
 
-    protected void initLoading() {
+    protected void initDialogLoading() {
         mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setMessage(getString(R.string.general_waiting_please_msg));
         mProgressDialog.setCancelable(false);

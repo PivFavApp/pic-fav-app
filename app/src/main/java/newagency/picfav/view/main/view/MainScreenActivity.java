@@ -6,6 +6,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -63,6 +64,9 @@ public class MainScreenActivity extends BaseActivity implements MainScreenContra
 
     @BindView(R.id.grid_iv)
     ImageView gridIv;
+
+    @BindView(R.id.progress_bar)
+    ProgressBar mProgressBar;
 
     private ImageRecyclerAdapter mImageRecyclerAdapter;
 
@@ -185,6 +189,16 @@ public class MainScreenActivity extends BaseActivity implements MainScreenContra
     public void updateToolbar(String name, String setRoundName) {
         setNameTv.setText(setRoundName);
         subTitleTv.setText(name);
+    }
+
+    @Override
+    public void showProgressBar() {
+        mProgressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideProgressBar() {
+        mProgressBar.setVisibility(View.GONE);
     }
 
     private void enableDisableButton(int countSelected) {

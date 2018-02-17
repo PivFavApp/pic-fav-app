@@ -12,7 +12,7 @@ import newagency.picfav.netwotk.response.GameResponse;
 import newagency.picfav.view.gamelist.MainContract;
 import newagency.picfav.view.gamelist.data.GetAllGamesRepository;
 
-public class MainPresenter implements MainContract.Presenter {
+public class AllGamePresenter implements MainContract.Presenter {
 
     @Nullable
     private MainContract.View view;
@@ -24,9 +24,9 @@ public class MainPresenter implements MainContract.Presenter {
     private GetAllGamesRepository getAllGamesRepository;
 
     @Inject
-    MainPresenter(@NonNull MainContract.View view,
-                  @NonNull SharedPrefManager sharedPrefManager,
-                  @NonNull GetAllGamesRepository getAllGamesRepository) {
+    AllGamePresenter(@NonNull MainContract.View view,
+                     @NonNull SharedPrefManager sharedPrefManager,
+                     @NonNull GetAllGamesRepository getAllGamesRepository) {
         this.view = view;
         this.sharedPrefManager = sharedPrefManager;
         this.getAllGamesRepository = getAllGamesRepository;
@@ -59,19 +59,27 @@ public class MainPresenter implements MainContract.Presenter {
     @Override
     public void getAllGames() {
         if (view == null) return;
+        view.showProgressBar();
         getAllGamesRepository.getAllGames(new GetAllGamesRepository.GetAllGamesCallback() {
-
             @Override
             public void onSuccess(List<GameResponse> allGames) {
+                view.hideProgressBar();
                 if (view != null && allGames != null) {
-                    view.allGames(true, allGames);
+                    view.showAllGame(true, allGames);
+                    if (allGames.size() == 0) {
+                        view.showEmptyList();
+                    } else {
+                        view.hideEmptyList();
+                    }
                 }
             }
 
             @Override
             public void onError(String error) {
                 if (view != null) {
+                    view.hideProgressBar();
                     view.showMessage(error);
+                    view.showEmptyList();
                 }
             }
         });

@@ -1,6 +1,5 @@
 package newagency.picfav.view.gamelist.view;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -9,6 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -22,14 +23,14 @@ import newagency.picfav.dagger.ViewModule;
 import newagency.picfav.netwotk.response.GameResponse;
 import newagency.picfav.view.BaseActivity;
 import newagency.picfav.view.gamelist.MainContract;
-import newagency.picfav.view.gamelist.presenter.MainPresenter;
+import newagency.picfav.view.gamelist.presenter.AllGamePresenter;
 import newagency.picfav.view.main.view.MainScreenActivity;
 import newagency.picfav.view.welcome.view.WelcomeActivity;
 
-public class MainActivity extends BaseActivity implements MainContract.View {
+public class AllGameActivity extends BaseActivity implements MainContract.View {
 
     public static void launch(@NonNull AppCompatActivity activity) {
-        Intent intent = new Intent(activity, MainActivity.class);
+        Intent intent = new Intent(activity, AllGameActivity.class);
         activity.startActivity(intent);
     }
 
@@ -39,10 +40,23 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     @BindView(R.id.root)
     View root;
 
+    @BindView(R.id.progress_bar)
+    ProgressBar mProgressBar;
+
+    @BindView(R.id.empty_tv)
+    TextView mEmptyTv;
+
     @Inject
-    MainPresenter presenter;
+    AllGamePresenter presenter;
 
     AllGamesAdapter adapter;
+
+    private AllGamesAdapter.AllGameCallback mAllGameCallback = new AllGamesAdapter.AllGameCallback() {
+        @Override
+        public void gameClick(@NonNull GameResponse game) {
+            MainScreenActivity.start(AllGameActivity.this, game.getId());
+        }
+    };
 
     @Override
     protected void onViewReady() {
@@ -51,9 +65,9 @@ public class MainActivity extends BaseActivity implements MainContract.View {
             return;
 
         } else {
-            presenter.onStart();
+            presenter.getAllGames();
         }
-        initRecView();
+        initRecyclerView();
     }
 
     @Override
@@ -65,17 +79,9 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     void logOut() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(getResources().getString(R.string.log_out_title))
-                .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        presenter.logout();
-                    }
-                })
-                .setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        //no-op
-                    }
+                .setPositiveButton(getResources().getString(R.string.yes), (dialogInterface, i) -> presenter.logout())
+                .setNegativeButton(getResources().getString(R.string.no), (dialogInterface, i) -> {
+                    //no-op
                 })
                 .setCancelable(false);
 
@@ -85,7 +91,7 @@ public class MainActivity extends BaseActivity implements MainContract.View {
 
     @Override
     protected int onRequestLayout() {
-        return R.layout.activity_main;
+        return R.layout.activity_all_game;
     }
 
     @Override
@@ -104,20 +110,14 @@ public class MainActivity extends BaseActivity implements MainContract.View {
     }
 
     @Override
-    public void allGames(boolean isForceRefresh, @NonNull List<GameResponse> games) {
+    public void showAllGame(boolean isForceRefresh, @NonNull List<GameResponse> games) {
         if (adapter != null) {
             adapter.addGames(isForceRefresh, games);
         }
     }
 
-    private void initRecView() {
-        adapter = new AllGamesAdapter(new AllGamesAdapter.AllGameCallback() {
-            @Override
-            public void gameClick(@NonNull GameResponse game) {
-//                ResultScreenActivity.start(MainActivity.this);
-                MainScreenActivity.start(MainActivity.this, game.getId());
-            }
-        });
+    private void initRecyclerView() {
+        adapter = new AllGamesAdapter(mAllGameCallback);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
     }
@@ -127,4 +127,23 @@ public class MainActivity extends BaseActivity implements MainContract.View {
         Snackbar.make(root, error, Snackbar.LENGTH_LONG).show();
     }
 
+    @Override
+    public void showProgressBar() {
+        mProgressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideProgressBar() {
+        mProgressBar.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showEmptyList() {
+        mEmptyTv.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideEmptyList() {
+        mEmptyTv.setVisibility(View.GONE);
+    }
 }

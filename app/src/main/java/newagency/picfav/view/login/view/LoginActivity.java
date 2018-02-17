@@ -15,8 +15,8 @@ import newagency.picfav.dagger.DaggerViewComponent;
 import newagency.picfav.dagger.ViewModule;
 import newagency.picfav.util.AppUtils;
 import newagency.picfav.view.BaseActivity;
+import newagency.picfav.view.gamelist.view.AllGameActivity;
 import newagency.picfav.view.login.LoginContract;
-import newagency.picfav.view.gamelist.view.MainActivity;
 
 public class LoginActivity extends BaseActivity implements LoginContract.View {
 
@@ -83,14 +83,14 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
 
     //    LoginContract.View methods
     @Override
-    public void showProgress() {
+    public void showProgressDialog() {
         if (!mProgressDialog.isShowing()) {
             mProgressDialog.show();
         }
     }
 
     @Override
-    public void hideProgress() {
+    public void hideProgressDialog() {
         if (mProgressDialog.isShowing()) {
             mProgressDialog.dismiss();
         }
@@ -119,7 +119,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
 
     @Override
     public void navigateToMainScreen() {
-        MainActivity.launch(this);
+        AllGameActivity.launch(this);
         finish();
     }
 }

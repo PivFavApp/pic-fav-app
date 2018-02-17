@@ -43,12 +43,17 @@ public class MainScreenPresenter implements MainScreenContract.PresenterI, IGame
     private IMainScreenRepository.GameCallback mGameCallback = new IMainScreenRepository.GameCallback() {
         @Override
         public void onSuccess(GameResponse gameResponse) {
-            mIGameManager.initGame(gameResponse);
+            if (mView != null) {
+                mView.hideProgressBar();
+                mIGameManager.initGame(gameResponse);
+            }
         }
 
         @Override
         public void onError(String error) {
-            //TODO
+            if (mView != null) {
+                mView.hideProgressBar();
+            }
         }
     };
 
@@ -79,6 +84,8 @@ public class MainScreenPresenter implements MainScreenContract.PresenterI, IGame
 
     @Override
     public void loadGame(String idGame) {
+        if (mView == null) return;
+        mView.showProgressBar();
         mIMainScreenRepository.getGame(idGame, mGameCallback);
     }
 

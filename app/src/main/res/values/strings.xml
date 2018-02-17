@@ -50,6 +50,7 @@
     <string name="result_activity_title">Result</string>
     <string name="game_loading_text">%d%%</string>
     <string name="result_activity_congratulations_msg">Сongratulations!</string>
+    <string name="game_list_empty_msg">You don\'t have active game.</string>
 
 
 </resources>

@@ -34,7 +34,7 @@ public class LoginPresenter implements LoginContract.PresenterI {
             mSharedPrefManager.setLoggedIn(true);
             if (mView != null) {
                 mView.navigateToMainScreen();
-                mView.hideProgress();
+                mView.hideProgressDialog();
             }
         }
 
@@ -42,7 +42,7 @@ public class LoginPresenter implements LoginContract.PresenterI {
         public void onError(String error) {
             if (mView != null) {
                 mView.showMessage(error);
-                mView.hideProgress();
+                mView.hideProgressDialog();
             }
         }
     };
@@ -73,7 +73,7 @@ public class LoginPresenter implements LoginContract.PresenterI {
     public void logIn(String userName, String password) {
         if (mView == null) return;
         if (isValidData(userName, password)) {
-            mView.showProgress();
+            mView.showProgressDialog();
             mLoginRepository.login(new LoginRequestBody(userName, password, AppConstants.GrantType.PASSWORD), mLoginCallback);
         }
     }

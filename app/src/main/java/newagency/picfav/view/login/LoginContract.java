@@ -5,9 +5,9 @@ import newagency.picfav.view.IBasePresenter;
 
 public interface LoginContract {
     interface View extends AbsView {
-        void showProgress();
+        void showProgressDialog();
 
-        void hideProgress();
+        void hideProgressDialog();
 
         void showMessage(String error);
 

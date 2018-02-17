@@ -16,6 +16,10 @@ public interface MainScreenContract {
 
     interface View extends AbsView {
 
+        void showProgressBar();
+
+        void hideProgressBar();
+
         void showMessage(String message);
 
         void updateToolbar(String name, String setRoundName);
