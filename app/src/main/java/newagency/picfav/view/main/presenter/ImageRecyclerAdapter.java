@@ -57,8 +57,13 @@ public class ImageRecyclerAdapter extends RecyclerView.Adapter<ImageRecyclerAdap
 
     private boolean isSelectedMode;
 
+    private float mWidth;
+
+    private float mHeight;
+
     public ImageRecyclerAdapter(Context context, ImageRecyclerAdapterCallback callback) {
         mContext = context;
+        initParams();
         this.mCallback = callback;
     }
 
@@ -85,6 +90,11 @@ public class ImageRecyclerAdapter extends RecyclerView.Adapter<ImageRecyclerAdap
 
     public List<ImageModel> getData() {
         return mImageItemList;
+    }
+
+    private void initParams() {
+        mWidth = mContext.getResources().getDimension(R.dimen.item_image_width);
+        mHeight = mContext.getResources().getDimension(R.dimen.item_image_height);
     }
 
     public void addAll(List<ImageModel> imageItemList, int countNeedPreliminary) {
@@ -157,12 +167,8 @@ public class ImageRecyclerAdapter extends RecyclerView.Adapter<ImageRecyclerAdap
         }
 
         public void bind(ImageModel imageItem) {
-            ViewGroup.LayoutParams params = mImageView.getLayoutParams();
-            float width = mContext.getResources().getDimension(R.dimen.item_image_width);
-            float height = mContext.getResources().getDimension(R.dimen.item_image_height);
-            params.width = (int) (width * sizeCoef);
-            params.height = (int) (height * sizeCoef);
-            mImageView.setLayoutParams(params);
+            mImageView.getLayoutParams().width = (int) (mWidth * sizeCoef);
+            mImageView.getLayoutParams().height = (int) (mHeight * sizeCoef);
 
             int colorBackground = imageItem.isSelected
                     ? ContextCompat.getColor(mContext, R.color.colorAccent)

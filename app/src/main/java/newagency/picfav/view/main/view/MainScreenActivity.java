@@ -162,6 +162,7 @@ public class MainScreenActivity extends BaseActivity implements MainScreenContra
     public void changedSizeGrid(AppConstants.GridState gridState) {
         if (mImageRecyclerAdapter != null) {
             mImageRecyclerAdapter.changeGridSize(gridState);
+            mCarouselView.scrollToPosition(0);
             switch (gridState) {
                 case SMALL:
                     gridIv.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_big_grid));
