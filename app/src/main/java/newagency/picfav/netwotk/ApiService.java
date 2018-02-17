@@ -35,5 +35,7 @@ public interface ApiService {
     Call<List<GameResponse>> getAllGames();
 
     @GET("/api/userstatistic")
-    Call<Object> postFinishGame();
+    Call<Object> postFinishGame(@Field("GamePublicId") String gameId,
+                                @Field("Date") long data,
+                                @Field("Result") int result);
 }

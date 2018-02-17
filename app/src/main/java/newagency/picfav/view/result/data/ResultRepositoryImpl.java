@@ -6,6 +6,7 @@ import android.util.Log;
 
 import newagency.picfav.dagger.scope.ApplicationContext;
 import newagency.picfav.netwotk.ApiService;
+import newagency.picfav.netwotk.request.ResultGameRequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -14,7 +15,7 @@ import retrofit2.Response;
  * Created by oroshka on 2/17/18.
  */
 
-public class IResultRepositoryImpl implements IResultRepository {
+public class ResultRepositoryImpl implements IResultRepository {
 
     @NonNull
     private ApiService mApiService;
@@ -23,15 +24,15 @@ public class IResultRepositoryImpl implements IResultRepository {
     @ApplicationContext
     private Context mContext;
 
-    public IResultRepositoryImpl(@NonNull @ApplicationContext Context context,
-                                 @NonNull ApiService apiService) {
+    public ResultRepositoryImpl(@NonNull @ApplicationContext Context context,
+                                @NonNull ApiService apiService) {
         this.mApiService = apiService;
         this.mContext = context;
     }
 
     @Override
-    public void postGameResult() {
-        mApiService.postFinishGame().enqueue(new Callback<Object>() {
+    public void postGameResult(ResultGameRequestBody body) {
+        mApiService.postFinishGame(body.gameId, body.time, body.result).enqueue(new Callback<Object>() {
             @Override
             public void onResponse(Call<Object> call, Response<Object> response) {
                 Log.e("s", "onResponse: ");

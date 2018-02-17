@@ -8,6 +8,7 @@ import javax.inject.Inject;
 
 import newagency.picfav.dagger.scope.ApplicationContext;
 import newagency.picfav.view.result.ResultScreenContract;
+import newagency.picfav.view.result.data.IResultRepository;
 
 /**
  * Created by oroshka on 2/13/18.
@@ -17,14 +18,18 @@ public class ResultScreenPresenter implements ResultScreenContract.PresenterI {
 
     @NonNull
     @ApplicationContext
-    Context mContext;
+    private Context mContext;
 
     @Nullable
-    ResultScreenContract.View mView;
+    private ResultScreenContract.View mView;
+
+    @NonNull
+    private IResultRepository resultRepository;
 
     @Inject
     public ResultScreenPresenter(@NonNull @ApplicationContext Context context,
-                                 @Nullable ResultScreenContract.View view) {
+                                 @Nullable ResultScreenContract.View view,
+                                 @NonNull IResultRepository resultRepository) {
         mContext = context;
         mView = view;
     }

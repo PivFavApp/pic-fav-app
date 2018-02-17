@@ -11,16 +11,16 @@ import newagency.picfav.dagger.scope.ApplicationContext;
 import newagency.picfav.localDb.SharedPrefManager;
 import newagency.picfav.netwotk.ApiClient;
 import newagency.picfav.netwotk.ApiService;
-import newagency.picfav.view.main.presenter.IMainScreenRepository;
+import newagency.picfav.view.gamelist.data.IGetAllGamesRepository;
+import newagency.picfav.view.gamelist.data.IGetAllGamesRepositoryImpl;
 import newagency.picfav.view.login.presenter.ILoginRepository;
 import newagency.picfav.view.login.presenter.LoginRepositoryImpl;
 import newagency.picfav.view.main.presenter.GameManager;
 import newagency.picfav.view.main.presenter.IGameManager;
+import newagency.picfav.view.main.presenter.IMainScreenRepository;
 import newagency.picfav.view.main.presenter.MainScreenRepositoryImpl;
-import newagency.picfav.view.gamelist.data.IGetAllGamesRepository;
-import newagency.picfav.view.gamelist.data.IGetAllGamesRepositoryImpl;
 import newagency.picfav.view.result.data.IResultRepository;
-import newagency.picfav.view.result.data.IResultRepositoryImpl;
+import newagency.picfav.view.result.data.ResultRepositoryImpl;
 import newagency.picfav.view.sign.up.presenter.ISignUpRepository;
 import newagency.picfav.view.sign.up.presenter.SignUpRepositoryImpl;
 
@@ -71,7 +71,7 @@ public class DataModule {
     @Singleton
     IResultRepository provideResultRepository(@NonNull @ApplicationContext Context context,
                                               @NonNull ApiService apiService) {
-        return new IResultRepositoryImpl(context, apiService);
+        return new ResultRepositoryImpl(context, apiService);
     }
 
 
