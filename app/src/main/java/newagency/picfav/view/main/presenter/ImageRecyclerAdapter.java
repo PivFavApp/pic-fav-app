@@ -55,6 +55,8 @@ public class ImageRecyclerAdapter extends RecyclerView.Adapter<ImageRecyclerAdap
 
     private float sizeCoef = 1;
 
+    private boolean isSelectedMode;
+
     public ImageRecyclerAdapter(Context context, ImageRecyclerAdapterCallback callback) {
         mContext = context;
         this.mCallback = callback;
@@ -106,6 +108,7 @@ public class ImageRecyclerAdapter extends RecyclerView.Adapter<ImageRecyclerAdap
     public void notifyChange() {
         if (mImageItemList != null) {
             mSelectedCount = GameUtil.calculateSelected(mImageItemList);
+            isSelectedMode  = mSelectedCount != 0;
             mCallback.onChangeCountSelected(mSelectedCount);
             if (mCountNeedPreliminary != -1) {
                 int diff = mCountNeedPreliminary - mSelectedCount;
@@ -130,34 +133,36 @@ public class ImageRecyclerAdapter extends RecyclerView.Adapter<ImageRecyclerAdap
             mWrapperCv = itemView.findViewById(R.id.wrapper_image_cv);
 
             mWrapperCv.setOnLongClickListener(v -> {
-                int positionClicked = getAdapterPosition();
+                if(!isSelectedMode) {
+                    int positionClicked = getAdapterPosition();
 
-                if (positionClicked != -1) {
-                    ImageModel imageItemModel = mImageItemList.get(positionClicked);
-                    changeSelectionItem(imageItemModel);
+                    if (positionClicked != -1) {
+                        ImageModel imageItemModel = mImageItemList.get(positionClicked);
+                        changeSelectionItem(imageItemModel);
+                    }
+                    isSelectedMode = true;
                 }
                 return false;
             });
 
             mWrapperCv.setOnClickListener(v -> {
-                int positionClicked = getAdapterPosition();
-                if (positionClicked != -1) {
-                    ImageModel imageModel = mImageItemList.get(positionClicked);
-                    if (imageModel.isSelected) {
-                        imageModel.isSelected = false;
-                        notifyChange();
+                if (isSelectedMode) {
+                    int positionClicked = getAdapterPosition();
+                    if (positionClicked != -1) {
+                        ImageModel imageModel = mImageItemList.get(positionClicked);
+                        changeSelectionItem(imageModel);
                     }
                 }
             });
         }
 
         public void bind(ImageModel imageItem) {
-            /*ViewGroup.LayoutParams params = mImageView.getLayoutParams();
+            ViewGroup.LayoutParams params = mImageView.getLayoutParams();
             float width = mContext.getResources().getDimension(R.dimen.item_image_width);
             float height = mContext.getResources().getDimension(R.dimen.item_image_height);
             params.width = (int) (width * sizeCoef);
             params.height = (int) (height * sizeCoef);
-            mImageView.setLayoutParams(params);*/
+            mImageView.setLayoutParams(params);
 
             int colorBackground = imageItem.isSelected
                     ? ContextCompat.getColor(mContext, R.color.colorAccent)

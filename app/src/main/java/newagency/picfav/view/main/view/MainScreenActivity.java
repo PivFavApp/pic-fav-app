@@ -99,7 +99,6 @@ public class MainScreenActivity extends BaseActivity implements MainScreenContra
     protected void onViewReady() {
         getArgs();
         mPresenter.loadGame(gameId);
-//        mPresenter.loadGame("494499d7-4826-46db-8315-a5bc90a67bbd");
         initAdapter();
     }
 
