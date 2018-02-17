@@ -63,13 +63,15 @@ public class AllGamePresenter implements MainContract.Presenter {
         getAllGamesRepository.getAllGames(new GetAllGamesRepository.GetAllGamesCallback() {
             @Override
             public void onSuccess(List<GameResponse> allGames) {
-                view.hideProgressBar();
-                if (view != null && allGames != null) {
-                    view.showAllGame(true, allGames);
-                    if (allGames.size() == 0) {
-                        view.showEmptyList();
-                    } else {
-                        view.hideEmptyList();
+                if (view != null) {
+                    view.hideProgressBar();
+                    if (allGames != null) {
+                        view.showAllGame(true, allGames);
+                        if (allGames.size() == 0) {
+                            view.showEmptyList();
+                        } else {
+                            view.hideEmptyList();
+                        }
                     }
                 }
             }
