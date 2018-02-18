@@ -1,4 +1,4 @@
-package newagency.picfav.view.gamelist.view;
+package newagency.picfav.view.mainFeed.gamelist.view;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;

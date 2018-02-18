@@ -1,4 +1,4 @@
-package newagency.picfav.view.gamelist.data;
+package newagency.picfav.view.mainFeed.gamelist.data;
 
 import android.support.annotation.NonNull;
 

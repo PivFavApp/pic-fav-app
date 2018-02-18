@@ -1,4 +1,4 @@
-package newagency.picfav.view.gamelist.presenter;
+package newagency.picfav.view.mainFeed.gamelist.presenter;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -9,13 +9,13 @@ import javax.inject.Inject;
 
 import newagency.picfav.localDb.SharedPrefManager;
 import newagency.picfav.netwotk.response.GameResponse;
-import newagency.picfav.view.gamelist.MainContract;
-import newagency.picfav.view.gamelist.data.IGetAllGamesRepository;
+import newagency.picfav.view.mainFeed.gamelist.AllGamesContract;
+import newagency.picfav.view.mainFeed.gamelist.data.IGetAllGamesRepository;
 
-public class AllGamePresenter implements MainContract.Presenter {
+public class AllGamePresenter implements AllGamesContract.Presenter {
 
     @Nullable
-    private MainContract.View view;
+    private AllGamesContract.View view;
 
     @NonNull
     private SharedPrefManager sharedPrefManager;
@@ -24,7 +24,7 @@ public class AllGamePresenter implements MainContract.Presenter {
     private IGetAllGamesRepository mIGetAllGamesRepository;
 
     @Inject
-    AllGamePresenter(@NonNull MainContract.View view,
+    AllGamePresenter(@NonNull AllGamesContract.View view,
                      @NonNull SharedPrefManager sharedPrefManager,
                      @NonNull IGetAllGamesRepository IGetAllGamesRepository) {
         this.view = view;
@@ -40,20 +40,6 @@ public class AllGamePresenter implements MainContract.Presenter {
     @Override
     public void onStop() {
         view = null;
-    }
-
-    @Override
-    public void logout() {
-        sharedPrefManager.setAuthToken(null);
-        sharedPrefManager.setLoggedIn(false);
-        if (view != null) {
-            view.navigateToWelcome();
-        }
-    }
-
-    @Override
-    public boolean isLogin() {
-        return sharedPrefManager.isLoggedIn();
     }
 
     @Override

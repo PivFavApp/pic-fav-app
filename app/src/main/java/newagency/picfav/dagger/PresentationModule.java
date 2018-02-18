@@ -5,12 +5,14 @@ import android.support.annotation.Nullable;
 
 import dagger.Module;
 import dagger.Provides;
-import newagency.picfav.view.gamelist.presenter.AllGamePresenter;
+import newagency.picfav.view.mainFeed.gamelist.presenter.AllGamePresenter;
 import newagency.picfav.view.main.MainScreenContract;
 import newagency.picfav.view.main.presenter.MainScreenPresenter;
 import newagency.picfav.view.login.LoginContract;
 import newagency.picfav.view.login.presenter.LoginPresenter;
-import newagency.picfav.view.gamelist.MainContract;
+import newagency.picfav.view.mainFeed.gamelist.AllGamesContract;
+import newagency.picfav.view.mainFeed.tabsScreen.TabsContact;
+import newagency.picfav.view.mainFeed.tabsScreen.presenter.TabsPresenter;
 import newagency.picfav.view.result.ResultScreenContract;
 import newagency.picfav.view.result.presenter.ResultScreenPresenter;
 import newagency.picfav.view.sign.up.SignUpContract;
@@ -42,12 +44,17 @@ public class PresentationModule {
     }
 
     @Provides
-    MainContract.Presenter provideMainPresenter(@Nullable AllGamePresenter presenter) {
+    AllGamesContract.Presenter provideMainPresenter(@Nullable AllGamePresenter presenter) {
         return presenter;
     }
 
     @Provides
     ResultScreenContract.PresenterI provideResultPresenter(@Nullable ResultScreenPresenter presenter) {
+        return presenter;
+    }
+
+    @Provides
+    TabsContact.PresenterI provideTabsPreseneter(@NonNull TabsPresenter presenter) {
         return presenter;
     }
 

@@ -15,8 +15,8 @@ import newagency.picfav.dagger.DaggerViewComponent;
 import newagency.picfav.dagger.ViewModule;
 import newagency.picfav.util.AppUtils;
 import newagency.picfav.view.BaseActivity;
-import newagency.picfav.view.gamelist.view.AllGameActivity;
 import newagency.picfav.view.login.LoginContract;
+import newagency.picfav.view.mainFeed.tabsScreen.view.TabsActivity;
 
 public class LoginActivity extends BaseActivity implements LoginContract.View {
 
@@ -119,7 +119,8 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
 
     @Override
     public void navigateToMainScreen() {
-        AllGameActivity.launch(this);
+      //  AllGamesFragment.launch(this);
+        TabsActivity.launch(this);
         finish();
     }
 }

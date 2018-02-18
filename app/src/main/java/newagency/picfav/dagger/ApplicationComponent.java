@@ -9,7 +9,7 @@ import dagger.Component;
 import newagency.picfav.PicFavApplication;
 import newagency.picfav.dagger.scope.ApplicationContext;
 import newagency.picfav.netwotk.ApiService;
-import newagency.picfav.view.gamelist.data.IGetAllGamesRepository;
+import newagency.picfav.view.mainFeed.gamelist.data.IGetAllGamesRepository;
 import newagency.picfav.view.login.presenter.ILoginRepository;
 import newagency.picfav.view.main.presenter.IGameManager;
 import newagency.picfav.view.main.presenter.IMainScreenRepository;
