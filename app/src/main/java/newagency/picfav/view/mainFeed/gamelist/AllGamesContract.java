@@ -1,4 +1,4 @@
-package newagency.picfav.view.gamelist;
+package newagency.picfav.view.mainFeed.gamelist;
 
 import android.support.annotation.NonNull;
 
@@ -8,11 +8,9 @@ import newagency.picfav.netwotk.response.GameResponse;
 import newagency.picfav.view.AbsView;
 import newagency.picfav.view.IBasePresenter;
 
-public interface MainContract {
+public interface AllGamesContract {
 
     interface View extends AbsView {
-
-        void navigateToWelcome();
 
         void showAllGame(boolean isForceRefresh, @NonNull List<GameResponse> games);
 
@@ -28,10 +26,6 @@ public interface MainContract {
     }
 
     interface Presenter extends IBasePresenter {
-
-        void logout();
-
-        boolean isLogin();
 
         void getAllGames();
 

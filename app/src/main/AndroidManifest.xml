@@ -13,33 +13,38 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity
             android:name=".view.welcome.view.WelcomeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".view.login.view.LoginActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustResize" />
+
         <activity
             android:name=".view.sign.up.view.SignUpActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustResize" />
+
         <activity
-            android:name=".view.gamelist.view.AllGameActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme">
+            android:name=".view.mainFeed.tabsScreen.view.TabsActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".view.main.view.MainScreenActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <activity android:name=".view.result.view.ResultScreenActivity" />
     </application>
 

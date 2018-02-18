@@ -3,6 +3,12 @@
     <string name="general_waiting_please_msg">Please waiting…</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="in_progress">In progress…</string>
+
+    <string name="tab_friends">Friends</string>
+    <string name="tab_select_game">Select Game</string>
+    <string name="tab_challenges">Challenges</string>
+
 
     <!--Permissions-->
     <string name="no_permissions">No permissions</string>
