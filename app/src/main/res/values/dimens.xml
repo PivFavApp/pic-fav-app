@@ -84,4 +84,7 @@
     <dimen name="result_activity_root_padding_bottom">16dp</dimen>
     <dimen name="result_activity_social_wrapper_margin_bottom">10dp</dimen>
 
+    <!--item game -->
+    <dimen name="item_game_padding_play_btn">17dp</dimen>
+
 </resources>

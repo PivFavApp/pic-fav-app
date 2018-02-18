@@ -147,6 +147,7 @@ public class MainScreenActivity extends BaseActivity implements MainScreenContra
 
     @Override
     public void updateAdapterPhoto(List<ImageModel> packImage, int countNeedPreliminary) {
+        mCarouselView.smoothScrollToPosition(0);
         mImageRecyclerAdapter.addAll(packImage, countNeedPreliminary);
     }
 
