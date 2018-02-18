@@ -54,10 +54,12 @@
     <string name="start">Start</string>
 
     <!--Result activity-->
-    <string name="result_activity_title">Result</string>
+    <string name="result_activity_title">PicFav Result</string>
     <string name="game_loading_text">%d%%</string>
     <string name="result_activity_congratulations_msg">Сongratulations!</string>
     <string name="game_list_empty_msg">You don\'t have active game.</string>
+    <string name="result_activity_sub_title_msg">Your taste comparing to other people in the world.</string>
+    <string name="result_activity_challenge_btn_msg">Go to Challenges</string>
 
 
 </resources>
