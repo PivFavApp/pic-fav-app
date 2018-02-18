@@ -33,6 +33,7 @@
 
         <activity
             android:name=".view.mainFeed.tabsScreen.view.TabsActivity"
+            android:launchMode="singleInstance"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

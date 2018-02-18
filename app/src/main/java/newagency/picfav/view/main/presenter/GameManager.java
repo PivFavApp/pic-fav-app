@@ -134,7 +134,7 @@ public class GameManager implements IGameManager {
     private GameStateInfo generateGameCurrentState(List<ImageModel> imageModels, int remainCountPreliminary) { // remainCount default
         GameStateInfo gameStateInfo = new GameStateInfo();
         gameStateInfo.round = mRound;
-        gameStateInfo.name = mGameResponse.name;
+        gameStateInfo.name = mGameResponse.getName();
         gameStateInfo.step = mCurrentStep + 1;
         gameStateInfo.countNeedPreliminary = remainCountPreliminary;
         gameStateInfo.isPreliminary = mCurrentStep == FIRST_ROUND_PRELIMINARY || mCurrentStep == SECOND_ROUND_PRELIMINARY;
@@ -147,14 +147,14 @@ public class GameManager implements IGameManager {
 
     private void groupFirstRoundGame(GameResponse gameResponse) {
         groupImageUserFirstRound = new HashMap<>();
-        Collections.shuffle(gameResponse.mImageModels);
-        int sizeImagesGame = gameResponse.mImageModels.size();
+        Collections.shuffle(gameResponse.getImageModels());
+        int sizeImagesGame = gameResponse.getImageModels().size();
         int countInGroup = 0;
         int itemInGroup = sizeImagesGame / COUNT_FIRST_ROUND;
         int groupIndex = mCurrentStep;
         List<ImageModel> groupImage = new ArrayList<>();
         for (int i = 0; i < sizeImagesGame; i++) {
-            ImageModel imageModel = gameResponse.mImageModels.get(i);
+            ImageModel imageModel = gameResponse.getImageModels().get(i);
 
             if (countInGroup == itemInGroup) {
                 countInGroup = 0;

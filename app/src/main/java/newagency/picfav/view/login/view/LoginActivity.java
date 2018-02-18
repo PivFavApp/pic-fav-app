@@ -13,6 +13,7 @@ import butterknife.OnClick;
 import newagency.picfav.R;
 import newagency.picfav.dagger.DaggerViewComponent;
 import newagency.picfav.dagger.ViewModule;
+import newagency.picfav.util.AppConstants;
 import newagency.picfav.util.AppUtils;
 import newagency.picfav.view.BaseActivity;
 import newagency.picfav.view.login.LoginContract;
@@ -119,8 +120,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
 
     @Override
     public void navigateToMainScreen() {
-      //  AllGamesFragment.launch(this);
-        TabsActivity.launch(this);
+        TabsActivity.launch(this, AppConstants.TabItem.HOME);
         finish();
     }
 }

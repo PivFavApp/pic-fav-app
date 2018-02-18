@@ -10,15 +10,43 @@ public class GameResponse {
     private String id;
 
     @SerializedName("Date")
-    public long time;
+    private long time;
 
     @SerializedName("Name")
-    public String name;
+    private String name;
 
     @SerializedName("Images")
-    public List<ImageModel> mImageModels;
+    private List<ImageModel> mImageModels;
 
     public String getId() {
         return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public long getTimeInMillisec() {
+        return time * 1000;
+    }
+
+    public void setTimeInMillisec(long time) {
+        this.time = time / 1000;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<ImageModel> getImageModels() {
+        return mImageModels;
+    }
+
+    public void setImageModels(List<ImageModel> imageModels) {
+        mImageModels = imageModels;
     }
 }

@@ -7,13 +7,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.util.Date;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import newagency.picfav.R;
 import newagency.picfav.netwotk.response.GameResponse;
+import newagency.picfav.util.DateUtil;
 
 public class GameViewHolder extends RecyclerView.ViewHolder {
 
@@ -44,9 +43,8 @@ public class GameViewHolder extends RecyclerView.ViewHolder {
 
     public void bind(@NonNull GameResponse gameResponse) {
         this.game = gameResponse;
-        tvName.setText(gameResponse.name);
-        Date date = new Date(gameResponse.time);
-        tvDate.setText(date.getDay() + ":" + date.getMonth() + ":" + date.getYear());
+        tvName.setText(gameResponse.getName());
+        tvDate.setText(DateUtil.getGameDate(gameResponse.getTimeInMillisec()));
     }
 
     @OnClick(R.id.btn_start_game)

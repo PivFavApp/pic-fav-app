@@ -26,11 +26,13 @@ import butterknife.OnClick;
 import newagency.picfav.R;
 import newagency.picfav.dagger.DaggerViewComponent;
 import newagency.picfav.dagger.ViewModule;
+import newagency.picfav.util.AppConstants;
 import newagency.picfav.util.CapturePhotoUtils;
 import newagency.picfav.util.PermissionManager;
 import newagency.picfav.util.SocialConstans;
 import newagency.picfav.view.BaseActivity;
 import newagency.picfav.view.custom.GameLoadingView;
+import newagency.picfav.view.mainFeed.tabsScreen.view.TabsActivity;
 import newagency.picfav.view.result.ResultScreenContract;
 
 public class ResultScreenActivity extends BaseActivity implements ResultScreenContract.View {
@@ -57,7 +59,7 @@ public class ResultScreenActivity extends BaseActivity implements ResultScreenCo
     @BindView(R.id.loading_game)
     GameLoadingView mGameLoadingView;
 
-    @BindView(R.id.result_content)
+    @BindView(R.id.root_result)
     View contentResult;
 
     @Inject
@@ -114,6 +116,11 @@ public class ResultScreenActivity extends BaseActivity implements ResultScreenCo
         if (!hasStoragePermissionForShareToInsta()) return;
 
         shareToInstagram(mPresenterI.getBitmapFromView(contentResult));
+    }
+
+    @OnClick(R.id.challenge_game_btn)
+    void goToChalanges() {
+        mPresenterI.challengesClicked();
     }
 
     @OnClick(R.id.iv_facebook)
@@ -280,6 +287,7 @@ public class ResultScreenActivity extends BaseActivity implements ResultScreenCo
         return "";
     }
 
+//    ResultScreenContract.View methods
     @Override
     public void showProgress() {
         mProgressDialog.show();
@@ -288,5 +296,11 @@ public class ResultScreenActivity extends BaseActivity implements ResultScreenCo
     @Override
     public void hideProgress() {
         mProgressDialog.hide();
+    }
+
+    @Override
+    public void navigateToChallenges() {
+        TabsActivity.launch(this, AppConstants.TabItem.CHALLENGES);
+        finish();
     }
 }

@@ -73,10 +73,15 @@
     <dimen name="item_image_margin">4dp</dimen>
 
     <!--Result activity-->
-    <dimen name="result_activity_icon_width">200dp</dimen>
-    <dimen name="result_activity_icon_height">200dp</dimen>
-    <dimen name="result_activity_icon_margin_top">24dp</dimen>
+    <dimen name="result_activity_icon_width">180dp</dimen>
+    <dimen name="result_activity_icon_height">180dp</dimen>
     <dimen name="result_activity_width_social">45dp</dimen>
     <dimen name="result_activity_social_height">45dp</dimen>
+    <dimen name="result_activity_subtitle_margin_top">5dp</dimen>
+    <dimen name="result_activity_root_padding_start">16dp</dimen>
+    <dimen name="result_activity_root_padding_end">16dp</dimen>
+    <dimen name="result_activity_root_padding_top">16dp</dimen>
+    <dimen name="result_activity_root_padding_bottom">16dp</dimen>
+    <dimen name="result_activity_social_wrapper_margin_bottom">10dp</dimen>
 
 </resources>

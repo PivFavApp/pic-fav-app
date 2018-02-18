@@ -18,9 +18,9 @@ import newagency.picfav.dagger.DaggerViewComponent;
 import newagency.picfav.dagger.ViewModule;
 import newagency.picfav.netwotk.response.GameResponse;
 import newagency.picfav.view.AbsFragment;
+import newagency.picfav.view.main.view.MainScreenActivity;
 import newagency.picfav.view.mainFeed.gamelist.AllGamesContract;
 import newagency.picfav.view.mainFeed.gamelist.presenter.AllGamePresenter;
-import newagency.picfav.view.result.view.ResultScreenActivity;
 
 public class AllGamesFragment extends AbsFragment implements AllGamesContract.View {
 
@@ -44,8 +44,8 @@ public class AllGamesFragment extends AbsFragment implements AllGamesContract.Vi
     private AllGamesAdapter.AllGameCallback mAllGameCallback = new AllGamesAdapter.AllGameCallback() {
         @Override
         public void gameClick(@NonNull GameResponse game) {
-//            MainScreenActivity.start(AllGamesFragment.this, game.getId());
-            ResultScreenActivity.start(getActivity(), 100);
+            MainScreenActivity.start(getActivity(), game.getId());
+//            ResultScreenActivity.start(getActivity(), 100);
         }
     };
 

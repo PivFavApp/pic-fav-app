@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    android:id="@+id/root_result"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -18,17 +20,32 @@
         <android.support.constraint.ConstraintLayout
             android:id="@+id/result_content"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/result_activity_root_padding_bottom"
+            android:paddingEnd="@dimen/result_activity_root_padding_end"
+            android:paddingStart="@dimen/result_activity_root_padding_start"
+            android:paddingTop="@dimen/result_activity_root_padding_top">
 
             <ImageView
                 android:id="@+id/result_iv"
                 android:layout_width="@dimen/result_activity_icon_width"
                 android:layout_height="@dimen/result_activity_icon_height"
-                android:layout_marginTop="@dimen/result_activity_icon_margin_top"
                 android:src="@drawable/ic_complete_game"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/matching_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/result_activity_subtitle_margin_top"
+                android:gravity="center"
+                android:text="@string/result_activity_sub_title_msg"
+                android:textAppearance="@style/Roboto.Normal.Black.16"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/result_tv" />
 
             <TextView
                 android:id="@+id/result_tv"
@@ -43,21 +60,21 @@
             <newagency.picfav.view.custom.GameLoadingView
                 android:id="@+id/loading_game"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 app:layout_constraintBottom_toTopOf="@+id/social_wrapper"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHeight_default="wrap"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/result_tv"
-                app:layout_constraintVertical_chainStyle="packed"
+                app:layout_constraintTop_toBottomOf="@+id/matching_tv"
+                app:layout_constraintVertical_chainStyle="spread_inside"
                 app:layout_constraintWidth_default="wrap" />
 
             <LinearLayout
                 android:id="@+id/social_wrapper"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_margin="@dimen/spacing_small"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/result_activity_social_wrapper_margin_bottom"
+                app:layout_constraintBottom_toTopOf="@+id/challenge_game_btn"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHeight_default="wrap"
                 app:layout_constraintStart_toStartOf="parent"
@@ -80,6 +97,20 @@
                     android:src="@drawable/ic_facebook" />
 
             </LinearLayout>
+
+            <Button
+                android:id="@+id/challenge_game_btn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_primary_button"
+                android:foreground="?attr/selectableItemBackground"
+                android:text="@string/result_activity_challenge_btn_msg"
+                android:textAppearance="@style/Roboto.Normal.White.16"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+
+                />
 
         </android.support.constraint.ConstraintLayout>
     </ScrollView>

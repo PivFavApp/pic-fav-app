@@ -22,4 +22,16 @@ public class AppConstants {
             this.coeff = coeff;
         }
     }
+
+    public enum TabItem {
+        FRIEND(0),
+        HOME(1),
+        CHALLENGES(2);
+
+        TabItem(int index) {
+            this.index = index;
+        }
+
+        public int index;
+    }
 }

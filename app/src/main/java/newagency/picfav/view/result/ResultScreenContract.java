@@ -12,10 +12,16 @@ public interface ResultScreenContract {
         void showProgress();
 
         void hideProgress();
+
+        void navigateToChallenges();
+
     }
 
     interface PresenterI extends IBasePresenter {
 
         Bitmap getBitmapFromView(android.view.View contentResult);
+
+        void challengesClicked();
+
     }
 }

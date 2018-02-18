@@ -62,4 +62,11 @@ public class ResultScreenPresenter implements ResultScreenContract.PresenterI {
         view.draw(canvas);
         return returnedBitmap;
     }
+
+    @Override
+    public void challengesClicked() {
+        if (mView != null) {
+            mView.navigateToChallenges();
+        }
+    }
 }

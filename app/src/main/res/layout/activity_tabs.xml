@@ -46,13 +46,20 @@
         </RelativeLayout>
     </android.support.design.widget.AppBarLayout>
 
+    <View
+        android:id="@+id/shadow_btn"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/general_shadow_height"
+        android:layout_above="@id/tab_layout"
+        android:background="@drawable/shadow_top" />
+
     <android.support.design.widget.TabLayout
         android:id="@+id/tab_layout"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:layout_alignParentBottom="true"
         android:alpha="0.9"
-        android:background="@color/colorLightGrey"
+        android:background="@color/colorPrimary"
         app:tabGravity="fill"
         app:tabIndicatorHeight="3dp"
         app:tabMode="fixed"
