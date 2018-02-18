@@ -9,64 +9,79 @@
 
     <include layout="@layout/simple_toolbar" />
 
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/result_content"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:fillViewport="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <ImageView
-            android:id="@+id/result_iv"
-            android:layout_width="@dimen/result_activity_icon_width"
-            android:layout_height="@dimen/result_activity_icon_height"
-            android:layout_marginTop="@dimen/result_activity_icon_margin_top"
-            android:src="@drawable/ic_complete_game"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/result_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/result_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/result_activity_congratulations_msg"
-            android:textAppearance="@style/Roboto.Normal.PrimaryDark.36"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/result_iv" />
+            <ImageView
+                android:id="@+id/result_iv"
+                android:layout_width="@dimen/result_activity_icon_width"
+                android:layout_height="@dimen/result_activity_icon_height"
+                android:layout_marginTop="@dimen/result_activity_icon_margin_top"
+                android:src="@drawable/ic_complete_game"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <newagency.picfav.view.custom.GameLoadingView
-            android:id="@+id/loading_game"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHeight_default="wrap"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/result_tv"
-            app:layout_constraintWidth_default="wrap" />
+            <TextView
+                android:id="@+id/result_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/result_activity_congratulations_msg"
+                android:textAppearance="@style/Roboto.Normal.PrimaryDark.36"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/result_iv" />
 
-    </android.support.constraint.ConstraintLayout>
+            <newagency.picfav.view.custom.GameLoadingView
+                android:id="@+id/loading_game"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toTopOf="@+id/social_wrapper"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_default="wrap"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/result_tv"
+                app:layout_constraintVertical_chainStyle="packed"
+                app:layout_constraintWidth_default="wrap" />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center"
-        android:layout_margin="@dimen/spacing_small"
-        android:orientation="horizontal">
+            <LinearLayout
+                android:id="@+id/social_wrapper"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="@dimen/spacing_small"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_default="wrap"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/loading_game"
+                app:layout_constraintWidth_default="wrap">
 
-        <ImageView
-            android:id="@+id/iv_insta"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_marginEnd="@dimen/spacing_thin"
-            android:src="@drawable/ic_insta"/>
+                <ImageView
+                    android:id="@+id/iv_insta"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_marginEnd="@dimen/spacing_medium"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:src="@drawable/ic_insta" />
 
-        <ImageView
-            android:id="@+id/iv_facebook"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:src="@drawable/ic_facebook"/>
+                <ImageView
+                    android:id="@+id/iv_facebook"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:src="@drawable/ic_facebook" />
 
-    </LinearLayout>
+            </LinearLayout>
+
+        </android.support.constraint.ConstraintLayout>
+    </ScrollView>
 
 </android.support.design.widget.CoordinatorLayout>

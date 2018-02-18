@@ -11,6 +11,8 @@ import newagency.picfav.view.main.presenter.MainScreenPresenter;
 import newagency.picfav.view.login.LoginContract;
 import newagency.picfav.view.login.presenter.LoginPresenter;
 import newagency.picfav.view.gamelist.MainContract;
+import newagency.picfav.view.result.ResultScreenContract;
+import newagency.picfav.view.result.presenter.ResultScreenPresenter;
 import newagency.picfav.view.sign.up.SignUpContract;
 import newagency.picfav.view.sign.up.presenter.SignUpPresenter;
 import newagency.picfav.view.welcome.WelcomeContract;
@@ -45,7 +47,7 @@ public class PresentationModule {
     }
 
     @Provides
-    MainContract.Presenter proviceResultPresenter(@Nullable AllGamePresenter presenter) {
+    ResultScreenContract.PresenterI provideResultPresenter(@Nullable ResultScreenPresenter presenter) {
         return presenter;
     }
 

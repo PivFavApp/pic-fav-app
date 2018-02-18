@@ -7,9 +7,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
@@ -21,6 +18,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -61,6 +60,9 @@ public class ResultScreenActivity extends BaseActivity implements ResultScreenCo
     @BindView(R.id.result_content)
     View contentResult;
 
+    @Inject
+    ResultScreenContract.PresenterI mPresenterI;
+
     private int mResult;
 
     public static void start(Context context, int score) {
@@ -73,6 +75,7 @@ public class ResultScreenActivity extends BaseActivity implements ResultScreenCo
     protected void onViewReady() {
         getArgsData();
         mToolbarTitle.setText(R.string.result_activity_title);
+
         mGameLoadingView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
@@ -110,14 +113,14 @@ public class ResultScreenActivity extends BaseActivity implements ResultScreenCo
     void instaShare() {
         if (!hasStoragePermissionForShareToInsta()) return;
 
-        shareToInstagram(getBitmapFromView(contentResult));
+        shareToInstagram(mPresenterI.getBitmapFromView(contentResult));
     }
 
     @OnClick(R.id.iv_facebook)
     void facebookShare() {
         if (!hasStoragePermissionForShareToFacebook()) return;
 
-        shareFacebook(getBitmapFromView(contentResult));
+        shareFacebook(mPresenterI.getBitmapFromView(contentResult));
     }
 
     private void getArgsData() {
@@ -197,19 +200,6 @@ public class ResultScreenActivity extends BaseActivity implements ResultScreenCo
         }
     }
 
-
-    public Bitmap getBitmapFromView(View view) {
-        Bitmap returnedBitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(returnedBitmap);
-        Drawable bgDrawable = view.getBackground();
-        if (bgDrawable != null)
-            bgDrawable.draw(canvas);
-        else
-            canvas.drawColor(Color.WHITE);
-        view.draw(canvas);
-        return returnedBitmap;
-    }
-
     private boolean hasStoragePermissionForShareToInsta() {
         return PermissionManager.hasPermission(this, PERMISSION_WRITE_STORAGE, RC_SHARE_TO_INSTA);
     }
@@ -231,7 +221,7 @@ public class ResultScreenActivity extends BaseActivity implements ResultScreenCo
 
             if (requestCode == RC_SHARE_TO_INSTA) {
                 if (result == PackageManager.PERMISSION_GRANTED) {
-                    shareToInstagram(getBitmapFromView(contentResult));
+                    shareToInstagram(mPresenterI.getBitmapFromView(contentResult));
                 } else {
                     if (isPermissionNeverAsk(permission)) {
                         showPermissionNeverAskDialog(getPermissionName(requestCode));
@@ -242,7 +232,7 @@ public class ResultScreenActivity extends BaseActivity implements ResultScreenCo
 
             if (requestCode == RC_SHARE_TO_FACEBOOK) {
                 if (result == PackageManager.PERMISSION_GRANTED) {
-                    shareFacebook(getBitmapFromView(contentResult));
+                    shareFacebook(mPresenterI.getBitmapFromView(contentResult));
                 } else {
                     if (isPermissionNeverAsk(permission)) {
                         showPermissionNeverAskDialog(getPermissionName(requestCode));

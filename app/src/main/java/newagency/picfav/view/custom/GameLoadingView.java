@@ -1,6 +1,7 @@
 package newagency.picfav.view.custom;
 
 import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.text.SpannableString;
 import android.text.style.RelativeSizeSpan;
@@ -19,6 +20,8 @@ import newagency.picfav.R;
  */
 
 public class GameLoadingView extends RelativeLayout {
+
+    private final static int ANIMATION_DURATION = 1500;
 
     @BindView(R.id.progress_counter)
     ProgressBar mProgressBar;
@@ -50,26 +53,36 @@ public class GameLoadingView extends RelativeLayout {
         ButterKnife.bind(view);
         mCountResponded = 0;
         mProgressBar.setMax(mMaxMember);
-        updateCountResponded();
+        updateCountResponded(mCountResponded);
     }
 
-    private void updateCountResponded() {
-        String s = getContext().getString(R.string.game_loading_text, mCountResponded);
-        SpannableString ss1 = new SpannableString(s);
-        ss1.setSpan(new RelativeSizeSpan(1.5f), 0, 2, 0);
-        mCountTv.setText(ss1);
+    private void updateCountResponded(int progress) {
+        ValueAnimator widthAnimator = ValueAnimator.ofInt(0, progress);
+        widthAnimator.setDuration(ANIMATION_DURATION);
+        widthAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                int animatedValue = (int) animation.getAnimatedValue();
+                String s = getContext().getString(R.string.game_loading_text, animatedValue);
+                SpannableString ss1 = new SpannableString(s);
+                ss1.setSpan(new RelativeSizeSpan(1.5f), 0, s.length() - 1, 0);
+                mCountTv.setText(ss1);
+            }
+        });
+        widthAnimator.start();
     }
 
     public void setResult(int count) {
         mCountResponded = count;
-        updateCountResponded();
+        updateCountResponded(mCountResponded);
         updateProgress();
         invalidate();
     }
 
     private void updateProgress() {
         ObjectAnimator progressAnimator = ObjectAnimator.ofInt(mProgressBar, "progress", 0, mCountResponded);
-        progressAnimator.setDuration(1500);
+        progressAnimator.setDuration(ANIMATION_DURATION);
         progressAnimator.start();
+
     }
 }

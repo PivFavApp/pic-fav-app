@@ -24,7 +24,7 @@ import newagency.picfav.netwotk.response.GameResponse;
 import newagency.picfav.view.BaseActivity;
 import newagency.picfav.view.gamelist.MainContract;
 import newagency.picfav.view.gamelist.presenter.AllGamePresenter;
-import newagency.picfav.view.main.view.MainScreenActivity;
+import newagency.picfav.view.result.view.ResultScreenActivity;
 import newagency.picfav.view.welcome.view.WelcomeActivity;
 
 public class AllGameActivity extends BaseActivity implements MainContract.View {
@@ -54,7 +54,8 @@ public class AllGameActivity extends BaseActivity implements MainContract.View {
     private AllGamesAdapter.AllGameCallback mAllGameCallback = new AllGamesAdapter.AllGameCallback() {
         @Override
         public void gameClick(@NonNull GameResponse game) {
-            MainScreenActivity.start(AllGameActivity.this, game.getId());
+//            MainScreenActivity.start(AllGameActivity.this, game.getId());
+            ResultScreenActivity.start(AllGameActivity.this, 100);
         }
     };
 

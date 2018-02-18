@@ -8,8 +8,10 @@
     <ProgressBar
         android:id="@+id/progress_counter"
         style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minHeight="200dp"
+        android:minWidth="200dp"
         android:background="@drawable/circle_shape"
         android:indeterminate="false"
         android:max="100"

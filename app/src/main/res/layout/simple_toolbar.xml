@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:theme="@style/AppTheme.AppBarOverlay"
-    app:elevation="0dp"
     tools:showIn="@layout/activity_result_screen">
 
     <android.support.v7.widget.Toolbar
