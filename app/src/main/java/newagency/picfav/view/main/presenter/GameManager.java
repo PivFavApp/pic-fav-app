@@ -54,9 +54,9 @@ public class GameManager implements IGameManager {
 
     private Map<Integer, List<ImageModel>> groupImageUserSecondRound;
 
-    private int mCurrentStep;
+    private int mCurrentStep; // first round is 0
 
-    private int mRound;
+    private int mRound;   // first round is 0
 
     @Inject
     public GameManager(@Nullable @ApplicationContext Context context) {
@@ -202,7 +202,6 @@ public class GameManager implements IGameManager {
             mGameManagerCallback.selectedStep(generateGameCurrentState(groupImageUserSecondRound.get(mCurrentStep), -1));
         }
     }
-
 
     private int calculateSelectedInAllGroup(Map<Integer, List<ImageModel>> groupImageUserFirstRound) {
         int countSelected = 0;

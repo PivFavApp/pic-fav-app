@@ -10,6 +10,5 @@ public interface WelcomeContract {
     }
 
     interface PresenterI extends IBasePresenter {
-
     }
 }

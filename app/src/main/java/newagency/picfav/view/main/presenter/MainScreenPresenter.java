@@ -15,6 +15,7 @@ import newagency.picfav.netwotk.response.GameResponse;
 import newagency.picfav.netwotk.response.ImageModel;
 import newagency.picfav.util.AppConstants;
 import newagency.picfav.util.GameUtil;
+import newagency.picfav.util.RoundUtil;
 import newagency.picfav.view.main.MainScreenContract;
 import newagency.picfav.view.main.presenter.model.GameResult;
 import newagency.picfav.view.main.presenter.model.GameStateInfo;
@@ -128,9 +129,8 @@ public class MainScreenPresenter implements MainScreenContract.PresenterI, IGame
     //    IGameManager.GameManagerCallback methods
     @Override
     public void selectedStep(GameStateInfo gameStateInfo) {
-        //            TODO need realize change IO for second round
         if (mView != null) {
-            String setName = detectSetName(gameStateInfo);
+            String setName = detectRoundName(gameStateInfo);
             mView.updateToolbar(gameStateInfo.name, setName);
             mView.updateAdapterPhoto(gameStateInfo.imageModels, gameStateInfo.countNeedPreliminary);
             if (gameStateInfo.isPreliminary) {
@@ -149,13 +149,13 @@ public class MainScreenPresenter implements MainScreenContract.PresenterI, IGame
         }
     }
 
-    private String detectSetName(GameStateInfo gameStateInfo) {
+    private String detectRoundName(GameStateInfo gameStateInfo) {
         String setName;
         if (gameStateInfo.isPreliminary) {
             setName = mContext.getString(R.string.main_set_name_preliminary);
 
         } else {
-            setName = mContext.getString(R.string.main_set_name, gameStateInfo.step);
+            setName = RoundUtil.getRoundAndStepStr(mContext, gameStateInfo);
         }
         return setName;
     }

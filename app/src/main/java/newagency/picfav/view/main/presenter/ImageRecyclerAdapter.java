@@ -55,7 +55,7 @@ public class ImageRecyclerAdapter extends RecyclerView.Adapter<ImageRecyclerAdap
 
     private float sizeCoef = 1;
 
-    private boolean isSelectedMode;
+//    private boolean isSelectedMode;
 
     private float mWidth;
 
@@ -118,7 +118,7 @@ public class ImageRecyclerAdapter extends RecyclerView.Adapter<ImageRecyclerAdap
     public void notifyChange() {
         if (mImageItemList != null) {
             mSelectedCount = GameUtil.calculateSelected(mImageItemList);
-            isSelectedMode  = mSelectedCount != 0;
+//            isSelectedMode  = mSelectedCount != 0;
             mCallback.onChangeCountSelected(mSelectedCount);
             if (mCountNeedPreliminary != -1) {
                 int diff = mCountNeedPreliminary - mSelectedCount;
@@ -142,7 +142,7 @@ public class ImageRecyclerAdapter extends RecyclerView.Adapter<ImageRecyclerAdap
             mImageView = itemView.findViewById(R.id.game_iv);
             mWrapperCv = itemView.findViewById(R.id.wrapper_image_cv);
 
-            mWrapperCv.setOnLongClickListener(v -> {
+            /*mWrapperCv.setOnLongClickListener(v -> {
                 if(!isSelectedMode) {
                     int positionClicked = getAdapterPosition();
 
@@ -153,16 +153,14 @@ public class ImageRecyclerAdapter extends RecyclerView.Adapter<ImageRecyclerAdap
                     isSelectedMode = true;
                 }
                 return false;
-            });
+            });*/
 
             mWrapperCv.setOnClickListener(v -> {
-                if (isSelectedMode) {
                     int positionClicked = getAdapterPosition();
                     if (positionClicked != -1) {
                         ImageModel imageModel = mImageItemList.get(positionClicked);
                         changeSelectionItem(imageModel);
                     }
-                }
             });
         }
 

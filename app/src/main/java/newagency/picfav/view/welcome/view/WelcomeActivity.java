@@ -28,6 +28,11 @@ public class WelcomeActivity extends BaseActivity implements WelcomeContract.Vie
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
     @OnClick(R.id.btn_log_in)
     void logInClick() {
         LoginActivity.start(this);

@@ -51,13 +51,18 @@
     <string name="main_selected_max_image_msg">Please press Next. You have already selected %d images.</string>
     <string name="main_selected_min_image_msg">Please, You should select more than %d images.</string>
     <string name="main_set_name_preliminary">Preliminary</string>
-    <string name="main_set_name">%d st set</string>
     <string name="main_remain_count_msg">%d Remain</string>
+    <string name="main_round_holder">%d Rd</string>
+    <string name="main_first_step_holder">%dst</string>
+    <string name="main_second_step_holder">%dnd</string>
+    <string name="main_third_step_holder">%drd</string>
+    <string name="main_default_step_holder">%dth</string>
 
     <!--Main activity-->
     <string name="select_game">Select game</string>
     <string name="log_out_title">Do you really want to log out?</string>
     <string name="start">Start</string>
+
 
     <!--Result activity-->
     <string name="result_activity_title">PicFav Result</string>
