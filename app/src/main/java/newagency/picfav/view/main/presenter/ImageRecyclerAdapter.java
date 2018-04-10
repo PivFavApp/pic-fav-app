@@ -1,5 +1,6 @@
 package newagency.picfav.view.main.presenter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
@@ -18,6 +19,7 @@ import newagency.picfav.R;
 import newagency.picfav.netwotk.response.ImageModel;
 import newagency.picfav.util.AppConstants;
 import newagency.picfav.util.GameUtil;
+import newagency.picfav.util.UIUtil;
 
 /**
  * Created by oroshka on 1/30/18.
@@ -53,18 +55,20 @@ public class ImageRecyclerAdapter extends RecyclerView.Adapter<ImageRecyclerAdap
 
     private int mSelectedCount = 0;
 
-    private float sizeCoef = 1;
+    private float sizeCoeff;
 
-//    private boolean isSelectedMode;
+    private int mWidth;
 
-    private float mWidth;
+    private int mHeight;
 
-    private float mHeight;
+    private int imagePadding;
 
-    public ImageRecyclerAdapter(Context context, ImageRecyclerAdapterCallback callback) {
+    public ImageRecyclerAdapter(Activity context, ImageRecyclerAdapterCallback callback, int maxHeight, int maxWidth) {
         mContext = context;
-        initParams();
         this.mCallback = callback;
+        imagePadding = (int) UIUtil.convertDpToPixel(8, context);
+        mWidth = maxWidth - imagePadding;
+        mHeight = maxHeight - imagePadding;
     }
 
     @Override
@@ -92,11 +96,6 @@ public class ImageRecyclerAdapter extends RecyclerView.Adapter<ImageRecyclerAdap
         return mImageItemList;
     }
 
-    private void initParams() {
-        mWidth = mContext.getResources().getDimension(R.dimen.item_image_width);
-        mHeight = mContext.getResources().getDimension(R.dimen.item_image_height);
-    }
-
     public void addAll(List<ImageModel> imageItemList, int countNeedPreliminary) {
         mCountNeedPreliminary = countNeedPreliminary;
         if (this.mImageItemList == null) {
@@ -118,7 +117,6 @@ public class ImageRecyclerAdapter extends RecyclerView.Adapter<ImageRecyclerAdap
     public void notifyChange() {
         if (mImageItemList != null) {
             mSelectedCount = GameUtil.calculateSelected(mImageItemList);
-//            isSelectedMode  = mSelectedCount != 0;
             mCallback.onChangeCountSelected(mSelectedCount);
             if (mCountNeedPreliminary != -1) {
                 int diff = mCountNeedPreliminary - mSelectedCount;
@@ -142,31 +140,18 @@ public class ImageRecyclerAdapter extends RecyclerView.Adapter<ImageRecyclerAdap
             mImageView = itemView.findViewById(R.id.game_iv);
             mWrapperCv = itemView.findViewById(R.id.wrapper_image_cv);
 
-            /*mWrapperCv.setOnLongClickListener(v -> {
-                if(!isSelectedMode) {
-                    int positionClicked = getAdapterPosition();
-
-                    if (positionClicked != -1) {
-                        ImageModel imageItemModel = mImageItemList.get(positionClicked);
-                        changeSelectionItem(imageItemModel);
-                    }
-                    isSelectedMode = true;
-                }
-                return false;
-            });*/
-
             mWrapperCv.setOnClickListener(v -> {
-                    int positionClicked = getAdapterPosition();
-                    if (positionClicked != -1) {
-                        ImageModel imageModel = mImageItemList.get(positionClicked);
-                        changeSelectionItem(imageModel);
-                    }
+                int positionClicked = getAdapterPosition();
+                if (positionClicked != -1) {
+                    ImageModel imageModel = mImageItemList.get(positionClicked);
+                    changeSelectionItem(imageModel);
+                }
             });
         }
 
         public void bind(ImageModel imageItem) {
-            mImageView.getLayoutParams().width = (int) (mWidth * sizeCoef);
-            mImageView.getLayoutParams().height = (int) (mHeight * sizeCoef);
+            mImageView.getLayoutParams().width = (int) (mWidth * sizeCoeff);
+            mImageView.getLayoutParams().height = (int) (mHeight * sizeCoeff);
 
             int colorBackground = imageItem.isSelected
                     ? ContextCompat.getColor(mContext, R.color.colorAccent)
@@ -180,7 +165,7 @@ public class ImageRecyclerAdapter extends RecyclerView.Adapter<ImageRecyclerAdap
     }
 
     public void changeGridSize(AppConstants.GridState gridState) {
-        sizeCoef = gridState.coeff;
+        sizeCoeff = gridState.coeff;
         notifyDataSetChanged();
     }
 

@@ -2,8 +2,8 @@ package newagency.picfav.view.main.view;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v4.content.ContextCompat;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -103,7 +103,19 @@ public class MainScreenActivity extends BaseActivity implements MainScreenContra
     protected void onViewReady() {
         getArgs();
         mPresenter.loadGame(gameId);
-        initAdapter();
+        mCarouselView.post(new Runnable() {
+            @Override
+            public void run() {
+                initAdapter();
+            }
+        });
+       /* mCarouselView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                initAdapter();
+                mCarouselView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+            }
+        });*/
     }
 
     @Override
@@ -170,11 +182,11 @@ public class MainScreenActivity extends BaseActivity implements MainScreenContra
             mCarouselView.scrollToPosition(0);
             switch (gridState) {
                 case SMALL:
-                    gridIv.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_big_grid));
+                    gridIv.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_full_screen_grid));
                     break;
 
                 case BIG:
-                    gridIv.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_small_grid));
+                    gridIv.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_big_grid));
                     break;
             }
         }
@@ -212,7 +224,9 @@ public class MainScreenActivity extends BaseActivity implements MainScreenContra
     }
 
     private void initAdapter() {
-        mImageRecyclerAdapter = new ImageRecyclerAdapter(this, mAdapterCallback);
+        int height = mCarouselView.getHeight();
+        int width = mCarouselView.getWidth();
+        mImageRecyclerAdapter = new ImageRecyclerAdapter(this, mAdapterCallback, height, width);
         mPresenter.restoreGridState();
         CoverFlowViewTransformer transformer = new CoverFlowViewTransformer();
         transformer.setYProjection(0f);
